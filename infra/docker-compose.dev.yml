@@ -1,0 +1,53 @@
+# Lidi Studio — local development override
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+#
+# Differences from production:
+#   - Caddy is disabled; access services directly on host ports
+#   - Postgres + Redis exposed to host for local debugging
+#   - All services accept localhost connections on dev-only ports
+#
+# Production must NEVER use this override.
+
+services:
+
+  # Disable Caddy in dev — access services directly via published ports
+  caddy:
+    profiles: ["disabled"]
+
+  # Disable Astro placeholder in dev — run `pnpm dev` from /apps/web instead
+  astro-api:
+    profiles: ["disabled"]
+
+  postgres:
+    ports:
+      - "5432:5432"
+
+  redis:
+    ports:
+      - "6379:6379"
+
+  ghost:
+    ports:
+      - "2368:2368"
+
+  calcom:
+    ports:
+      - "3001:3000"
+
+  docuseal:
+    ports:
+      - "3002:3000"
+
+  nocodb:
+    ports:
+      - "8080:8080"
+
+  umami:
+    ports:
+      - "3003:3000"
+
+  uptime-kuma:
+    ports:
+      - "3004:3001"

@@ -1,0 +1,364 @@
+# Lidi Studio — production stack
+# See /docs/platform-architecture-v1.md (v1.1) §2 for stack details
+# See /docs/platform-architecture-v1.md §2.17 for RAM budget rationale
+# All services on lidi-net bridge; postgres/redis NOT exposed to host
+# Total mem_limit committed: ~2.54 GB (target: <3.2 GB on 4 GB host)
+#
+# Compose v2 — `version:` key intentionally omitted (deprecated)
+
+services:
+
+  # ────────────────────────────────────────────────────────
+  # astro-api — hybrid Astro Node container for /api/* routes
+  # Static frontend served directly by Caddy from the astro_dist
+  # volume, populated by GitHub Actions deploy workflow.
+  # NOTE: /apps/web/ does not exist yet — image and command below
+  # are a placeholder. Uncomment build: block after phase (b).
+  # ────────────────────────────────────────────────────────
+  astro-api:
+    # build:
+    #   context: ../apps/web
+    #   target: api
+    image: node:20-alpine
+    container_name: lidi-astro-api
+    restart: unless-stopped
+    command: ["sh", "-c", "echo 'astro-api placeholder until apps/web is built' && sleep infinity"]
+    environment:
+      NODE_ENV: production
+      PORT: 4321
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB_NOCODB}
+      NOCODB_API_URL: ${NOCODB_API_URL}
+      NOCODB_API_TOKEN: ${NOCODB_API_TOKEN}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_FROM: ${SMTP_FROM}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      CALCOM_WEBHOOK_SECRET: ${CALCOM_WEBHOOK_SECRET}
+      DOCUSEAL_WEBHOOK_SECRET: ${DOCUSEAL_WEBHOOK_SECRET}
+      GHOST_WEBHOOK_SECRET: ${GHOST_WEBHOOK_SECRET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    mem_limit: 120m
+    mem_reservation: 80m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4321/api/healthz || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # ────────────────────────────────────────────────────────
+  # caddy — reverse proxy + auto-SSL via Let's Encrypt
+  # Origin TLS even though Cloudflare proxies on the edge:
+  # ensures end-to-end encryption with Cloudflare "Full (strict)".
+  # ────────────────────────────────────────────────────────
+  caddy:
+    image: caddy:2.8-alpine
+    container_name: lidi-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"  # HTTP/3 (QUIC)
+    environment:
+      NOCODB_BASIC_AUTH_USER: ${NOCODB_BASIC_AUTH_USER}
+      NOCODB_BASIC_AUTH_PASSWORD_HASH: ${NOCODB_BASIC_AUTH_PASSWORD_HASH}
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy/Caddyfile.status:/etc/caddy/Caddyfile.status:ro
+      - ./caddy/error-pages:/srv/error-pages:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+      # Astro static build artifact, populated by GitHub Actions
+      - astro_dist:/srv/astro:ro
+    depends_on:
+      - ghost
+      - calcom
+      - docuseal
+      - nocodb
+      - umami
+      - uptime-kuma
+      - astro-api
+    mem_limit: 60m
+    mem_reservation: 30m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:80"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ────────────────────────────────────────────────────────
+  # calcom — booking system, served at /book via Caddy
+  # ────────────────────────────────────────────────────────
+  calcom:
+    image: calcom/cal.com:latest
+    container_name: lidi-calcom
+    restart: unless-stopped
+    environment:
+      NEXTAUTH_URL: https://lidi.studio/book
+      NEXTAUTH_SECRET: ${CALCOM_NEXTAUTH_SECRET}
+      CALENDSO_ENCRYPTION_KEY: ${CALCOM_ENCRYPTION_KEY}
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB_CALCOM}
+      LICENSE_CONSENT: ${CALCOM_LICENSE_CONSENT}
+      EMAIL_FROM: ${SMTP_FROM}
+      EMAIL_SERVER_HOST: ${SMTP_HOST}
+      EMAIL_SERVER_PORT: ${SMTP_PORT}
+      EMAIL_SERVER_USER: ${SMTP_USER}
+      EMAIL_SERVER_PASSWORD: ${SMTP_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    mem_limit: 800m
+    mem_reservation: 600m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 120s   # Cal.com (Next.js) has a slow cold start
+
+  # ────────────────────────────────────────────────────────
+  # docuseal — contracts at /contracts/[token] via Caddy
+  # ────────────────────────────────────────────────────────
+  docuseal:
+    image: docuseal/docuseal:latest
+    container_name: lidi-docuseal
+    restart: unless-stopped
+    environment:
+      SECRET_KEY_BASE: ${DOCUSEAL_SECRET_KEY_BASE}
+      FORCE_SSL: "true"
+      HOST: lidi.studio
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB_DOCUSEAL}
+      SMTP_ADDRESS: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USERNAME: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_FROM: ${SMTP_FROM}
+    volumes:
+      - docuseal_data:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    mem_limit: 250m
+    mem_reservation: 180m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+  # ────────────────────────────────────────────────────────
+  # ghost — journal CMS at /journal via Caddy
+  # ────────────────────────────────────────────────────────
+  ghost:
+    image: ghost:5-alpine
+    container_name: lidi-ghost
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      url: https://lidi.studio/journal
+      database__client: pg
+      database__connection__host: postgres
+      database__connection__port: 5432
+      database__connection__user: ${POSTGRES_USER}
+      database__connection__password: ${POSTGRES_PASSWORD}
+      database__connection__database: ${POSTGRES_DB_GHOST}
+      mail__transport: SMTP
+      mail__from: ${SMTP_FROM}
+      mail__options__host: ${SMTP_HOST}
+      mail__options__port: ${SMTP_PORT}
+      mail__options__auth__user: ${SMTP_USER}
+      mail__options__auth__pass: ${SMTP_PASSWORD}
+    volumes:
+      - ghost_content:/var/lib/ghost/content
+    depends_on:
+      postgres:
+        condition: service_healthy
+    mem_limit: 350m
+    mem_reservation: 250m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:2368"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+  # ────────────────────────────────────────────────────────
+  # nocodb — internal CRM at /admin via Caddy (basic_auth + IP allowlist)
+  # ────────────────────────────────────────────────────────
+  nocodb:
+    image: nocodb/nocodb:latest
+    container_name: lidi-nocodb
+    restart: unless-stopped
+    environment:
+      NC_DB: pg://postgres:5432?u=${POSTGRES_USER}&p=${POSTGRES_PASSWORD}&d=${POSTGRES_DB_NOCODB}
+      NC_AUTH_JWT_SECRET: ${NOCODB_AUTH_JWT_SECRET}
+      NC_PUBLIC_URL: https://lidi.studio/admin
+      NC_DISABLE_TELE: "true"
+    volumes:
+      - nocodb_data:/usr/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    mem_limit: 300m
+    mem_reservation: 220m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+  # ────────────────────────────────────────────────────────
+  # postgres — shared instance, 5 logical databases
+  # init-databases.sh creates ghost/calcom/docuseal/nocodb/umami DBs
+  # postgresql.conf tuned for 350 MB budget on 4 GB shared host
+  # ────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: lidi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: postgres
+      POSTGRES_DB_GHOST: ${POSTGRES_DB_GHOST}
+      POSTGRES_DB_CALCOM: ${POSTGRES_DB_CALCOM}
+      POSTGRES_DB_DOCUSEAL: ${POSTGRES_DB_DOCUSEAL}
+      POSTGRES_DB_NOCODB: ${POSTGRES_DB_NOCODB}
+      POSTGRES_DB_UMAMI: ${POSTGRES_DB_UMAMI}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh:ro
+      - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+    mem_limit: 350m
+    mem_reservation: 280m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ────────────────────────────────────────────────────────
+  # redis — Cal.com sessions + Ghost cache, 50 MB max with LRU eviction
+  # ────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: lidi-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --requirepass ${REDIS_PASSWORD}
+      --maxmemory 50mb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+    volumes:
+      - redis_data:/data
+    mem_limit: 80m
+    mem_reservation: 50m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ────────────────────────────────────────────────────────
+  # umami — analytics at /stats via Caddy (basic_auth + IP allowlist)
+  # GDPR-compliant: no cookies, no PII collected
+  # ────────────────────────────────────────────────────────
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    container_name: lidi-umami
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB_UMAMI}
+      DATABASE_TYPE: postgresql
+      APP_SECRET: ${UMAMI_APP_SECRET}
+      DISABLE_TELEMETRY: "1"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    mem_limit: 130m
+    mem_reservation: 100m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/heartbeat"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # ────────────────────────────────────────────────────────
+  # uptime-kuma — public status page at status.lidi.studio
+  # Separate Caddy site block (Caddyfile.status) so status stays
+  # reachable independently of the main app's Cloudflare proxy.
+  # ────────────────────────────────────────────────────────
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: lidi-uptime-kuma
+    restart: unless-stopped
+    volumes:
+      - uptime_kuma_data:/app/data
+    mem_limit: 100m
+    mem_reservation: 70m
+    networks: [lidi-net]
+    healthcheck:
+      test: ["CMD", "node", "/app/extra/healthcheck.js"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  lidi-net:
+    driver: bridge
+    name: lidi-net
+
+volumes:
+  astro_dist:        # populated by GitHub Actions deploy workflow
+  caddy_data:
+  caddy_config:
+  caddy_logs:
+  docuseal_data:
+  ghost_content:
+  nocodb_data:
+  postgres_data:
+  redis_data:
+  uptime_kuma_data:
+
+# ────────────────────────────────────────────────────────────────
+# RAM budget summary (committed mem_limit):
+#   astro-api:    120m
+#   caddy:         60m
+#   calcom:       800m
+#   docuseal:     250m
+#   ghost:        350m
+#   nocodb:       300m
+#   postgres:     350m
+#   redis:         80m
+#   umami:        130m
+#   uptime-kuma:  100m
+#   ─────────────────
+#   total:      2540m
+#   host:       4096m
+#   headroom:   1556m (~38%)
+# ────────────────────────────────────────────────────────────────

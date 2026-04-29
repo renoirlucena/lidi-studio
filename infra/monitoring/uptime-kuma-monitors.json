@@ -1,0 +1,118 @@
+{
+  "version": "1.23.0",
+  "notificationList": [
+    {
+      "name": "Telegram — operator",
+      "type": "telegram",
+      "isDefault": true,
+      "applyExisting": true,
+      "telegramBotToken": "${TELEGRAM_BOT_TOKEN}",
+      "telegramChatID": "${TELEGRAM_CHAT_ID}"
+    }
+  ],
+  "monitorList": [
+    {
+      "name": "Homepage — keyword",
+      "type": "keyword",
+      "url": "https://lidi.studio/",
+      "method": "GET",
+      "keyword": "Painted, not posed.",
+      "interval": 60,
+      "retryInterval": 60,
+      "maxretries": 2,
+      "maxredirects": 5,
+      "accepted_statuscodes": ["200-299", "301", "308"],
+      "ignoreTls": false,
+      "upsideDown": false,
+      "active": true
+    },
+    {
+      "name": "Journal index — keyword",
+      "type": "keyword",
+      "url": "https://lidi.studio/journal",
+      "method": "GET",
+      "keyword": "Lidi",
+      "interval": 300,
+      "retryInterval": 60,
+      "maxretries": 2,
+      "maxredirects": 5,
+      "accepted_statuscodes": ["200-299", "301", "308"],
+      "active": true
+    },
+    {
+      "name": "API health endpoint",
+      "type": "http",
+      "url": "https://lidi.studio/api/healthz",
+      "method": "GET",
+      "interval": 60,
+      "retryInterval": 60,
+      "maxretries": 2,
+      "accepted_statuscodes": ["200-299"],
+      "active": true
+    },
+    {
+      "name": "Booking (Cal.com)",
+      "type": "http",
+      "url": "https://lidi.studio/book",
+      "method": "GET",
+      "interval": 300,
+      "retryInterval": 60,
+      "maxretries": 2,
+      "accepted_statuscodes": ["200-299", "301", "308"],
+      "active": true
+    },
+    {
+      "name": "Status page self-check",
+      "type": "http",
+      "url": "https://status.lidi.studio/",
+      "method": "GET",
+      "interval": 60,
+      "retryInterval": 60,
+      "maxretries": 2,
+      "accepted_statuscodes": ["200-299"],
+      "active": true
+    },
+    {
+      "name": "Postgres TCP (internal)",
+      "type": "port",
+      "hostname": "postgres",
+      "port": 5432,
+      "interval": 60,
+      "retryInterval": 60,
+      "maxretries": 3,
+      "active": true
+    },
+    {
+      "name": "Disk usage (push)",
+      "type": "push",
+      "interval": 600,
+      "retryInterval": 600,
+      "maxretries": 1,
+      "active": true,
+      "description": "Push monitor — set up cron on host to POST when disk < 80% used"
+    },
+    {
+      "name": "TLS cert — lidi.studio",
+      "type": "http",
+      "url": "https://lidi.studio/",
+      "method": "GET",
+      "interval": 21600,
+      "retryInterval": 600,
+      "maxretries": 1,
+      "expiryNotification": true,
+      "active": true,
+      "description": "Cert expiry alert at 14 days remaining"
+    },
+    {
+      "name": "TLS cert — status.lidi.studio",
+      "type": "http",
+      "url": "https://status.lidi.studio/",
+      "method": "GET",
+      "interval": 21600,
+      "retryInterval": 600,
+      "maxretries": 1,
+      "expiryNotification": true,
+      "active": true
+    }
+  ]
+}

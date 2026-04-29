@@ -1,0 +1,111 @@
+# Lidi Studio — Caddy reverse proxy
+# See /docs/platform-architecture-v1.md (v1.1) §3 for routing map
+#
+# Caddy auto-provisions Let's Encrypt certs for lidi.studio.
+# Cloudflare proxy is ON (orange) for the apex; Caddy still issues
+# origin certs so end-to-end encryption works with Cloudflare's
+# "Full (strict)" mode.
+{
+	email lidi@lidi.studio
+	servers {
+		protocols h1 h2 h3
+	}
+}
+
+# Status subdomain — defined in a separate file to keep this Caddyfile readable
+import Caddyfile.status
+
+# www → apex (Cloudflare-proxied 301)
+www.lidi.studio {
+	redir https://lidi.studio{uri} permanent
+}
+
+lidi.studio {
+	# ──────────────── Security headers (apply to all routes) ────────────────
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+		-Server
+	}
+
+	# ──────────────── Routing per platform-arch §3 ────────────────
+
+	# /journal* → Ghost (handle_path strips /journal prefix; Ghost is configured
+	# with url=https://lidi.studio/journal and handles its own subpath routing)
+	handle_path /journal* {
+		reverse_proxy ghost:2368
+	}
+
+	# /book* → Cal.com
+	handle_path /book* {
+		reverse_proxy calcom:3000
+	}
+
+	# /contracts/* → DocuSeal (token gate is applied by DocuSeal itself)
+	handle_path /contracts* {
+		reverse_proxy docuseal:3000
+	}
+
+	# /admin → NocoDB (CRM). Basic_auth is the second factor on top of
+	# NocoDB's native auth. Hetzner Cloud Firewall provides IP allowlist
+	# at the network layer (configured separately in console).
+	handle_path /admin* {
+		basic_auth {
+			{$NOCODB_BASIC_AUTH_USER} {$NOCODB_BASIC_AUTH_PASSWORD_HASH}
+		}
+		header X-Robots-Tag "noindex, nofollow"
+		reverse_proxy nocodb:8080
+	}
+
+	# /stats → Umami (analytics). Same protection as /admin.
+	handle_path /stats* {
+		basic_auth {
+			{$NOCODB_BASIC_AUTH_USER} {$NOCODB_BASIC_AUTH_PASSWORD_HASH}
+		}
+		header X-Robots-Tag "noindex, nofollow"
+		reverse_proxy umami:3000
+	}
+
+	# /api/* → Astro hybrid (Node container). NOTE: handle (not handle_path)
+	# preserves the /api/ prefix because Astro routes are file-routed at /api/*.
+	handle /api/* {
+		reverse_proxy astro-api:4321
+	}
+
+	# Default: Astro static site from build artifact
+	handle {
+		root * /srv/astro
+		try_files {path} {path}/ /index.html
+		file_server
+		encode gzip zstd
+	}
+
+	# ──────────────── Custom error pages (Sargent Luminous) ────────────────
+	handle_errors {
+		@404 expression `{err.status_code} == 404`
+		handle @404 {
+			root * /srv/error-pages
+			rewrite * /404.html
+			file_server
+		}
+		@5xx expression `{err.status_code} >= 500`
+		handle @5xx {
+			root * /srv/error-pages
+			rewrite * /5xx.html
+			file_server
+		}
+	}
+
+	# ──────────────── Structured access logs ────────────────
+	log {
+		output file /var/log/caddy/access.log {
+			roll_size 100MB
+			roll_keep 7
+			roll_keep_for 720h
+		}
+		format json
+	}
+}

@@ -1,0 +1,26 @@
+# Lidi Studio — status.lidi.studio
+#
+# Public Uptime Kuma status page on a separate subdomain so it stays
+# reachable independently of the apex Cloudflare proxy. The DNS A
+# record for status.lidi.studio is grey-clouded (DNS-only) per
+# /docs/platform-architecture-v1.md §3, ensuring outages of the
+# Cloudflare edge or the main app do not blind us to our own state.
+
+status.lidi.studio {
+	reverse_proxy uptime-kuma:3001
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		-Server
+	}
+
+	log {
+		output file /var/log/caddy/status-access.log {
+			roll_size 50MB
+			roll_keep 7
+			roll_keep_for 720h
+		}
+		format json
+	}
+}
