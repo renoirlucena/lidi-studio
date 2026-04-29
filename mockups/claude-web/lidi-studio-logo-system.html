@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lidi Studio — Logo System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Italiana&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5EBDD;
+  --mauve:#D4B5B0;
+  --pearl:#C9C2B8;
+  --gold:#B89968;
+  --charcoal:#4A3F38;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{ background:var(--cream); color:var(--charcoal); font-family:'EB Garamond',Georgia,serif; -webkit-font-smoothing:antialiased; }
+body{ padding: clamp(48px,6vh,96px) clamp(24px,5vw,80px) clamp(80px,10vh,140px); }
+
+.eyebrow{ font-family:'JetBrains Mono',monospace; font-weight:300; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:var(--charcoal); }
+.eyebrow.gold{ color:var(--gold); }
+
+.head{
+  display:flex; justify-content:space-between; align-items:flex-start; gap:32px;
+  padding-bottom: clamp(28px,4vh,48px);
+  border-bottom: 1px solid color-mix(in oklab, var(--charcoal) 22%, transparent);
+  margin-bottom: clamp(80px,10vh,140px);
+}
+.head__title{
+  font-family:'Italiana',serif; font-size:clamp(28px,3vw,48px); line-height:1.1; letter-spacing:.02em; max-width:24ch; margin-top:18px;
+}
+.head__sub{ text-align:right; line-height:2; }
+
+.plate{
+  padding: clamp(96px,14vh,180px) 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--charcoal) 14%, transparent);
+  display:grid; grid-template-columns: 1fr; gap: clamp(40px,6vh,80px);
+}
+.plate__head{
+  display:flex; justify-content:space-between; align-items:baseline; gap:24px;
+}
+.plate__no{ font-family:'JetBrains Mono',monospace; font-weight:300; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:var(--charcoal); opacity:.7; }
+.plate__no .gold{ color:var(--gold); }
+.plate__name{ font-family:'Italiana',serif; font-size:clamp(18px,1.6vw,24px); letter-spacing:.04em; }
+
+.plate__stage{
+  display:grid; place-items:center;
+  padding: clamp(40px,8vh,120px) 16px;
+  background: var(--cream);
+  position:relative;
+}
+.plate__stage--charcoal{ background: var(--charcoal); }
+.plate__stage--mauve{ background: var(--mauve); }
+
+.plate__caption{
+  display:grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,72px);
+  padding-top: clamp(20px,3vh,32px);
+  border-top: 1px dashed color-mix(in oklab, var(--charcoal) 22%, transparent);
+}
+.plate__caption .label{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; opacity:.7; }
+.plate__caption .note{ font-family:'Italiana',serif; font-size:clamp(15px,1.15vw,18px); line-height:1.55; opacity:.85; max-width:48ch; }
+
+/* THE WORDMARK — pure type, no flourish */
+.wordmark{ display:inline-flex; flex-direction:column; align-items:center; gap: clamp(18px,2.4vh,32px); padding: clamp(18px,2.4vh,32px) 0; }
+.wordmark .lidi{
+  font-family:'Cormorant Garamond',serif; font-weight:500; font-style:normal;
+  letter-spacing:.32em;
+  color: var(--charcoal);
+}
+.wordmark .rule{
+  height:1px; background: var(--gold);
+  width: 100%;
+}
+.wordmark .studio{
+  font-family:'Cormorant Garamond',serif; font-weight:400; font-style:normal;
+  letter-spacing:.40em;
+  color: var(--charcoal);
+}
+.wordmark--reverse .lidi,
+.wordmark--reverse .studio{ color: var(--cream); }
+
+/* Sized variants */
+.wordmark--xl   .lidi{ font-size: 96px; } .wordmark--xl   .studio{ font-size: 30px; }
+.wordmark--lg   .lidi{ font-size: 72px; } .wordmark--lg   .studio{ font-size: 22px; }
+.wordmark--md   .lidi{ font-size: 48px; } .wordmark--md   .studio{ font-size: 15px; }
+
+.horizontal{
+  display:inline-flex; align-items:center; gap: clamp(18px,2vw,32px);
+}
+.horizontal .lidi, .horizontal .studio{
+  font-family:'Cormorant Garamond',serif; color: var(--charcoal);
+}
+.horizontal .lidi{ font-weight:500; letter-spacing:.32em; font-size: clamp(40px, 5.6vw, 84px); }
+.horizontal .studio{ font-weight:400; letter-spacing:.40em; font-size: clamp(14px, 1.6vw, 22px); }
+.horizontal .dot{
+  width:5px; height:5px; border-radius:50%; background: var(--gold); display:inline-block;
+}
+
+.monogram{
+  font-family:'Cormorant Garamond',serif; font-weight:500; line-height:1;
+  font-size: clamp(140px, 18vw, 280px);
+  letter-spacing: 0;
+}
+.monogram--gold{ color: var(--gold); }
+.monogram--charcoal{ color: var(--charcoal); }
+
+.monogram-pair{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,72px); width:100%; }
+.monogram-pair > div{ display:grid; place-items:center; padding: clamp(40px,8vh,80px) 16px; }
+
+.seal-wrap{ display:flex; flex-direction:column; align-items:center; gap: clamp(20px,3vh,32px); }
+.seal{
+  width: 200px; height: 200px; border-radius: 50%;
+  display:grid; place-items:center;
+  background: radial-gradient(circle at 38% 35%, #D4B07B 0%, #B89968 55%, #8E7344 100%);
+  box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 24px 60px -30px rgba(74,63,56,.4);
+}
+.seal__l{ font-family:'Cormorant Garamond',serif; font-weight:500; font-size: 130px; color: var(--cream); line-height:1; padding-bottom: 8px; }
+.seal-inscription{ font-family:'JetBrains Mono',monospace; font-weight:300; font-size: 11px; letter-spacing:.4em; text-transform:uppercase; color: var(--charcoal); }
+
+.archival{
+  border: 1px solid var(--gold);
+  padding: 28px 56px;
+  display:flex; flex-direction:column; align-items:center; gap: 14px;
+  min-width: 360px;
+}
+.archival .top{ font-family:'JetBrains Mono',monospace; font-size: 10px; letter-spacing:.4em; color: var(--charcoal); }
+.archival .mid{ font-family:'Cormorant Garamond',serif; font-weight:500; font-size: 22px; letter-spacing:.32em; color: var(--charcoal); }
+.archival .bot{ font-family:'JetBrains Mono',monospace; font-size: 10px; letter-spacing:.4em; color: var(--charcoal); }
+
+.favicons{ display:flex; gap: clamp(40px,6vw,96px); align-items:flex-end; }
+.fav-fig{ display:flex; flex-direction:column; gap: 14px; align-items:center; }
+.fav-32{ width:32px; height:32px; display:grid; place-items:center; background: var(--cream); }
+.fav-32 .l{ font-family:'Cormorant Garamond',serif; font-weight:500; font-size: 24px; line-height:1; padding-bottom:1px; }
+.fav-zoom{ width:160px; height:160px; display:grid; place-items:center; background: var(--cream); border:1px solid color-mix(in oklab, var(--charcoal) 18%, transparent); }
+.fav-zoom .l{ font-family:'Cormorant Garamond',serif; font-weight:500; font-size: 120px; line-height:1; padding-bottom: 4px; }
+.fav-fig .label{ font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.32em; text-transform:uppercase; opacity:.7; }
+
+.foot{
+  margin-top: clamp(80px,10vh,140px);
+  padding-top: clamp(24px,3vh,40px);
+  border-top: 1px solid color-mix(in oklab, var(--charcoal) 22%, transparent);
+  display:flex; justify-content:space-between; gap: 24px; flex-wrap:wrap;
+}
+
+@media (max-width: 720px){
+  .head, .plate__head, .plate__caption, .foot{ flex-direction:column; }
+  .plate__caption{ grid-template-columns:1fr; }
+  .monogram-pair{ grid-template-columns:1fr; }
+  .favicons{ gap:32px; }
+  .archival{ min-width:0; padding: 24px 28px; }
+}
+</style>
+</head>
+<body>
+
+<header class="head">
+  <div>
+    <div class="eyebrow">LIDI STUDIO</div>
+    <h1 class="head__title">Logo System · MMXXVI</h1>
+  </div>
+  <div class="eyebrow head__sub">
+    Anchorage · Alaska<br>
+    Plate Set α · House Codes<br>
+    /lee-dee/
+  </div>
+</header>
+
+<!-- 01 PRIMARY MARK STACKED -->
+<section class="plate">
+  <div class="plate__head">
+    <div class="plate__no"><span class="gold">i</span> · Primary Mark</div>
+    <div class="plate__name">Stacked</div>
+  </div>
+  <div class="plate__stage">
+    <div class="wordmark wordmark--xl">
+      <span class="lidi">LIDI</span>
+      <span class="rule"></span>
+      <span class="studio">STUDIO</span>
+    </div>
+  </div>
+  <div class="plate__caption">
+    <div class="label">CONFIGURATION I · STACKED</div>
+    <div class="note">The ceremonial mark. Cormorant Medium, all caps, tracked +0.32em. A single Aged Gold hairline divides the wordmark from STUDIO, set in regular at +0.40em. No flourish, no diamond, no swash. Only spacing, weight, and silence.</div>
+  </div>
+</section>
+
+<!-- 02 HORIZONTAL LOCKUP -->
+<section class="plate">
+  <div class="plate__head">
+    <div class="plate__no"><span class="gold">ii</span> · Primary Mark</div>
+    <div class="plate__name">Horizontal Lockup</div>
+  </div>
+  <div class="plate__stage">
+    <div class="horizontal">
+      <span class="lidi">LIDI</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="studio">STUDIO</span>
+    </div>
+  </div>
+  <div class="plate__caption">
+    <div class="label">CONFIGURATION II · HORIZONTAL</div>
+    <div class="note">For navigation, signatures, watermarks, the verso of correspondence. A single Aged Gold dot — slightly heavier than a typographic interpunct — holds the rhythm between the two words.</div>
+  </div>
+</section>
+
+<!-- 03 MONOGRAM -->
+<section class="plate">
+  <div class="plate__head">
+    <div class="plate__no"><span class="gold">iii</span> · Monogram</div>
+    <div class="plate__name">L · Charcoal &amp; Gold</div>
+  </div>
+  <div class="plate__stage" style="padding:0">
+    <div class="monogram-pair">
+      <div><span class="monogram monogram--charcoal">L</span></div>
+      <div><span class="monogram monogram--gold">L</span></div>
+    </div>
+  </div>
+  <div class="plate__caption">
+    <div class="label">CONFIGURATION III · MONOGRAM</div>
+    <div class="note">A single Cormorant Medium L. Untouched: no swash, no extension, no flourish. Warm Charcoal carries the everyday; Aged Gold is reserved for the seal, the print, and the page that matters.</div>
+  </div>
+</section>
+
+<!-- 04 WAX SEAL -->
+<section class="plate">
+  <div class="plate__head">
+    <div class="plate__no"><span class="gold">iv</span> · Wax Seal</div>
+    <div class="plate__name">Correspondence</div>
+  </div>
+  <div class="plate__stage">
+    <div class="seal-wrap">
+      <div class="seal" aria-label="Lidi Studio wax seal"><div class="seal__l">L</div></div>
+      <div class="seal-inscription">LIDI · STUDIO · ANCHORAGE</div>
+    </div>
+  </div>
+  <div class="plate__caption">
+    <div class="label">CONFIGURATION IV · WAX SEAL</div>
+    <div class="note">A circular Aged Gold disc with a quiet radial gradient — light at the upper-left, deeper at the rim. The L sits in Champagne Cream, occupying half the diameter. The inscription stands beneath, never around.</div>
+  </div>
+</section>
+
+<!-- 05 ARCHIVAL STAMP -->
+<section class="plate">
+  <div class="plate__head">
+    <div class="plate__no"><span class="gold">v</span> · Archival Stamp</div>
+    <div class="plate__name">Verso of every print</div>
+  </div>
+  <div class="plate__stage">
+    <div class="archival">
+      <div class="top">FROM&nbsp;&nbsp;THE&nbsp;&nbsp;STUDIO&nbsp;&nbsp;OF</div>
+      <div class="mid">LIDI&nbsp;STUDIO</div>
+      <div class="bot">ANCHORAGE · ALASKA · MMXXVI</div>
+    </div>
+  </div>
+  <div class="plate__caption">
+    <div class="label">CONFIGURATION V · ARCHIVAL STAMP</div>
+    <div class="note">A bordered field in Aged Gold hairline, three lines of register. The mark contracts into a label — for the verso of every archival print, stamped or letterpressed by hand where possible.</div>
+  </div>
+</section>
+
+<!-- 06 FAVICON -->
+<section class="plate">
+  <div class="plate__head">
+    <div class="plate__no"><span class="gold">vi</span> · Favicon</div>
+    <div class="plate__name">32 × 32 · Two grounds</div>
+  </div>
+  <div class="plate__stage">
+    <div class="favicons">
+      <figure class="fav-fig">
+        <div class="fav-32"><span class="l" style="color:var(--gold)">L</span></div>
+        <div class="fav-zoom"><span class="l" style="color:var(--gold)">L</span></div>
+        <span class="label">Aged Gold · Actual / 5×</span>
+      </figure>
+      <figure class="fav-fig">
+        <div class="fav-32"><span class="l" style="color:var(--charcoal)">L</span></div>
+        <div class="fav-zoom"><span class="l" style="color:var(--charcoal)">L</span></div>
+        <span class="label">Charcoal · Actual / 5×</span>
+      </figure>
+    </div>
+  </div>
+  <div class="plate__caption">
+    <div class="label">CONFIGURATION VI · FAVICON</div>
+    <div class="note">A single L on Champagne Cream, in either Aged Gold (ceremonial) or Warm Charcoal (everyday). Optimised at 32 pixels; the form holds because the form was already pure.</div>
+  </div>
+</section>
+
+<!-- 07 GROUNDS — bonus moments -->
+<section class="plate">
+  <div class="plate__head">
+    <div class="plate__no"><span class="gold">vii</span> · Variant Grounds</div>
+    <div class="plate__name">Charcoal · Mauve</div>
+  </div>
+  <div class="plate__stage" style="padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0">
+    <div class="plate__stage--charcoal" style="padding:clamp(60px,10vh,120px) 16px;display:grid;place-items:center">
+      <div class="wordmark wordmark--lg wordmark--reverse">
+        <span class="lidi">LIDI</span>
+        <span class="rule"></span>
+        <span class="studio">STUDIO</span>
+      </div>
+    </div>
+    <div class="plate__stage--mauve" style="padding:clamp(60px,10vh,120px) 16px;display:grid;place-items:center">
+      <div class="wordmark wordmark--lg">
+        <span class="lidi">LIDI</span>
+        <span class="rule"></span>
+        <span class="studio">STUDIO</span>
+      </div>
+    </div>
+  </div>
+  <div class="plate__caption">
+    <div class="label">CONFIGURATION VII · GROUNDS</div>
+    <div class="note">The mark holds across Warm Charcoal (the rare ceremonial reverse) and Soft Mauve (permitted for editorial covers, never for navigation). The Aged Gold rule remains constant — the only chromatic indulgence the system allows.</div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="eyebrow">Lidi Studio · Logo System · Plate Set α</div>
+  <div class="eyebrow">Anchorage · MMXXVI</div>
+  <div class="eyebrow">Painted, not posed.</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1785 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#1A1612" />
+<title>Lidi Studio — Painted, not posed. · Anchorage, Alaska</title>
+<meta name="description" content="Fine art portraiture for the most extraordinary chapter of a woman's life. Composed in light, atmosphere, and time — by a photographer who paints in oil. Lidi Studio · Anchorage, Alaska." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+<style>
+  /* ─────────────────────────────────────────────────
+     1. TOKENS  — locked from brand-book-v2.md
+     ───────────────────────────────────────────────── */
+  :root {
+    /* Palette */
+    --color-carbon:   #1A1612;
+    --color-bone:     #E8DFCF;
+    --color-umber:    #6B4F3A;
+    --color-slate:    #3D434A;
+    --color-oxblood:  #5A1E1E;
+
+    /* Bone tints (computed for hover/border subtleties) */
+    --color-bone-95:  rgba(232,223,207,0.95);
+    --color-bone-60:  rgba(232,223,207,0.60);
+    --color-bone-40:  rgba(232,223,207,0.40);
+    --color-bone-20:  rgba(232,223,207,0.20);
+    --color-bone-12:  rgba(232,223,207,0.12);
+    --color-bone-08:  rgba(232,223,207,0.08);
+    --color-carbon-90: rgba(26,22,18,0.90);
+    --color-carbon-72: rgba(26,22,18,0.72);
+
+    /* Type */
+    --font-display: "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
+    --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-mono:    "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+
+    /* Spacing — fluid, clamp-based */
+    --space-1:  clamp(0.25rem, 0.4vw, 0.5rem);
+    --space-2:  clamp(0.5rem, 0.8vw, 0.75rem);
+    --space-3:  clamp(0.75rem, 1.2vw, 1rem);
+    --space-4:  clamp(1rem, 2vw, 1.5rem);
+    --space-5:  clamp(1.5rem, 3vw, 2.5rem);
+    --space-6:  clamp(2rem, 4vw, 3.5rem);
+    --space-7:  clamp(3rem, 6vw, 5rem);
+    --space-8:  clamp(4rem, 8vw, 7rem);
+    --space-9:  clamp(5rem, 10vw, 9rem);
+    --space-10: clamp(6rem, 12vw, 12rem);
+
+    /* Section padding (vertical breathing) */
+    --section-y:        clamp(80px, 12vw, 160px);
+    --section-y-lg:     clamp(100px, 14vw, 200px);
+    --gutter-x:         clamp(20px, 5vw, 80px);
+
+    /* Motion */
+    --ease-paper: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-soft:  cubic-bezier(0.2, 0, 0, 1);
+    --dur-fast:   220ms;
+    --dur-med:    450ms;
+    --dur-slow:   900ms;
+
+    /* Hairline */
+    --hairline:   1px solid var(--color-umber);
+    --hairline-bone: 1px solid var(--color-bone-20);
+  }
+
+  /* ─────────────────────────────────────────────────
+     2. RESET
+     ───────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+  body { margin: 0; }
+  img, picture, video { max-width: 100%; height: auto; display: block; }
+  button, input { font: inherit; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  ul, ol { list-style: none; padding: 0; margin: 0; }
+  figure { margin: 0; }
+  ::selection { background: var(--color-oxblood); color: var(--color-bone); }
+
+  /* ─────────────────────────────────────────────────
+     3. BASE / TYPOGRAPHY
+     ───────────────────────────────────────────────── */
+  body {
+    background: var(--color-bone);
+    color: var(--color-carbon);
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.05vw, 17px);
+    line-height: 1.65;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  .display    { font-family: var(--font-display); font-weight: 500; line-height: 1.05; letter-spacing: -0.005em; }
+  .display-it { font-family: var(--font-display); font-weight: 400; font-style: italic; line-height: 1.10; letter-spacing: 0; }
+  .mono       { font-family: var(--font-mono);    font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; font-size: 11px; line-height: 1.4; }
+  .mono-sm    { font-family: var(--font-mono);    font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; font-size: 10px; line-height: 1.5; }
+  .body-lede  { font-size: clamp(17px, 1.4vw, 22px); line-height: 1.55; font-weight: 400; }
+  .body-small { font-size: 13px; line-height: 1.55; }
+
+  /* H scale */
+  .h0 { font-family: var(--font-display); font-weight: 500; font-size: clamp(56px, 11vw, 168px); line-height: 0.92; letter-spacing: -0.018em; }
+  .h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(42px, 6.5vw, 88px);  line-height: 1.02; letter-spacing: -0.012em; }
+  .h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(34px, 4.8vw, 68px);  line-height: 1.06; letter-spacing: -0.008em; }
+  .h2-it { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(34px, 4.8vw, 68px); line-height: 1.10; letter-spacing: 0; }
+  .h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.18; letter-spacing: -0.005em; }
+
+  /* ─────────────────────────────────────────────────
+     4. LAYOUT PRIMITIVES
+     ───────────────────────────────────────────────── */
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-left: var(--gutter-x);
+    padding-right: var(--gutter-x);
+  }
+  .section { padding-top: var(--section-y); padding-bottom: var(--section-y); }
+  .section-lg { padding-top: var(--section-y-lg); padding-bottom: var(--section-y-lg); }
+
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+  }
+
+  .hairline { display: block; height: 1px; background: var(--color-umber); border: 0; }
+  .hairline-bone { background: var(--color-bone-20); }
+  .hairline-short { width: 64px; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-umber);
+  }
+  .eyebrow--oxblood { color: var(--color-oxblood); }
+  .eyebrow--bone    { color: var(--color-bone-60); }
+
+  /* ─────────────────────────────────────────────────
+     5. NAV
+     ───────────────────────────────────────────────── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px var(--gutter-x);
+    background: var(--color-carbon-72);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border-bottom: 1px solid var(--color-bone-12);
+    color: var(--color-bone);
+    transition: background var(--dur-med) var(--ease-soft), border-color var(--dur-med) var(--ease-soft);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-bone);
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .wordmark__dot {
+    width: 4px; height: 4px;
+    background: var(--color-bone-60);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .wordmark__sub {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--color-bone-60);
+  }
+
+  .nav__links { display: flex; gap: clamp(20px, 3vw, 44px); align-items: center; }
+  .nav__link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-bone);
+    position: relative;
+    padding: 6px 0;
+    transition: color var(--dur-fast) var(--ease-soft);
+  }
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--color-bone);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 600ms var(--ease-paper);
+  }
+  .nav__link:hover::after { transform: scaleX(1); }
+  .nav__link--cta { color: var(--color-bone); }
+  .nav__link--cta::after { background: var(--color-oxblood); transform: scaleX(1); opacity: 0.6; }
+
+  .nav__hamburger {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: var(--color-bone);
+    cursor: pointer;
+    padding: 8px;
+    margin-right: -8px;
+  }
+  .nav__hamburger-icon {
+    width: 22px; height: 14px;
+    position: relative;
+    display: block;
+  }
+  .nav__hamburger-icon::before,
+  .nav__hamburger-icon::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--color-bone);
+    transition: transform var(--dur-med) var(--ease-soft), top var(--dur-med) var(--ease-soft), bottom var(--dur-med) var(--ease-soft);
+  }
+  .nav__hamburger-icon::before { top: 3px; }
+  .nav__hamburger-icon::after  { bottom: 3px; }
+  .nav.is-open .nav__hamburger-icon::before { top: 50%; transform: translateY(-50%) rotate(45deg); }
+  .nav.is-open .nav__hamburger-icon::after  { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+  /* ─────────────────────────────────────────────────
+     6. HERO
+     ───────────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 640px;
+    background: var(--color-carbon);
+    color: var(--color-bone);
+    overflow: hidden;
+  }
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .hero__media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    transform: scale(1.04);
+    transition: transform 2.4s var(--ease-paper), opacity 1.6s var(--ease-paper);
+    opacity: 0;
+  }
+  .hero__media.is-revealed img { transform: scale(1); opacity: 1; }
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(26,22,18,0.55) 0%, rgba(26,22,18,0.10) 22%, rgba(26,22,18,0.05) 50%, rgba(26,22,18,0.78) 100%),
+      linear-gradient(90deg, rgba(26,22,18,0.55) 0%, rgba(26,22,18,0.0) 50%);
+    pointer-events: none;
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+  .hero__top {
+    align-self: start;
+    padding-top: clamp(110px, 14vh, 160px);
+  }
+  .hero__bottom {
+    align-self: end;
+    padding-bottom: clamp(60px, 8vh, 100px);
+  }
+  .hero__eyebrow-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--color-bone-60);
+  }
+  .hero__eyebrow-row .eyebrow--oxblood { color: var(--color-oxblood); }
+  .hero__eyebrow-rule {
+    width: 56px;
+    height: 1px;
+    background: var(--color-bone-40);
+  }
+  .hero__masthead {
+    margin-top: clamp(20px, 3vw, 36px);
+    color: var(--color-bone);
+    max-width: 14ch;
+  }
+  .hero__masthead em { font-style: italic; font-weight: 400; color: var(--color-bone); }
+  .hero__lede {
+    margin-top: clamp(24px, 3vw, 38px);
+    max-width: 32ch;
+    color: var(--color-bone-60);
+    font-size: clamp(15px, 1.2vw, 19px);
+    line-height: 1.55;
+  }
+  .hero__meta {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    gap: var(--space-4);
+    color: var(--color-bone-60);
+  }
+  .hero__meta-block { display: flex; flex-direction: column; gap: 4px; }
+  .hero__meta-block strong { color: var(--color-bone); font-weight: 400; font-family: var(--font-display); font-size: 18px; letter-spacing: 0.04em; }
+  .hero__meta-block--right { text-align: right; }
+  .hero__meta-rule { height: 1px; background: var(--color-bone-20); align-self: end; min-width: 80px; }
+
+  .hero__scroll {
+    position: absolute;
+    left: var(--gutter-x);
+    bottom: clamp(20px, 3vh, 28px);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-bone-60);
+    pointer-events: none;
+  }
+  .hero__scroll-line {
+    display: block;
+    width: 1px; height: 36px;
+    background: var(--color-bone-40);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__scroll-line::after {
+    content: "";
+    position: absolute;
+    left: 0; top: 0;
+    width: 1px; height: 36px;
+    background: var(--color-bone);
+    transform: translateY(-100%);
+    animation: scrollHint 2.6s var(--ease-paper) infinite;
+  }
+  @keyframes scrollHint {
+    0%   { transform: translateY(-100%); }
+    50%  { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+  }
+
+  /* ─────────────────────────────────────────────────
+     7. MANIFESTO
+     ───────────────────────────────────────────────── */
+  .manifesto {
+    background: var(--color-carbon);
+    color: var(--color-bone);
+    position: relative;
+    padding-top: var(--section-y-lg);
+    padding-bottom: var(--section-y-lg);
+  }
+  .manifesto__inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-7);
+  }
+  .manifesto__eyebrow-col {
+    grid-column: 2 / span 2;
+    align-self: start;
+    padding-top: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .manifesto__eyebrow-col .hairline-short { background: var(--color-bone-40); }
+  .manifesto__body {
+    grid-column: 4 / span 8;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(24px, 3.2vw, 44px);
+    line-height: 1.34;
+    letter-spacing: -0.002em;
+    color: var(--color-bone);
+  }
+  .manifesto__body p { margin: 0; }
+  .manifesto__body p + p { margin-top: 1.1em; }
+  .manifesto__body strong {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--color-bone);
+    display: block;
+    margin-top: 1.4em;
+    font-size: clamp(20px, 2.4vw, 32px);
+    letter-spacing: 0.01em;
+  }
+  .manifesto__signature {
+    grid-column: 4 / span 8;
+    margin-top: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--color-bone-60);
+  }
+  .manifesto__signature .hairline { width: 64px; background: var(--color-bone-40); }
+  .manifesto__seal {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--color-oxblood);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  /* ─────────────────────────────────────────────────
+     8. COMMISSIONS
+     ───────────────────────────────────────────────── */
+  .commissions {
+    padding-top: var(--section-y-lg);
+    padding-bottom: var(--section-y-lg);
+    background: var(--color-bone);
+    color: var(--color-carbon);
+  }
+  .commissions__header {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    margin-bottom: var(--space-9);
+  }
+  .commissions__header-eyebrow {
+    grid-column: 2 / span 2;
+    padding-top: 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .commissions__header-title {
+    grid-column: 4 / span 8;
+    max-width: 18ch;
+  }
+  .commissions__header-meta {
+    grid-column: 12 / span 1;
+    text-align: right;
+    align-self: end;
+    color: var(--color-umber);
+  }
+
+  .commission {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-5);
+    margin-bottom: var(--space-10);
+    position: relative;
+  }
+  .commission:last-child { margin-bottom: 0; }
+
+  .commission__media {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-slate);
+  }
+  .commission__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.03);
+    opacity: 0;
+    transition: transform 1.6s var(--ease-paper), opacity 1.2s var(--ease-paper);
+  }
+  .commission__media.is-revealed img { transform: scale(1); opacity: 1; }
+
+  .commission__caption {
+    margin-top: var(--space-3);
+    color: var(--color-umber);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+  .commission__plate-meta { letter-spacing: 0.18em; }
+
+  .commission__text {
+    align-self: end;
+    padding-bottom: var(--space-2);
+  }
+  .commission__number {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--color-umber);
+    margin-bottom: var(--space-4);
+  }
+  .commission__eyebrow {
+    margin-bottom: var(--space-3);
+    color: var(--color-umber);
+  }
+  .commission__name {
+    margin-bottom: var(--space-3);
+  }
+  .commission__tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.4;
+    color: var(--color-carbon);
+    margin-bottom: var(--space-4);
+    max-width: 28ch;
+  }
+  .commission__lede {
+    color: var(--color-slate);
+    margin-bottom: var(--space-5);
+    max-width: 36ch;
+  }
+  .commission__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-umber);
+    transition: color var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft), gap var(--dur-med) var(--ease-paper);
+    color: var(--color-carbon);
+  }
+  .commission__action .mono { color: inherit; }
+  .commission__action:hover { color: var(--color-oxblood); border-color: var(--color-oxblood); gap: 18px; }
+  .commission__action svg { transition: transform var(--dur-med) var(--ease-paper); }
+  .commission__action:hover svg { transform: translateX(4px); }
+
+  /* Layout variants — asymmetric editorial */
+  .commission--A .commission__media-wrap { grid-column: 1 / span 7; }
+  .commission--A .commission__text       { grid-column: 9 / span 4; padding-top: var(--space-7); }
+
+  .commission--B .commission__media-wrap { grid-column: 6 / span 7; grid-row: 1; }
+  .commission--B .commission__text       { grid-column: 1 / span 4; grid-row: 1; padding-top: var(--space-9); }
+
+  .commission--C .commission__media-wrap { grid-column: 2 / span 6; }
+  .commission--C .commission__text       { grid-column: 9 / span 4; padding-top: var(--space-5); }
+
+  .commission--D .commission__media-wrap { grid-column: 5 / span 8; grid-row: 1; }
+  .commission--D .commission__text       { grid-column: 1 / span 3; grid-row: 1; padding-top: var(--space-7); }
+
+  /* Triptych — flagship: full-bleed, text below */
+  .commission--flagship {
+    grid-template-columns: 1fr;
+    padding: 0;
+    max-width: none;
+  }
+  .commission--flagship .commission__media-wrap {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+  }
+  .commission--flagship .commission__media {
+    aspect-ratio: 21 / 10;
+    width: 100%;
+  }
+  .commission--flagship .commission__text {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: var(--space-7) var(--gutter-x) 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    align-items: start;
+  }
+  .commission--flagship .commission__number {
+    grid-column: 2 / span 1;
+    margin-bottom: 0;
+    padding-top: 18px;
+  }
+  .commission--flagship .commission__name-block {
+    grid-column: 4 / span 5;
+  }
+  .commission--flagship .commission__lede-block {
+    grid-column: 9 / span 3;
+    padding-top: 18px;
+  }
+  .commission--flagship .commission__lede { margin-bottom: var(--space-3); }
+  .commission--flagship .commission__caption {
+    max-width: 1600px;
+    margin: var(--space-3) auto 0;
+    padding: 0 var(--gutter-x);
+  }
+
+  /* Aspect ratios per row variant */
+  .commission__media[data-aspect="4-5"]  { aspect-ratio: 4 / 5; }
+  .commission__media[data-aspect="5-7"]  { aspect-ratio: 5 / 7; }
+  .commission__media[data-aspect="2-3"]  { aspect-ratio: 2 / 3; }
+  .commission__media[data-aspect="3-4"]  { aspect-ratio: 3 / 4; }
+
+  /* ─────────────────────────────────────────────────
+     9. ARCHIVE FEATURE
+     ───────────────────────────────────────────────── */
+  .archive-feature {
+    background: var(--color-carbon);
+    color: var(--color-bone);
+    padding-top: var(--section-y-lg);
+    padding-bottom: var(--section-y-lg);
+  }
+  .archive-feature__inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-6);
+  }
+  .archive-feature__eyebrow {
+    grid-column: 2 / span 3;
+    display: flex;
+    gap: 12px;
+    color: var(--color-bone-60);
+  }
+  .archive-feature__eyebrow .hairline-short { background: var(--color-bone-40); }
+  .archive-feature__date {
+    grid-column: 11 / span 2;
+    text-align: right;
+    color: var(--color-bone-60);
+  }
+  .archive-feature__media {
+    grid-column: 2 / span 6;
+    grid-row: 2;
+    overflow: hidden;
+  }
+  .archive-feature__media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    aspect-ratio: 5 / 7;
+    transform: scale(1.03);
+    opacity: 0;
+    transition: transform 1.6s var(--ease-paper), opacity 1.2s var(--ease-paper);
+  }
+  .archive-feature__media.is-revealed img { transform: scale(1); opacity: 1; }
+  .archive-feature__media-caption {
+    grid-column: 2 / span 6;
+    grid-row: 3;
+    color: var(--color-bone-60);
+  }
+  .archive-feature__quote-col {
+    grid-column: 9 / span 3;
+    grid-row: 2;
+    align-self: end;
+    padding-bottom: var(--space-4);
+  }
+  .archive-feature__quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.34;
+    color: var(--color-bone);
+    margin: 0 0 var(--space-5);
+    max-width: 22ch;
+  }
+  .archive-feature__attribution {
+    color: var(--color-bone-60);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .archive-feature__action {
+    grid-column: 9 / span 3;
+    grid-row: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-bone-40);
+    color: var(--color-bone);
+    align-self: start;
+    width: fit-content;
+    transition: gap var(--dur-med) var(--ease-paper), color var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft);
+  }
+  .archive-feature__action:hover { gap: 18px; color: var(--color-bone); border-color: var(--color-bone); }
+
+  /* ─────────────────────────────────────────────────
+     10. ABOUT TEASER
+     ───────────────────────────────────────────────── */
+  .about-teaser {
+    background: var(--color-bone);
+    color: var(--color-carbon);
+    padding-top: var(--section-y-lg);
+    padding-bottom: var(--section-y-lg);
+  }
+  .about-teaser__inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-6);
+  }
+  .about-teaser__eyebrow {
+    grid-column: 2 / span 4;
+    display: flex;
+    gap: 12px;
+  }
+  .about-teaser__media {
+    grid-column: 8 / span 4;
+    grid-row: 2 / span 2;
+    overflow: hidden;
+    align-self: start;
+  }
+  .about-teaser__media img {
+    width: 100%; height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transform: scale(1.03);
+    opacity: 0;
+    transition: transform 1.6s var(--ease-paper), opacity 1.2s var(--ease-paper);
+  }
+  .about-teaser__media.is-revealed img { transform: scale(1); opacity: 1; }
+  .about-teaser__media-cap {
+    grid-column: 8 / span 4;
+    grid-row: 4;
+    color: var(--color-umber);
+    margin-top: var(--space-2);
+  }
+  .about-teaser__title {
+    grid-column: 2 / span 5;
+    grid-row: 2;
+  }
+  .about-teaser__title em { font-style: italic; font-weight: 400; }
+  .about-teaser__body {
+    grid-column: 2 / span 5;
+    grid-row: 3;
+    max-width: 38ch;
+    color: var(--color-slate);
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.7;
+  }
+  .about-teaser__body p + p { margin-top: 1.1em; }
+  .about-teaser__pron {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-umber);
+    padding: 1px 6px;
+    border: 1px solid var(--color-umber);
+    margin-left: 8px;
+    white-space: nowrap;
+    display: inline-block;
+    transform: translateY(-2px);
+  }
+  .about-teaser__action {
+    grid-column: 2 / span 4;
+    grid-row: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-umber);
+    color: var(--color-carbon);
+    width: fit-content;
+    transition: gap var(--dur-med) var(--ease-paper), color var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft);
+  }
+  .about-teaser__action:hover { gap: 18px; color: var(--color-oxblood); border-color: var(--color-oxblood); }
+
+  /* ─────────────────────────────────────────────────
+     11. JOURNAL TEASER
+     ───────────────────────────────────────────────── */
+  .journal {
+    background: var(--color-bone);
+    color: var(--color-carbon);
+    padding-top: var(--section-y);
+    padding-bottom: var(--section-y-lg);
+    border-top: var(--hairline);
+    border-color: rgba(107,79,58,0.30);
+  }
+  .journal__inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-7);
+  }
+  .journal__header-eyebrow {
+    grid-column: 2 / span 2;
+    padding-top: 22px;
+    display: flex;
+    gap: 12px;
+  }
+  .journal__header-title {
+    grid-column: 4 / span 6;
+    max-width: 22ch;
+  }
+  .journal__header-cta {
+    grid-column: 11 / span 2;
+    text-align: right;
+    align-self: end;
+  }
+  .journal__header-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--color-umber);
+    transition: gap var(--dur-med) var(--ease-paper);
+  }
+  .journal__header-cta a:hover { gap: 16px; }
+
+  .journal__post {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .journal__post-media {
+    overflow: hidden;
+    background: var(--color-slate);
+  }
+  .journal__post-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+    transform: scale(1.03);
+    opacity: 0;
+    transition: transform 1.4s var(--ease-paper), opacity 1.0s var(--ease-paper);
+  }
+  .journal__post-media.is-revealed img { transform: scale(1); opacity: 1; }
+  .journal__post-eyebrow { color: var(--color-umber); }
+  .journal__post-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.22;
+    letter-spacing: -0.005em;
+    color: var(--color-carbon);
+    margin: 0;
+    max-width: 22ch;
+  }
+  .journal__post-meta {
+    color: var(--color-umber);
+    margin-top: auto;
+    padding-top: var(--space-2);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .journal__post--lead { grid-column: 2 / span 6; }
+  .journal__post--lead .journal__post-media img { aspect-ratio: 5 / 7; }
+  .journal__post--lead .journal__post-title { font-size: clamp(28px, 2.6vw, 38px); max-width: 16ch; }
+  .journal__post--small-1 { grid-column: 9 / span 3; padding-top: var(--space-7); }
+  .journal__post--small-1 .journal__post-media img { aspect-ratio: 4 / 5; }
+  .journal__post--small-2 { grid-column: 9 / span 3; padding-top: var(--space-3); }
+  .journal__post--small-2 .journal__post-media img { aspect-ratio: 4 / 5; }
+
+  /* ─────────────────────────────────────────────────
+     12. NEWSLETTER
+     ───────────────────────────────────────────────── */
+  .newsletter {
+    background: var(--color-carbon);
+    color: var(--color-bone);
+    padding-top: var(--section-y-lg);
+    padding-bottom: var(--section-y-lg);
+    border-top: 1px solid var(--color-bone-08);
+  }
+  .newsletter__inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-6);
+  }
+  .newsletter__eyebrow {
+    grid-column: 2 / span 3;
+    display: flex; gap: 12px;
+    color: var(--color-bone-60);
+    padding-top: 22px;
+  }
+  .newsletter__eyebrow .hairline-short { background: var(--color-bone-40); }
+  .newsletter__title {
+    grid-column: 4 / span 6;
+    max-width: 18ch;
+    color: var(--color-bone);
+  }
+  .newsletter__lede {
+    grid-column: 4 / span 6;
+    max-width: 44ch;
+    color: var(--color-bone-60);
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.7;
+  }
+  .newsletter__form {
+    grid-column: 4 / span 6;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: 1px solid var(--color-bone-40);
+    padding-bottom: 16px;
+    transition: border-color var(--dur-fast) var(--ease-soft);
+  }
+  .newsletter__form:focus-within { border-color: var(--color-bone); }
+  .newsletter__input {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--color-bone);
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.2vw, 20px);
+    padding: 8px 0;
+    letter-spacing: 0;
+  }
+  .newsletter__input::placeholder { color: var(--color-bone-40); }
+  .newsletter__submit {
+    background: transparent;
+    border: 0;
+    color: var(--color-bone);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-left: 1px solid var(--color-bone-20);
+    margin-left: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: color var(--dur-fast) var(--ease-soft), gap var(--dur-med) var(--ease-paper);
+  }
+  .newsletter__submit:hover { color: var(--color-oxblood); gap: 16px; }
+  .newsletter__submit svg { transition: transform var(--dur-med) var(--ease-paper); }
+  .newsletter__submit:hover svg { transform: translateX(3px); }
+  .newsletter__fine {
+    grid-column: 4 / span 6;
+    color: var(--color-bone-40);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─────────────────────────────────────────────────
+     13. FOOTER
+     ───────────────────────────────────────────────── */
+  .footer {
+    background: var(--color-carbon);
+    color: var(--color-bone);
+    padding-top: var(--space-9);
+    padding-bottom: var(--space-7);
+    border-top: 1px solid var(--color-bone-12);
+  }
+  .footer__inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-x);
+  }
+  .footer__top {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    row-gap: var(--space-6);
+    padding-bottom: var(--space-9);
+  }
+  .footer__brand {
+    grid-column: 2 / span 4;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .footer__monogram {
+    width: 56px; height: 56px;
+    border: 1px solid var(--color-bone-20);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 36px;
+    color: var(--color-bone);
+    line-height: 1;
+    margin-bottom: var(--space-2);
+  }
+  .footer__wordmark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-bone);
+  }
+  .footer__tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--color-bone-60);
+    margin-top: var(--space-2);
+  }
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .footer__col--studio   { grid-column: 7 / span 2; }
+  .footer__col--journal  { grid-column: 9 / span 2; }
+  .footer__col--contact  { grid-column: 11 / span 2; }
+
+  .footer__col-title {
+    color: var(--color-bone-40);
+    margin-bottom: var(--space-2);
+  }
+  .footer__col a {
+    color: var(--color-bone);
+    font-size: 14px;
+    line-height: 1.5;
+    transition: color var(--dur-fast) var(--ease-soft);
+    display: inline-block;
+    width: fit-content;
+  }
+  .footer__col a:hover { color: var(--color-bone-60); }
+  .footer__col span,
+  .footer__col p { color: var(--color-bone); font-size: 14px; line-height: 1.5; margin: 0; }
+
+  .footer__bottom {
+    border-top: 1px solid var(--color-bone-12);
+    padding-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-4);
+    color: var(--color-bone-40);
+  }
+  .footer__legal      { grid-column: 2 / span 4; }
+  .footer__pron       { grid-column: 6 / span 4; text-align: center; color: var(--color-bone-60); }
+  .footer__location   { grid-column: 10 / span 3; text-align: right; }
+  .footer__legal a    { color: var(--color-bone-60); margin-right: 16px; }
+  .footer__legal a:hover { color: var(--color-bone); }
+
+  /* ─────────────────────────────────────────────────
+     14. REVEAL ANIMATIONS
+     ───────────────────────────────────────────────── */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--dur-slow) var(--ease-paper), transform var(--dur-slow) var(--ease-paper);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    [data-reveal] { opacity: 1; transform: none; }
+    .hero__media img { opacity: 1; transform: none; }
+    .commission__media img,
+    .archive-feature__media img,
+    .about-teaser__media img,
+    .journal__post-media img { opacity: 1; transform: none; }
+  }
+
+  /* ─────────────────────────────────────────────────
+     15. RESPONSIVE — RECOMPOSITION (not just stack)
+     ───────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    :root { --gutter-x: 32px; }
+
+    /* Nav: hamburger + drawer */
+    .nav__links {
+      position: fixed;
+      top: 0; right: 0;
+      bottom: 0;
+      width: min(86vw, 420px);
+      background: var(--color-carbon);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 100px 36px 36px;
+      gap: 22px;
+      transform: translateX(100%);
+      transition: transform var(--dur-slow) var(--ease-paper);
+      border-left: 1px solid var(--color-bone-12);
+    }
+    .nav.is-open .nav__links { transform: translateX(0); }
+    .nav__hamburger { display: inline-flex; }
+
+    /* Hero */
+    .hero { height: 92vh; min-height: 600px; }
+    .hero__masthead { font-size: clamp(56px, 14vw, 96px); max-width: 9ch; }
+
+    /* Manifesto */
+    .manifesto__eyebrow-col { grid-column: 1 / span 12; padding-top: 0; }
+    .manifesto__body        { grid-column: 1 / span 12; }
+    .manifesto__signature   { grid-column: 1 / span 12; }
+
+    /* Commissions: alternate offsets at tablet */
+    .commission--A .commission__media-wrap { grid-column: 1 / span 8; }
+    .commission--A .commission__text       { grid-column: 1 / span 12; padding-top: var(--space-5); }
+    .commission--B .commission__media-wrap { grid-column: 5 / span 8; grid-row: 2; }
+    .commission--B .commission__text       { grid-column: 1 / span 12; grid-row: 1; padding-top: 0; }
+    .commission--C .commission__media-wrap { grid-column: 1 / span 8; }
+    .commission--C .commission__text       { grid-column: 1 / span 12; padding-top: var(--space-5); }
+    .commission--D .commission__media-wrap { grid-column: 5 / span 8; grid-row: 2; }
+    .commission--D .commission__text       { grid-column: 1 / span 12; grid-row: 1; padding-top: 0; }
+
+    .commission--flagship .commission__media { aspect-ratio: 16 / 11; }
+    .commission--flagship .commission__number     { grid-column: 1 / span 12; padding-top: 0; }
+    .commission--flagship .commission__name-block { grid-column: 1 / span 12; }
+    .commission--flagship .commission__lede-block { grid-column: 1 / span 12; padding-top: 0; }
+
+    /* Archive */
+    .archive-feature__media       { grid-column: 1 / span 9; grid-row: 2; }
+    .archive-feature__media-caption { grid-column: 1 / span 12; grid-row: 4; }
+    .archive-feature__quote-col   { grid-column: 1 / span 12; grid-row: 3; padding-bottom: 0; padding-top: var(--space-4); }
+    .archive-feature__action      { grid-column: 1 / span 6; grid-row: 5; }
+    .archive-feature__date        { grid-column: 7 / span 6; }
+
+    /* About */
+    .about-teaser__eyebrow  { grid-column: 1 / span 12; }
+    .about-teaser__title    { grid-column: 1 / span 12; grid-row: 2; }
+    .about-teaser__media    { grid-column: 1 / span 7; grid-row: 3; }
+    .about-teaser__body     { grid-column: 8 / span 5; grid-row: 3; align-self: end; }
+    .about-teaser__media-cap { grid-column: 1 / span 7; grid-row: 4; }
+    .about-teaser__action   { grid-column: 8 / span 5; grid-row: 4; padding-top: var(--space-3); }
+
+    /* Journal */
+    .journal__header-eyebrow { grid-column: 1 / span 12; padding-top: 0; }
+    .journal__header-title   { grid-column: 1 / span 12; }
+    .journal__header-cta     { grid-column: 1 / span 12; text-align: left; }
+    .journal__post--lead     { grid-column: 1 / span 12; }
+    .journal__post--small-1  { grid-column: 1 / span 6; padding-top: 0; }
+    .journal__post--small-2  { grid-column: 7 / span 6; padding-top: 0; }
+
+    /* Newsletter */
+    .newsletter__eyebrow { grid-column: 1 / span 12; padding-top: 0; }
+    .newsletter__title   { grid-column: 1 / span 12; }
+    .newsletter__lede,
+    .newsletter__form,
+    .newsletter__fine    { grid-column: 1 / span 12; }
+
+    /* Footer */
+    .footer__brand        { grid-column: 1 / span 12; }
+    .footer__col--studio  { grid-column: 1 / span 4; }
+    .footer__col--journal { grid-column: 5 / span 4; }
+    .footer__col--contact { grid-column: 9 / span 4; }
+    .footer__legal        { grid-column: 1 / span 12; }
+    .footer__pron         { grid-column: 1 / span 12; text-align: left; }
+    .footer__location     { grid-column: 1 / span 12; text-align: left; }
+  }
+
+  @media (max-width: 640px) {
+    :root { --gutter-x: 24px; }
+    .h0 { font-size: clamp(48px, 16vw, 96px); }
+    .h2, .h2-it { font-size: clamp(30px, 9vw, 48px); }
+
+    /* Hero */
+    .hero__masthead { font-size: clamp(50px, 18vw, 88px); max-width: 7ch; }
+    .hero__lede     { font-size: 14px; max-width: 28ch; }
+    .hero__meta     { grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+    .hero__meta-rule { display: none; }
+
+    /* Commissions */
+    .commission--A .commission__media-wrap,
+    .commission--B .commission__media-wrap,
+    .commission--C .commission__media-wrap,
+    .commission--D .commission__media-wrap { grid-column: 1 / span 12; grid-row: 1 !important; }
+    .commission--A .commission__text,
+    .commission--B .commission__text,
+    .commission--C .commission__text,
+    .commission--D .commission__text { grid-column: 1 / span 12; grid-row: 2 !important; padding-top: var(--space-5); }
+
+    .commission__caption { flex-direction: column; gap: 6px; align-items: flex-start; }
+
+    /* Archive */
+    .archive-feature__media   { grid-column: 1 / span 12; }
+    .archive-feature__date    { grid-column: 1 / span 12; text-align: left; }
+
+    /* About */
+    .about-teaser__media     { grid-column: 1 / span 12; }
+    .about-teaser__body      { grid-column: 1 / span 12; }
+    .about-teaser__media-cap { grid-column: 1 / span 12; }
+    .about-teaser__action    { grid-column: 1 / span 12; }
+
+    /* Journal */
+    .journal__post--small-1,
+    .journal__post--small-2  { grid-column: 1 / span 12; padding-top: 0; }
+
+    /* Footer */
+    .footer__col--studio,
+    .footer__col--journal,
+    .footer__col--contact { grid-column: 1 / span 12; }
+    .footer__top { row-gap: var(--space-5); }
+  }
+
+  /* hide scrollbar where unnecessary */
+  body { scrollbar-gutter: stable; }
+</style>
+</head>
+
+<body>
+
+<!-- ════════════════════════════════════════════════
+     NAV
+     ════════════════════════════════════════════════ -->
+<header class="nav" id="nav" role="banner">
+  <div class="nav__inner">
+    <a href="/" class="wordmark" aria-label="Lidi Studio — Home">
+      <span>LIDI</span>
+      <span class="wordmark__dot" aria-hidden="true"></span>
+      <span>STUDIO</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#work" class="nav__link">Work</a>
+      <a href="#commissions" class="nav__link">Commissions</a>
+      <a href="#journal" class="nav__link">Journal</a>
+      <a href="#about" class="nav__link">About</a>
+      <a href="#begin" class="nav__link nav__link--cta">Begin</a>
+    </nav>
+
+    <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false" id="hamburger">
+      <span class="nav__hamburger-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__media" data-image-reveal>
+    <img src="../../assets/photos/hero-angel-wings.jpg"
+         alt="A mother in editorial portraiture, draped in dark fabric with sculptural light, photographed in the studio."
+         fetchpriority="high"
+         decoding="async" />
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <div class="hero__top" data-reveal>
+      <div class="hero__eyebrow-row">
+        <span class="eyebrow eyebrow--oxblood">LIDI STUDIO</span>
+        <span class="hero__eyebrow-rule" aria-hidden="true"></span>
+        <span class="eyebrow eyebrow--bone">Anchorage · Alaska</span>
+      </div>
+    </div>
+
+    <div class="hero__bottom">
+      <h1 class="h0 hero__masthead" id="hero-title" data-reveal style="--reveal-delay: 120ms;">
+        Painted,<br>not&nbsp;<em>posed</em>.
+      </h1>
+      <p class="hero__lede" data-reveal style="--reveal-delay: 280ms;">
+        Fine art portraiture for the most extraordinary chapter of a woman's life.
+        Composed in light, atmosphere, and time — by a photographer who paints in oil.
+      </p>
+
+      <div class="hero__meta" style="margin-top: clamp(40px, 6vw, 80px);" data-reveal>
+        <div class="hero__meta-block">
+          <span class="mono-sm">Commission</span>
+          <strong>By appointment</strong>
+        </div>
+        <span class="hero__meta-rule" aria-hidden="true"></span>
+        <div class="hero__meta-block hero__meta-block--right">
+          <span class="mono-sm">In residence</span>
+          <strong>Anchorage, AK</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="mono-sm">Scroll</span>
+    <span class="hero__scroll-line"></span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     MANIFESTO
+     ════════════════════════════════════════════════ -->
+<section class="manifesto" aria-labelledby="manifesto-eyebrow">
+  <div class="manifesto__inner">
+    <div class="manifesto__eyebrow-col" data-reveal>
+      <span class="hairline-short hairline" aria-hidden="true" style="margin-top: 8px;"></span>
+      <span class="eyebrow eyebrow--bone" id="manifesto-eyebrow">Manifesto · MMXXVI</span>
+    </div>
+    <div class="manifesto__body" data-reveal style="--reveal-delay: 120ms;">
+      <p>Motherhood is the most extraordinary chapter of a woman's life — and most of it disappears in phone rolls and pastel props.</p>
+      <p>Lidi paints with light. Twenty years behind the camera. A lifetime behind the easel.</p>
+      <p>Every session is composed: the wardrobe sculpted, the light layered, the body honored. These are not snapshots of a season — they are portraits of who you became.</p>
+      <p><strong>Painted, not posed. Remembered, not just photographed.</strong></p>
+    </div>
+    <div class="manifesto__signature" data-reveal style="--reveal-delay: 280ms;">
+      <span class="manifesto__seal" aria-hidden="true"></span>
+      <span class="hairline" aria-hidden="true"></span>
+      <span class="mono">Lidi Studio · Atelier Note</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     COMMISSIONS  (5 entries — asymmetric editorial list)
+     ════════════════════════════════════════════════ -->
+<section class="commissions" id="commissions" aria-labelledby="commissions-title">
+  <div class="commissions__header">
+    <div class="commissions__header-eyebrow" data-reveal>
+      <span class="hairline-short hairline" aria-hidden="true" style="margin-top: 8px;"></span>
+      <span class="eyebrow">The Commissions</span>
+    </div>
+    <h2 class="h2 commissions__header-title" id="commissions-title" data-reveal style="--reveal-delay: 120ms;">
+      Five sittings — composed across <em class="display-it">the chapter</em>.
+    </h2>
+    <span class="mono commissions__header-meta" data-reveal style="--reveal-delay: 240ms;">I — V</span>
+  </div>
+
+  <!-- 01 — The Hearth -->
+  <article class="commission commission--A">
+    <div class="commission__media-wrap">
+      <figure>
+        <div class="commission__media" data-aspect="3-4" data-image-reveal>
+          <img src="../../assets/photos/newborn-family-beige.jpg"
+               alt="A family portrait in muted bone tones, composed with editorial light." loading="lazy" decoding="async" />
+        </div>
+        <figcaption class="commission__caption">
+          <span class="mono commission__plate-meta">Plate I · Family · MMXXVI</span>
+          <span class="mono">4:3 · Studio</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="commission__text" data-reveal>
+      <span class="commission__number">01 / V</span>
+      <span class="eyebrow commission__eyebrow">Family · Entry</span>
+      <h3 class="h2 commission__name">The Hearth</h3>
+      <p class="commission__tagline">A composed family portrait, in the painter's tradition.</p>
+      <p class="commission__lede">Ninety minutes in studio or on location. Direction of figurine, sculpted light, and a small archive of fifteen rendered portraits. The threshold to the studio's practice.</p>
+      <a href="#" class="commission__action">
+        <span class="mono">Read the commission</span>
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </a>
+    </div>
+  </article>
+
+  <!-- 02 — The Becoming -->
+  <article class="commission commission--B">
+    <div class="commission__media-wrap">
+      <figure>
+        <div class="commission__media" data-aspect="5-7" data-image-reveal>
+          <img src="../../assets/photos/maternity-red.jpg"
+               alt="A pregnant woman in a deep oxblood gown, composed against atmospheric studio light." loading="lazy" decoding="async" />
+        </div>
+        <figcaption class="commission__caption">
+          <span class="mono commission__plate-meta">Plate II · Maternity · MMXXVI</span>
+          <span class="mono">5:7 · Studio</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="commission__text" data-reveal>
+      <span class="commission__number">02 / V</span>
+      <span class="eyebrow commission__eyebrow">Maternity · Signature</span>
+      <h3 class="h2 commission__name">The Becoming</h3>
+      <p class="commission__tagline">A composed portrait of the woman becoming a mother.</p>
+      <p class="commission__lede">Three hours in studio or on location. Conversation, direction of figurine, drapery built on the dressform, atmospheric light layered slowly. Twenty-five rendered portraits and five fine art prints.</p>
+      <a href="#" class="commission__action">
+        <span class="mono">Read the commission</span>
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </a>
+    </div>
+  </article>
+
+  <!-- 03 — First Light -->
+  <article class="commission commission--C">
+    <div class="commission__media-wrap">
+      <figure>
+        <div class="commission__media" data-aspect="4-5" data-image-reveal>
+          <img src="../../assets/photos/newborn-mother.jpg"
+               alt="A mother holding her newborn in studio, painted-portrait light." loading="lazy" decoding="async" />
+        </div>
+        <figcaption class="commission__caption">
+          <span class="mono commission__plate-meta">Plate III · Newborn · MMXXVI</span>
+          <span class="mono">4:5 · Studio</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="commission__text" data-reveal>
+      <span class="commission__number">03 / V</span>
+      <span class="eyebrow commission__eyebrow">Newborn · Signature</span>
+      <h3 class="h2 commission__name">First Light</h3>
+      <p class="commission__tagline">The first portrait of a new life, painted in light.</p>
+      <p class="commission__lede">Within the first fourteen days. Drapery, weight, hands, breath. The mother is the centre — the child, the gravity that pulls the composition toward her.</p>
+      <a href="#" class="commission__action">
+        <span class="mono">Read the commission</span>
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </a>
+    </div>
+  </article>
+
+  <!-- 04 — The Mothering -->
+  <article class="commission commission--D">
+    <div class="commission__media-wrap">
+      <figure>
+        <div class="commission__media" data-aspect="2-3" data-image-reveal>
+          <img src="../../assets/photos/newborn-wing.jpg"
+               alt="A motherhood portrait composed with sculptural wings and atmospheric light." loading="lazy" decoding="async" />
+        </div>
+        <figcaption class="commission__caption">
+          <span class="mono commission__plate-meta">Plate IV · Motherhood · MMXXVI</span>
+          <span class="mono">2:3 · Studio</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="commission__text" data-reveal>
+      <span class="commission__number">04 / V</span>
+      <span class="eyebrow commission__eyebrow">Motherhood · Signature</span>
+      <h3 class="h2 commission__name">The Mothering</h3>
+      <p class="commission__tagline">A portrait of the woman, in the act of mothering.</p>
+      <p class="commission__lede">Studio or location. Mother and her small ones, composed slowly. Twenty rendered portraits and three fine art prints — the chapter mid-stride.</p>
+      <a href="#" class="commission__action">
+        <span class="mono">Read the commission</span>
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </a>
+    </div>
+  </article>
+
+  <!-- 05 — The Triptych (flagship) -->
+  <article class="commission commission--flagship">
+    <div class="commission__media-wrap">
+      <figure>
+        <div class="commission__media" data-image-reveal>
+          <img src="../../assets/photos/maternity-black.jpg"
+               alt="A pregnant woman in dramatic black drapery, atmospheric studio light, the flagship Triptych." loading="lazy" decoding="async" />
+        </div>
+      </figure>
+    </div>
+
+    <div class="commission__text" data-reveal>
+      <span class="commission__number">05 / V</span>
+      <div class="commission__name-block">
+        <span class="eyebrow commission__eyebrow">Flagship · Premium · Limited 4 / year</span>
+        <h3 class="h1 commission__name" style="margin-bottom: var(--space-3);">The Triptych</h3>
+        <p class="commission__tagline" style="font-size: clamp(20px, 1.8vw, 26px); max-width: 24ch;">
+          Three sittings across the most extraordinary year. One archive.
+        </p>
+      </div>
+      <div class="commission__lede-block">
+        <p class="commission__lede">
+          The Becoming, First Light, and The Mothering — composed in sequence over twelve months and bound, at close, in an archival portfolio book. A body of work, not a session.
+        </p>
+        <a href="#" class="commission__action">
+          <span class="mono">Inquire about the Triptych</span>
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <figcaption class="commission__caption" style="grid-row: 3;">
+      <span class="mono commission__plate-meta">Plate V · The Triptych · MMXXVI</span>
+      <span class="mono">21:10 · Studio + Location</span>
+    </figcaption>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     ARCHIVE FEATURE
+     ════════════════════════════════════════════════ -->
+<section class="archive-feature" id="work" aria-labelledby="archive-title">
+  <div class="archive-feature__inner">
+    <div class="archive-feature__eyebrow" data-reveal>
+      <span class="hairline-short hairline" aria-hidden="true" style="margin-top: 8px;"></span>
+      <span class="eyebrow eyebrow--bone" id="archive-title">From the Archive · A Recent Sitting</span>
+    </div>
+    <span class="mono archive-feature__date" data-reveal>Spring · MMXXVI</span>
+
+    <figure class="archive-feature__media" data-image-reveal>
+      <img src="../../assets/photos/maternity-bw.jpg"
+           alt="A black-and-white maternity portrait, sculpted drapery and dimensional skin." loading="lazy" decoding="async" />
+    </figure>
+
+    <figcaption class="archive-feature__media-caption mono" data-reveal>
+      Plate · Untitled (Maternity, in Wool) · 2026 · Anchorage, Alaska
+    </figcaption>
+
+    <div class="archive-feature__quote-col" data-reveal>
+      <blockquote class="archive-feature__quote">
+        "Lidi did not photograph me. She <em>composed</em> me. The print on our wall feels like an heirloom my daughter will inherit."
+      </blockquote>
+      <span class="archive-feature__attribution">— S. — The Becoming · MMXXVI</span>
+    </div>
+
+    <a href="#" class="archive-feature__action mono" data-reveal>
+      <span>Enter the archive</span>
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     ABOUT TEASER
+     ════════════════════════════════════════════════ -->
+<section class="about-teaser" id="about" aria-labelledby="about-title">
+  <div class="about-teaser__inner">
+    <div class="about-teaser__eyebrow" data-reveal>
+      <span class="hairline-short hairline" aria-hidden="true" style="margin-top: 8px;"></span>
+      <span class="eyebrow">About the Studio</span>
+    </div>
+
+    <h2 class="h2 about-teaser__title" id="about-title" data-reveal style="--reveal-delay: 100ms;">
+      She paints with light.<br><em>She paints with oil.</em>
+    </h2>
+
+    <figure class="about-teaser__media" data-image-reveal>
+      <img src="../../assets/photos/painting-landscape.jpg"
+           alt="A landscape oil painting by Lidi — atmospheric, painted in the manner that informs her photography." loading="lazy" decoding="async" />
+    </figure>
+
+    <div class="about-teaser__body" data-reveal style="--reveal-delay: 200ms;">
+      <p>
+        Lidi <span class="about-teaser__pron">/ LEE-dee /</span> is a fine art photographer based in Anchorage, Alaska. Twenty years behind the camera. A lifetime behind the easel.
+      </p>
+      <p>
+        Her practice as an oil painter informs every frame: composition is built, not captured; light is layered, not found; drapery is sculpted on the dressform before it ever meets the model. The photograph is the last gesture, not the first.
+      </p>
+      <p>
+        The studio composes a small number of commissions each season. Maternity, newborn, motherhood, family — each rendered as a portrait, not a session.
+      </p>
+    </div>
+
+    <figcaption class="about-teaser__media-cap mono" data-reveal>
+      Untitled (Landscape, Oil on Linen) · Lidi · 2024
+    </figcaption>
+
+    <a href="#" class="about-teaser__action mono" data-reveal>
+      <span>Read the studio note</span>
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     JOURNAL
+     ════════════════════════════════════════════════ -->
+<section class="journal" id="journal" aria-labelledby="journal-title">
+  <div class="journal__inner">
+    <div class="journal__header-eyebrow" data-reveal>
+      <span class="hairline-short hairline" aria-hidden="true" style="margin-top: 8px;"></span>
+      <span class="eyebrow">The Journal</span>
+    </div>
+    <h2 class="h2 journal__header-title" id="journal-title" data-reveal style="--reveal-delay: 100ms;">
+      Recent dispatches from the atelier.
+    </h2>
+    <div class="journal__header-cta" data-reveal style="--reveal-delay: 220ms;">
+      <a href="#" class="mono">All entries
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </a>
+    </div>
+
+    <article class="journal__post journal__post--lead" data-reveal>
+      <a href="#" class="journal__post-link">
+        <figure class="journal__post-media" data-image-reveal>
+          <img src="../../assets/photos/maternity-classic.jpg" alt="A composed maternity portrait, classic in posture, atmospheric in light." loading="lazy" decoding="async" />
+        </figure>
+        <div style="margin-top: var(--space-4);">
+          <span class="journal__post-eyebrow eyebrow">Studio Notes · 04.2026</span>
+          <h3 class="journal__post-title" style="margin-top: var(--space-2);">On Composing a Sitting in Three Acts.</h3>
+          <div class="journal__post-meta">
+            <span class="mono">Lidi</span>
+            <span class="mono">12 min · Read</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="journal__post journal__post--small-1" data-reveal style="--reveal-delay: 120ms;">
+      <a href="#" class="journal__post-link">
+        <figure class="journal__post-media" data-image-reveal>
+          <img src="../../assets/photos/bts-dress.jpg" alt="Drapery and figurine on the dressform — behind the scenes from the atelier." loading="lazy" decoding="async" />
+        </figure>
+        <div style="margin-top: var(--space-3);">
+          <span class="journal__post-eyebrow eyebrow">Process · 03.2026</span>
+          <h3 class="journal__post-title" style="margin-top: var(--space-2);">Notes on Drapery, in Cold Light.</h3>
+          <div class="journal__post-meta">
+            <span class="mono">Lidi</span>
+            <span class="mono">7 min · Read</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="journal__post journal__post--small-2" data-reveal style="--reveal-delay: 200ms;">
+      <a href="#" class="journal__post-link">
+        <figure class="journal__post-media" data-image-reveal>
+          <img src="../../assets/photos/bts-shooting.jpg" alt="Behind the scenes — atmospheric studio light during a sitting." loading="lazy" decoding="async" />
+        </figure>
+        <div style="margin-top: var(--space-3);">
+          <span class="journal__post-eyebrow eyebrow">Studio Notes · 02.2026</span>
+          <h3 class="journal__post-title" style="margin-top: var(--space-2);">What an Oil Painter Looks for in a Camera.</h3>
+          <div class="journal__post-meta">
+            <span class="mono">Lidi</span>
+            <span class="mono">9 min · Read</span>
+          </div>
+        </div>
+      </a>
+    </article>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     NEWSLETTER
+     ════════════════════════════════════════════════ -->
+<section class="newsletter" id="begin" aria-labelledby="newsletter-title">
+  <div class="newsletter__inner">
+    <div class="newsletter__eyebrow" data-reveal>
+      <span class="hairline-short hairline" aria-hidden="true" style="margin-top: 8px;"></span>
+      <span class="eyebrow eyebrow--bone">The Studio Letter · Quarterly</span>
+    </div>
+    <h2 class="h2-it newsletter__title" id="newsletter-title" data-reveal style="--reveal-delay: 100ms;">
+      Quarterly notes <em>from the atelier</em>.
+    </h2>
+    <p class="newsletter__lede" data-reveal style="--reveal-delay: 200ms;">
+      Four times a year — a slow letter. Studio notes, recent sittings, occasional thoughts on light, drapery, and the painter's method. No promotions. No urgency.
+    </p>
+    <form class="newsletter__form" data-reveal style="--reveal-delay: 280ms;" onsubmit="event.preventDefault(); this.querySelector('.newsletter__submit').textContent = 'Thank you ↩';">
+      <input class="newsletter__input" type="email" required placeholder="your@email" aria-label="Email address" />
+      <button class="newsletter__submit" type="submit">
+        <span>Subscribe</span>
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </button>
+    </form>
+    <p class="newsletter__fine mono" data-reveal style="--reveal-delay: 360ms;">No tracking pixels · Unsubscribe at any time</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <div class="footer__top">
+
+      <div class="footer__brand">
+        <span class="footer__monogram" aria-hidden="true">L</span>
+        <span class="footer__wordmark">LIDI · STUDIO</span>
+        <span class="footer__tagline">Painted, not posed.</span>
+      </div>
+
+      <div class="footer__col footer__col--studio">
+        <span class="mono footer__col-title">Studio</span>
+        <a href="#">Work</a>
+        <a href="#commissions">Commissions</a>
+        <a href="#about">About</a>
+        <a href="#">Archive</a>
+      </div>
+
+      <div class="footer__col footer__col--journal">
+        <span class="mono footer__col-title">Journal</span>
+        <a href="#journal">Journal</a>
+        <a href="#begin">Newsletter</a>
+        <a href="#">Press</a>
+      </div>
+
+      <div class="footer__col footer__col--contact">
+        <span class="mono footer__col-title">Contact</span>
+        <a href="mailto:lidi@lidi.studio">lidi@lidi.studio</a>
+        <a href="https://instagram.com/lidi.studio" target="_blank" rel="noopener">@lidi.studio</a>
+        <span>Anchorage, AK · JBER</span>
+        <a href="https://status.lidi.studio" target="_blank" rel="noopener">status.lidi.studio</a>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__legal mono-sm">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <span>© MMXXVI Lidi Studio</span>
+      </div>
+      <div class="footer__pron mono-sm">Pronounced /LEE-dee/</div>
+      <div class="footer__location mono-sm">Anchorage · 61°13′N · 149°54′W</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ─────────────────────────────────────────────────
+  // 1. Intersection-observer driven reveals
+  // ─────────────────────────────────────────────────
+  (function () {
+    if (typeof IntersectionObserver === 'undefined') {
+      document.querySelectorAll('[data-reveal], [data-image-reveal]').forEach(el => el.classList.add('is-revealed'));
+      return;
+    }
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      document.querySelectorAll('[data-reveal], [data-image-reveal]').forEach(el => el.classList.add('is-revealed'));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    document.querySelectorAll('[data-reveal], [data-image-reveal]').forEach(el => io.observe(el));
+  })();
+
+  // ─────────────────────────────────────────────────
+  // 2. Mobile nav toggle
+  // ─────────────────────────────────────────────────
+  (function () {
+    const nav = document.getElementById('nav');
+    const btn = document.getElementById('hamburger');
+    if (!nav || !btn) return;
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    nav.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+
+  // ─────────────────────────────────────────────────
+  // 3. Subtle nav scrim deepening on scroll
+  // ─────────────────────────────────────────────────
+  (function () {
+    const nav = document.getElementById('nav');
+    if (!nav) return;
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          if (y > 80) {
+            nav.style.background = 'rgba(26,22,18,0.92)';
+            nav.style.borderBottomColor = 'rgba(232,223,207,0.18)';
+          } else {
+            nav.style.background = 'rgba(26,22,18,0.72)';
+            nav.style.borderBottomColor = 'rgba(232,223,207,0.12)';
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
+
+</body>
+</html>

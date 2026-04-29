@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Lidi Studio — Palette Showcase · X candidates · Decision Tool</title>
+<meta name="description" content="Ten palettes in search of a studio. Visual decision tool for the Lidi Studio brand palette." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+Upright:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Italiana&family=Playfair+Display:ital,wght@0,400;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+<style>
+  /* ──────────────────────────────────────────────
+     1. RESET + BASE
+     ────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+  body { margin: 0; background: #1a1612; color: #2d1f15; font-family: "EB Garamond", Georgia, serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  img, picture { max-width: 100%; height: auto; display: block; }
+  ul, ol { list-style: none; padding: 0; margin: 0; }
+  figure { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: rgba(122, 88, 40, 0.4); }
+
+  /* ──────────────────────────────────────────────
+     2. TYPE PRIMITIVES
+     ────────────────────────────────────────────── */
+  .f-cormorant      { font-family: "Cormorant Garamond", serif; }
+  .f-cormorant-up   { font-family: "Cormorant Upright", "Cormorant Garamond", serif; }
+  .f-eb             { font-family: "EB Garamond", serif; }
+  .f-italiana       { font-family: "Italiana", serif; }
+  .f-playfair       { font-family: "Playfair Display", serif; }
+  .f-inter          { font-family: "Inter", sans-serif; }
+  .f-mono           { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+  /* Font-feature settings — turn ON discretionary ligatures + swashes
+     where the font supports them. Cormorant Garamond Italic carries
+     contextual alternates and historical letterforms. */
+  .swashy {
+    font-feature-settings: "swsh" 1, "salt" 1, "calt" 1, "dlig" 1, "hlig" 1, "liga" 1;
+    font-variant-ligatures: discretionary-ligatures common-ligatures historical-ligatures;
+    font-variant: contextual;
+  }
+
+  /* Mono caps for editorial labels */
+  .mono-caps {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .mono-caps-sm {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9.5px;
+    font-weight: 400;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .inter-mono {
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  /* ──────────────────────────────────────────────
+     3. ORNAMENT — typographic flourishes
+     ────────────────────────────────────────────── */
+  .ornament {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.6em;
+    color: var(--accent, currentColor);
+    text-align: center;
+    user-select: none;
+  }
+
+  /* ──────────────────────────────────────────────
+     4. HERO  (intro)
+     ────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: #F0E5D0;
+    color: #2D1F15;
+    padding: clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px) clamp(40px, 6vh, 80px);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(40px, 6vh, 80px);
+    position: relative;
+  }
+  .hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .hero__eyebrow { color: #705440; }
+  .hero__index {
+    text-align: right;
+    color: #705440;
+    line-height: 1.5;
+  }
+  .hero__center {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1;
+  }
+  .hero__line-1 {
+    font-family: "Cormorant Upright", serif;
+    font-weight: 500;
+    font-size: clamp(60px, 9vw, 144px);
+    color: #2D1F15;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+  }
+  .hero__line-2 {
+    font-family: "Italiana", serif;
+    font-weight: 400;
+    font-size: clamp(13px, 1.4vw, 18px);
+    color: #705440;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    margin-top: clamp(20px, 2.5vh, 32px);
+    margin-bottom: clamp(8px, 1vh, 16px);
+  }
+  .hero__line-3 {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(96px, 18vw, 280px);
+    color: #7A5828;
+    letter-spacing: -0.035em;
+    line-height: 0.86;
+    margin-top: -0.06em;
+  }
+  .hero__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #705440;
+    gap: 24px;
+  }
+  .hero__bottom-right { text-align: right; }
+  .hero__bottom-right .star { color: #7A5828; }
+
+  .hero__ornament {
+    margin-top: clamp(40px, 6vh, 80px);
+    color: #7A5828;
+    font-size: clamp(20px, 2vw, 28px);
+  }
+
+  /* ──────────────────────────────────────────────
+     5. PALETTE SECTIONS  (the heart of the page)
+     ────────────────────────────────────────────── */
+  .palette-section {
+    --bg: #F0E5D0;
+    --text: #2D1F15;
+    --text-soft: rgba(45, 31, 21, 0.62);
+    --text-faint: rgba(45, 31, 21, 0.32);
+    --accent: #7A5828;
+    --hairline: rgba(45, 31, 21, 0.18);
+    background: var(--bg);
+    color: var(--text);
+    padding: clamp(120px, 16vh, 200px) clamp(24px, 5vw, 80px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Per-palette tokens (each section is its own world) */
+  [data-palette="A"] {
+    --bg: #F5EBDD; --text: #4A3F38; --accent: #B89968; --secondary: #D4B5B0; --neutral: #C9C2B8;
+    --text-soft: rgba(74, 63, 56, 0.62); --text-faint: rgba(74, 63, 56, 0.32); --hairline: rgba(74, 63, 56, 0.18);
+  }
+  [data-palette="B"] {
+    --bg: #F4EDE2; --text: #5C5A56; --accent: #C9A777; --secondary: #BCC8CD; --neutral: #E0C5B4;
+    --text-soft: rgba(92, 90, 86, 0.65); --text-faint: rgba(92, 90, 86, 0.35); --hairline: rgba(92, 90, 86, 0.20);
+  }
+  [data-palette="C"] {
+    --bg: #EFE7DA; --text: #3D332A; --accent: #A88553; --secondary: #D8B8AC; --neutral: #B8B8A6;
+    --text-soft: rgba(61, 51, 42, 0.62); --text-faint: rgba(61, 51, 42, 0.30); --hairline: rgba(61, 51, 42, 0.18);
+  }
+  [data-palette="D"] {
+    --bg: #EBE2D2; --text: #2E251F; --accent: #9A6B47; --secondary: #C8A192; --neutral: #B5A88E;
+    --text-soft: rgba(46, 37, 31, 0.60); --text-faint: rgba(46, 37, 31, 0.30); --hairline: rgba(46, 37, 31, 0.16);
+  }
+  [data-palette="E"] {
+    --bg: #F2E8DA; --text: #3A2C2C; --accent: #C68B7A; --secondary: #B8A0A8; --neutral: #A8A39C;
+    --text-soft: rgba(58, 44, 44, 0.62); --text-faint: rgba(58, 44, 44, 0.30); --hairline: rgba(58, 44, 44, 0.18);
+  }
+  [data-palette="F"] {
+    --bg: #F0E4D0; --text: #2F3328; --accent: #B36A45; --secondary: #D8A285; --neutral: #ADAE8E;
+    --text-soft: rgba(47, 51, 40, 0.62); --text-faint: rgba(47, 51, 40, 0.30); --hairline: rgba(47, 51, 40, 0.18);
+  }
+  [data-palette="G"] {
+    --bg: #F1E9DC; --text: #2D232A; --accent: #B68660; --secondary: #E0BEB5; --neutral: #B8B0BC;
+    --text-soft: rgba(45, 35, 42, 0.62); --text-faint: rgba(45, 35, 42, 0.30); --hairline: rgba(45, 35, 42, 0.18);
+  }
+  [data-palette="H"] {
+    --bg: #F2EADC; --text: #2A241F; --accent: #8A6D4F; --secondary: #D4B5AE; --neutral: #C5BFA8;
+    --text-soft: rgba(42, 36, 31, 0.62); --text-faint: rgba(42, 36, 31, 0.30); --hairline: rgba(42, 36, 31, 0.18);
+  }
+  [data-palette="I"] {
+    --bg: #EEE7DA; --text: #34373A; --accent: #7C8285; --secondary: #B5AEA0; --neutral: #D8AFA0;
+    --text-soft: rgba(52, 55, 58, 0.62); --text-faint: rgba(52, 55, 58, 0.30); --hairline: rgba(52, 55, 58, 0.20);
+  }
+  [data-palette="J"] {
+    --bg: #F0E5D0; --text: #2D1F15; --accent: #7A5828; --secondary: #705440; --neutral: #9D9C95;
+    --text-soft: rgba(45, 31, 21, 0.62); --text-faint: rgba(45, 31, 21, 0.30); --hairline: rgba(45, 31, 21, 0.18);
+  }
+
+  /* Palette layout — asymmetric editorial 12-col */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: clamp(16px, 2.5vw, 40px);
+    row-gap: clamp(60px, 10vh, 120px);
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+
+  /* Section header (eyebrow + roman numeral / palette code) */
+  .palette-header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: var(--text-soft);
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: clamp(16px, 2vh, 24px);
+    margin-bottom: clamp(40px, 6vh, 80px);
+    gap: 24px;
+  }
+  .palette-header__numeral {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(28px, 3vw, 44px);
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .palette-header__right {
+    text-align: right;
+    color: var(--text-soft);
+  }
+
+  /* LEFT — name + descriptor + pull quote + swatches */
+  .palette-left {
+    grid-column: 1 / span 7;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 5vh, 60px);
+  }
+
+  .palette-name-block {
+    position: relative;
+    line-height: 1;
+  }
+  .palette-name {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: clamp(56px, 8vw, 128px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0;
+    position: relative;
+    padding-left: clamp(60px, 7vw, 120px);
+  }
+  .dropcap {
+    position: absolute;
+    left: -0.04em;
+    top: -0.18em;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(180px, 24vw, 360px);
+    line-height: 0.78;
+    color: var(--accent);
+    user-select: none;
+    font-feature-settings: "swsh" 1, "salt" 1, "calt" 1;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .palette-name__roman {
+    display: inline;
+    position: relative;
+    z-index: 2;
+    font-family: "Cormorant Upright", "Cormorant Garamond", serif;
+    font-weight: 500;
+  }
+  .palette-name__italic {
+    display: block;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(80px, 12vw, 200px);
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    margin-top: -0.12em;
+    margin-left: -0.04em;
+    color: var(--text);
+    font-feature-settings: "swsh" 1, "salt" 1, "calt" 1, "liga" 1, "dlig" 1;
+    position: relative;
+    z-index: 2;
+  }
+  .palette-name__italic--small {
+    font-size: clamp(36px, 5vw, 72px);
+    margin-top: 0;
+    color: var(--accent);
+    letter-spacing: -0.015em;
+  }
+  .palette-name__amp {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .palette-descriptor {
+    font-family: "Italiana", serif;
+    font-weight: 400;
+    font-size: clamp(15px, 1.4vw, 20px);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+    padding-top: clamp(16px, 2vh, 28px);
+    border-top: 1px solid var(--hairline);
+    max-width: 50ch;
+  }
+
+  .pull-quote {
+    font-family: "Italiana", serif;
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 56px);
+    line-height: 1.1;
+    color: var(--text);
+    margin: 0;
+    max-width: 22ch;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+  .pull-quote::before { content: "“"; color: var(--accent); margin-right: 0.05em; }
+  .pull-quote::after  { content: "”"; color: var(--accent); margin-left: 0.05em; }
+
+  /* SWATCHES */
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(8px, 1vw, 18px);
+    width: 100%;
+  }
+  .swatch { display: flex; flex-direction: column; gap: 10px; }
+  .swatch-block {
+    width: 100%;
+    height: clamp(80px, 12vh, 150px);
+    position: relative;
+    overflow: hidden;
+  }
+  .swatch-block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+    pointer-events: none;
+  }
+  .swatch-name {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(13px, 1vw, 16px);
+    line-height: 1.25;
+    color: var(--text);
+    letter-spacing: 0;
+  }
+  .swatch-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    align-items: baseline;
+    margin-top: -2px;
+  }
+  .swatch-hex {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    text-transform: uppercase;
+  }
+  .swatch-pct {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+  }
+
+  /* RIGHT — photo + caption */
+  .palette-right {
+    grid-column: 9 / span 4;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1.5vh, 18px);
+  }
+  .palette-figure {
+    position: relative;
+    background: var(--text);
+    overflow: hidden;
+  }
+  .palette-figure picture,
+  .palette-figure img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+  }
+  .palette-figure__caption {
+    color: var(--text-soft);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 6px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  /* TYPOGRAPHY TEST (full width below the grid) */
+  .palette-test {
+    grid-column: 1 / -1;
+    margin-top: clamp(40px, 6vh, 80px);
+    padding-top: clamp(40px, 6vh, 80px);
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: clamp(16px, 2.5vw, 40px);
+    row-gap: clamp(24px, 3vh, 40px);
+    align-items: end;
+  }
+  .palette-test__display {
+    grid-column: 1 / span 7;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(56px, 9vw, 152px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin: 0;
+  }
+  .palette-test__display em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .palette-test__body {
+    grid-column: 9 / span 4;
+    font-family: "EB Garamond", serif;
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.65;
+    color: var(--text-soft);
+    margin: 0;
+    max-width: 32ch;
+  }
+  .palette-test__meta-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    margin-top: clamp(12px, 2vh, 24px);
+    padding-top: clamp(16px, 2vh, 24px);
+    border-top: 1px solid var(--hairline);
+    color: var(--text-soft);
+    flex-wrap: wrap;
+  }
+  .palette-test__cta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 6px;
+    transition: gap 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .palette-test__cta:hover { gap: 18px; }
+  .palette-test__cta-arrow { color: var(--accent); transform: translateY(-1px); }
+
+  .palette-test__ornament {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: clamp(40px, 6vh, 80px);
+    color: var(--accent);
+    font-size: clamp(18px, 2vw, 28px);
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 1.4em;
+    user-select: none;
+  }
+
+  /* ──────────────────────────────────────────────
+     6. J PALETTE — special treatment
+     ────────────────────────────────────────────── */
+  [data-palette="J"] .palette-header__numeral {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .brand-chief-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: clamp(20px, 2.5vh, 32px);
+    background: rgba(122, 88, 40, 0.04);
+    align-self: flex-start;
+    width: fit-content;
+  }
+  .brand-chief-badge .star {
+    color: var(--accent);
+    font-size: 14px;
+    transform: translateY(-1px);
+  }
+
+  [data-palette="J"] .dropcap {
+    font-size: clamp(220px, 28vw, 420px);
+    top: -0.20em;
+  }
+  [data-palette="J"] .pull-quote {
+    font-size: clamp(36px, 4.5vw, 72px);
+    max-width: 18ch;
+  }
+
+  .pigment-footnote {
+    grid-column: 1 / -1;
+    margin-top: clamp(40px, 6vh, 80px);
+    padding-top: clamp(20px, 2.5vh, 32px);
+    border-top: 1px solid var(--hairline);
+    text-align: center;
+    color: var(--text-faint);
+    font-family: "Italiana", serif;
+    font-size: clamp(12px, 1vw, 14px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.7;
+  }
+
+  /* ──────────────────────────────────────────────
+     7. DECISION SUMMARY
+     ────────────────────────────────────────────── */
+  .summary {
+    background: #F0E5D0;
+    color: #2D1F15;
+    padding: clamp(120px, 16vh, 200px) clamp(24px, 5vw, 80px);
+  }
+  .summary__inner {
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+  .summary__head {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: clamp(16px, 2.5vw, 40px);
+    margin-bottom: clamp(80px, 12vh, 140px);
+    align-items: end;
+  }
+  .summary__title {
+    grid-column: 1 / span 9;
+    margin: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(60px, 9vw, 168px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: #2D1F15;
+  }
+  .summary__title em {
+    font-family: "Cormorant Upright", "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+    color: #7A5828;
+  }
+  .summary__subtitle {
+    grid-column: 10 / span 3;
+    text-align: right;
+    color: #705440;
+    line-height: 1.5;
+  }
+
+  .summary__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .summary__row {
+    display: grid;
+    grid-template-columns: 60px minmax(140px, 1.4fr) minmax(0, 4fr) 240px;
+    gap: clamp(12px, 1.5vw, 24px);
+    align-items: center;
+    padding: clamp(18px, 2.5vh, 28px) 0;
+    border-bottom: 1px solid rgba(45, 31, 21, 0.18);
+  }
+  .summary__row:first-child { border-top: 1px solid rgba(45, 31, 21, 0.18); }
+  .summary__row--star {
+    background: rgba(122, 88, 40, 0.06);
+    margin: 0 -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .summary__letter {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(36px, 4vw, 60px);
+    line-height: 1;
+    color: #7A5828;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .summary__star {
+    color: #7A5828;
+    font-size: 18px;
+    transform: translateY(-2px);
+  }
+  .summary__name {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 1.8vw, 28px);
+    line-height: 1.15;
+    color: #2D1F15;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .summary__name em {
+    font-family: "Cormorant Upright", "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+    color: #2D1F15;
+  }
+  .summary__name-sub {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(45, 31, 21, 0.45);
+  }
+  .summary__stripe {
+    display: grid;
+    grid-template-columns: var(--stripe-cols, repeat(5, 1fr));
+    height: clamp(48px, 7vh, 72px);
+    width: 100%;
+    box-shadow: inset 0 0 0 1px rgba(45, 31, 21, 0.06);
+  }
+  .summary__stripe span { display: block; height: 100%; }
+  .summary__test {
+    border: 1px solid rgba(45, 31, 21, 0.18);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: clamp(48px, 7vh, 72px);
+  }
+  .summary__test-text {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.1;
+    letter-spacing: -0.005em;
+  }
+
+  .summary__close {
+    margin-top: clamp(80px, 12vh, 140px);
+    text-align: center;
+    color: #705440;
+  }
+
+  /* ──────────────────────────────────────────────
+     8. FOOTER
+     ────────────────────────────────────────────── */
+  .foot {
+    min-height: 100vh;
+    background: #2D1F15;
+    color: #F0E5D0;
+    padding: clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(40px, 6vh, 80px);
+    text-align: center;
+  }
+  .foot__top { color: rgba(240, 229, 208, 0.55); }
+  .foot__center {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(24px, 4vh, 48px);
+  }
+  .foot__line {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 96px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #F0E5D0;
+    max-width: 18ch;
+  }
+  .foot__line em {
+    color: #7A5828;
+    font-style: italic;
+  }
+  .foot__ornament {
+    color: #7A5828;
+    font-size: clamp(20px, 2vw, 32px);
+    font-family: "Cormorant Garamond", serif;
+    letter-spacing: 1.2em;
+  }
+  .foot__bottom {
+    color: rgba(240, 229, 208, 0.45);
+    line-height: 1.5;
+  }
+  .foot__bottom-pron {
+    color: rgba(240, 229, 208, 0.7);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+
+  /* ──────────────────────────────────────────────
+     9. FLOATING NAV (A–J)
+     ────────────────────────────────────────────── */
+  .palette-nav {
+    position: fixed;
+    right: clamp(12px, 2vw, 24px);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(45, 31, 21, 0.86);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    padding: 14px 8px;
+    border: 1px solid rgba(240, 229, 208, 0.12);
+    color: #F0E5D0;
+  }
+  .palette-nav__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    color: rgba(240, 229, 208, 0.55);
+    letter-spacing: 0;
+    transition: color 220ms ease, background 220ms ease;
+    border-radius: 50%;
+    position: relative;
+  }
+  .palette-nav__item:hover { color: #F0E5D0; }
+  .palette-nav__item.is-active { color: #F0E5D0; background: rgba(240, 229, 208, 0.08); }
+  .palette-nav__item--star {
+    color: #B89968;
+  }
+  .palette-nav__item--star.is-active { color: #B89968; background: rgba(184, 153, 104, 0.16); }
+  .palette-nav__item--star::after {
+    content: "★";
+    position: absolute;
+    top: -4px; right: -8px;
+    font-size: 9px;
+    color: #B89968;
+    font-style: normal;
+  }
+
+  /* ──────────────────────────────────────────────
+     10. REVEAL ANIMATIONS
+     ────────────────────────────────────────────── */
+  .palette-section,
+  .summary,
+  .foot {
+    opacity: 0.45;
+    transform: scale(0.985);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .palette-section.is-revealed,
+  .summary.is-revealed,
+  .foot.is-revealed {
+    opacity: 1;
+    transform: scale(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .palette-section,
+    .summary,
+    .foot { opacity: 1; transform: none; }
+  }
+
+  /* ──────────────────────────────────────────────
+     11. RESPONSIVE
+     ────────────────────────────────────────────── */
+  @media (max-width: 1100px) {
+    .palette-left { grid-column: 1 / -1; }
+    .palette-right { grid-column: 1 / span 8; margin-left: 24%; margin-top: clamp(20px, 3vh, 40px); }
+    .palette-test__display { grid-column: 1 / -1; }
+    .palette-test__body { grid-column: 1 / -1; max-width: 60ch; }
+    .summary__row {
+      grid-template-columns: 44px 1fr 2fr;
+      grid-template-rows: auto auto;
+    }
+    .summary__test { grid-column: 1 / -1; }
+  }
+  @media (max-width: 720px) {
+    .hero__line-1 { font-size: clamp(48px, 16vw, 84px); }
+    .hero__line-3 { font-size: clamp(72px, 22vw, 120px); }
+    .palette-name { padding-left: clamp(48px, 14vw, 80px); }
+    .dropcap { font-size: clamp(140px, 38vw, 220px); top: -0.16em; }
+    .palette-right { grid-column: 1 / -1; margin-left: 0; }
+    .pull-quote { max-width: 90vw; }
+    .palette-nav { right: 8px; padding: 8px 4px; gap: 4px; }
+    .palette-nav__item { width: 22px; height: 22px; font-size: 12px; }
+    .swatches { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .swatch-name { font-size: 11px; }
+    .swatch-hex, .swatch-pct { font-size: 8.5px; }
+    .palette-test__display { font-size: clamp(48px, 14vw, 80px); }
+    .summary__row { grid-template-columns: 36px 1fr; row-gap: 8px; }
+    .summary__stripe, .summary__test { grid-column: 1 / -1; }
+    .summary__name { grid-column: 2; }
+  }
+
+  /* Small print color util — used inline */
+  .text-accent { color: var(--accent); }
+  .text-soft   { color: var(--text-soft); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     FLOATING NAV
+     ════════════════════════════════════════════════ -->
+<nav class="palette-nav" aria-label="Jump to palette" id="paletteNav">
+  <a href="#palette-A" class="palette-nav__item" data-jump="A">A</a>
+  <a href="#palette-B" class="palette-nav__item" data-jump="B">B</a>
+  <a href="#palette-C" class="palette-nav__item" data-jump="C">C</a>
+  <a href="#palette-D" class="palette-nav__item" data-jump="D">D</a>
+  <a href="#palette-E" class="palette-nav__item" data-jump="E">E</a>
+  <a href="#palette-F" class="palette-nav__item" data-jump="F">F</a>
+  <a href="#palette-G" class="palette-nav__item" data-jump="G">G</a>
+  <a href="#palette-H" class="palette-nav__item" data-jump="H">H</a>
+  <a href="#palette-I" class="palette-nav__item" data-jump="I">I</a>
+  <a href="#palette-J" class="palette-nav__item palette-nav__item--star" data-jump="J">J</a>
+</nav>
+
+<!-- ════════════════════════════════════════════════
+     1. HERO
+     ════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__top">
+    <span class="hero__eyebrow inter-mono">PALETTE SHOWCASE · LIDI STUDIO · DECISION TOOL</span>
+    <span class="hero__index mono-caps">MMXXVI</span>
+  </div>
+
+  <div class="hero__center">
+    <span class="hero__line-1 swashy">Ten palettes.</span>
+    <span class="hero__line-2">in search of a</span>
+    <span class="hero__line-3 swashy">studio</span>
+    <span class="hero__ornament">❦ &nbsp;⁂&nbsp; ❦</span>
+  </div>
+
+  <div class="hero__bottom">
+    <span class="mono-caps-sm">Anchorage · Alaska</span>
+    <span class="hero__bottom-right mono-caps-sm">10 candidates · 1 to be chosen · <span class="star">★</span> 1 recommended</span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE A — SARGENT LUMINOUS
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="A" id="palette-A" aria-labelledby="palette-A-name">
+  <div class="palette-grid">
+
+    <header class="palette-header">
+      <div>
+        <span class="palette-header__numeral">I</span>
+      </div>
+      <div class="palette-header__right mono-caps-sm">Direction A · Sargent Luminous</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-A-name">
+          <span class="dropcap">S</span><span class="palette-name__roman">argent</span>
+          <span class="palette-name__italic">Luminous</span>
+        </h2>
+        <p class="palette-descriptor">The luminous skin against warmed cream.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#F5EBDD"></div><div class="swatch-name">Champagne Cream</div><div class="swatch-meta"><span class="swatch-hex">#F5EBDD</span><span class="swatch-pct">60%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#D4B5B0"></div><div class="swatch-name">Soft Mauve</div><div class="swatch-meta"><span class="swatch-hex">#D4B5B0</span><span class="swatch-pct">20%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#C9C2B8"></div><div class="swatch-name">Pearl Grey</div><div class="swatch-meta"><span class="swatch-hex">#C9C2B8</span><span class="swatch-pct">12%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#B89968"></div><div class="swatch-name">Aged Gold</div><div class="swatch-meta"><span class="swatch-hex">#B89968</span><span class="swatch-pct">5%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#4A3F38"></div><div class="swatch-name">Warm Charcoal</div><div class="swatch-meta"><span class="swatch-hex">#4A3F38</span><span class="swatch-pct">3%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture>
+          <img src="../../assets/photos/maternity-classic.jpg" alt="A composed maternity portrait, classical light." loading="lazy" decoding="async" />
+        </picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm">
+        <span>Plate · Sargent Luminous · in context</span>
+        <span>4:5</span>
+      </figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">A composed portrait of the woman becoming a mother — wardrobe sculpted, light layered, body honored.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">The Becoming · Maternity · MMXXVI</span>
+        <a href="#" class="palette-test__cta"><span>Begin a consultation</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE B — VERMEER SOFT LIGHT
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="B" id="palette-B" aria-labelledby="palette-B-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">II</span>
+      <div class="palette-header__right mono-caps-sm">Direction B · Vermeer Soft Light</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-B-name">
+          <span class="dropcap">V</span><span class="palette-name__roman">ermeer</span>
+          <span class="palette-name__italic">Soft Light</span>
+        </h2>
+        <p class="palette-descriptor">Window-light, holding still.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#F4EDE2"></div><div class="swatch-name">Linen White</div><div class="swatch-meta"><span class="swatch-hex">#F4EDE2</span><span class="swatch-pct">55%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#BCC8CD"></div><div class="swatch-name">Powder Blue</div><div class="swatch-meta"><span class="swatch-hex">#BCC8CD</span><span class="swatch-pct">18%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#E0C5B4"></div><div class="swatch-name">Dusty Peach</div><div class="swatch-meta"><span class="swatch-hex">#E0C5B4</span><span class="swatch-pct">12%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#C9A777"></div><div class="swatch-name">Soft Ochre</div><div class="swatch-meta"><span class="swatch-hex">#C9A777</span><span class="swatch-pct">8%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#5C5A56"></div><div class="swatch-name">Quiet Slate</div><div class="swatch-meta"><span class="swatch-hex">#5C5A56</span><span class="swatch-pct">7%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/newborn-mother.jpg" alt="A mother holding her newborn." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Vermeer Soft Light · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">First Light — within the first fourteen days. Drapery, weight, hands, breath. The mother is the centre.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">First Light · Newborn · MMXXVI</span>
+        <a href="#" class="palette-test__cta"><span>Begin a consultation</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE C — MODERN ATELIER
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="C" id="palette-C" aria-labelledby="palette-C-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">III</span>
+      <div class="palette-header__right mono-caps-sm">Direction C · Modern Atelier</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-C-name">
+          <span class="dropcap">M</span><span class="palette-name__roman">odern</span>
+          <span class="palette-name__italic">Atelier</span>
+        </h2>
+        <p class="palette-descriptor">Cashmere weight. Brass conviction.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#EFE7DA"></div><div class="swatch-name">Bone White</div><div class="swatch-meta"><span class="swatch-hex">#EFE7DA</span><span class="swatch-pct">55%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#D8B8AC"></div><div class="swatch-name">Dusty Rose</div><div class="swatch-meta"><span class="swatch-hex">#D8B8AC</span><span class="swatch-pct">18%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#B8B8A6"></div><div class="swatch-name">Sage Mist</div><div class="swatch-meta"><span class="swatch-hex">#B8B8A6</span><span class="swatch-pct">12%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#A88553"></div><div class="swatch-name">Burnished Brass</div><div class="swatch-meta"><span class="swatch-hex">#A88553</span><span class="swatch-pct">8%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#3D332A"></div><div class="swatch-name">Ink Brown</div><div class="swatch-meta"><span class="swatch-hex">#3D332A</span><span class="swatch-pct">7%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/maternity-veil.jpg" alt="A maternity portrait with a sculptural veil." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Modern Atelier · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">The studio composes a small number of commissions each season. Maternity, motherhood, family — each rendered.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">The Studio · Anchorage · MMXXVI</span>
+        <a href="#" class="palette-test__cta"><span>Begin a consultation</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE D — AMAN SPA
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="D" id="palette-D" aria-labelledby="palette-D-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">IV</span>
+      <div class="palette-header__right mono-caps-sm">Direction D · Aman Spa</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-D-name">
+          <span class="dropcap">A</span><span class="palette-name__roman">man</span>
+          <span class="palette-name__italic">Spa</span>
+        </h2>
+        <p class="palette-descriptor">Clay walls. Slow afternoon.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#EBE2D2"></div><div class="swatch-name">Warm Linen</div><div class="swatch-meta"><span class="swatch-hex">#EBE2D2</span><span class="swatch-pct">60%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#C8A192"></div><div class="swatch-name">Clay Pink</div><div class="swatch-meta"><span class="swatch-hex">#C8A192</span><span class="swatch-pct">18%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#B5A88E"></div><div class="swatch-name">Stone Beige</div><div class="swatch-meta"><span class="swatch-hex">#B5A88E</span><span class="swatch-pct">12%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#9A6B47"></div><div class="swatch-name">Aged Copper</div><div class="swatch-meta"><span class="swatch-hex">#9A6B47</span><span class="swatch-pct">6%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#2E251F"></div><div class="swatch-name">Espresso</div><div class="swatch-meta"><span class="swatch-hex">#2E251F</span><span class="swatch-pct">4%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/maternity-red.jpg" alt="A maternity portrait in deep red drapery." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Aman Spa · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">The Triptych — three sittings across the most extraordinary year. One archive, bound in linen and quiet care.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">The Triptych · Flagship · IV / year</span>
+        <a href="#" class="palette-test__cta"><span>Inquire about the triptych</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE E — CHAMPAGNE & SMOKE
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="E" id="palette-E" aria-labelledby="palette-E-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">V</span>
+      <div class="palette-header__right mono-caps-sm">Direction E · Champagne & Smoke</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-E-name">
+          <span class="dropcap">C</span><span class="palette-name__roman">hampagne</span>
+          <span class="palette-name__italic"><span class="palette-name__amp">&amp;</span> Smoke</span>
+        </h2>
+        <p class="palette-descriptor">A chamber. A flute. A pause.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#F2E8DA"></div><div class="swatch-name">Iced Champagne</div><div class="swatch-meta"><span class="swatch-hex">#F2E8DA</span><span class="swatch-pct">58%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#B8A0A8"></div><div class="swatch-name">Smoky Mauve</div><div class="swatch-meta"><span class="swatch-hex">#B8A0A8</span><span class="swatch-pct">17%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#A8A39C"></div><div class="swatch-name">Pewter Mist</div><div class="swatch-meta"><span class="swatch-hex">#A8A39C</span><span class="swatch-pct">13%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#C68B7A"></div><div class="swatch-name">Antique Rose</div><div class="swatch-meta"><span class="swatch-hex">#C68B7A</span><span class="swatch-pct">7%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#3A2C2C"></div><div class="swatch-name">Charcoal Wine</div><div class="swatch-meta"><span class="swatch-hex">#3A2C2C</span><span class="swatch-pct">5%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/maternity-black.jpg" alt="A maternity portrait in dramatic black drapery." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Champagne &amp; Smoke · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">A composed portrait, slow to develop. Drapery sculpted on the dressform before the model ever arrives.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">The Becoming · Maternity · MMXXVI</span>
+        <a href="#" class="palette-test__cta"><span>Begin a consultation</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE F — TUSCAN MORNING
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="F" id="palette-F" aria-labelledby="palette-F-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">VI</span>
+      <div class="palette-header__right mono-caps-sm">Direction F · Tuscan Morning</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-F-name">
+          <span class="dropcap">T</span><span class="palette-name__roman">uscan</span>
+          <span class="palette-name__italic">Morning</span>
+        </h2>
+        <p class="palette-descriptor">Stone and olive. Long lunch.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#F0E4D0"></div><div class="swatch-name">Sun-Bleached</div><div class="swatch-meta"><span class="swatch-hex">#F0E4D0</span><span class="swatch-pct">55%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#D8A285"></div><div class="swatch-name">Faded Terracotta</div><div class="swatch-meta"><span class="swatch-hex">#D8A285</span><span class="swatch-pct">18%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#ADAE8E"></div><div class="swatch-name">Olive Mist</div><div class="swatch-meta"><span class="swatch-hex">#ADAE8E</span><span class="swatch-pct">13%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#B36A45"></div><div class="swatch-name">Burnt Sienna</div><div class="swatch-meta"><span class="swatch-hex">#B36A45</span><span class="swatch-pct">8%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#2F3328"></div><div class="swatch-name">Cypress</div><div class="swatch-meta"><span class="swatch-hex">#2F3328</span><span class="swatch-pct">6%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/newborn-family-beige.jpg" alt="A family in muted bone tones." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Tuscan Morning · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">Olive, sun-bleached linen, stone walls warmed at noon — the family rendered against an Italian afternoon.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">The Hearth · Family · MMXXVI</span>
+        <a href="#" class="palette-test__cta"><span>Begin a consultation</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE G — POWDER ROOM
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="G" id="palette-G" aria-labelledby="palette-G-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">VII</span>
+      <div class="palette-header__right mono-caps-sm">Direction G · Powder Room</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-G-name">
+          <span class="dropcap">P</span><span class="palette-name__roman">owder</span>
+          <span class="palette-name__italic">Room</span>
+        </h2>
+        <p class="palette-descriptor">A boudoir, in pearl and rose.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#F1E9DC"></div><div class="swatch-name">Pearl Cream</div><div class="swatch-meta"><span class="swatch-hex">#F1E9DC</span><span class="swatch-pct">55%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#E0BEB5"></div><div class="swatch-name">Blush Pink</div><div class="swatch-meta"><span class="swatch-hex">#E0BEB5</span><span class="swatch-pct">20%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#B8B0BC"></div><div class="swatch-name">Soft Lavender</div><div class="swatch-meta"><span class="swatch-hex">#B8B0BC</span><span class="swatch-pct">12%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#B68660"></div><div class="swatch-name">Old Rose Gold</div><div class="swatch-meta"><span class="swatch-hex">#B68660</span><span class="swatch-pct">8%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#2D232A"></div><div class="swatch-name">Plum Black</div><div class="swatch-meta"><span class="swatch-hex">#2D232A</span><span class="swatch-pct">5%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/maternity-bw.jpg" alt="A black-and-white maternity portrait." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Powder Room · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">A small archive of rendered portraits, delivered in linen folio with hand-numbered prints.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">The Mothering · Motherhood · MMXXVI</span>
+        <a href="#" class="palette-test__cta"><span>Begin a consultation</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE H — WABI-SABI
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="H" id="palette-H" aria-labelledby="palette-H-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">VIII</span>
+      <div class="palette-header__right mono-caps-sm">Direction H · Wabi-Sabi</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-H-name">
+          <span class="dropcap">W</span><span class="palette-name__roman">abi&#8202;–</span>
+          <span class="palette-name__italic">Sabi</span>
+        </h2>
+        <p class="palette-descriptor">Rice paper. Cracked tea bowl. Gold seam.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#F2EADC"></div><div class="swatch-name">Rice Paper</div><div class="swatch-meta"><span class="swatch-hex">#F2EADC</span><span class="swatch-pct">60%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#D4B5AE"></div><div class="swatch-name">Faded Sakura</div><div class="swatch-meta"><span class="swatch-hex">#D4B5AE</span><span class="swatch-pct">15%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#C5BFA8"></div><div class="swatch-name">Bamboo Pale</div><div class="swatch-meta"><span class="swatch-hex">#C5BFA8</span><span class="swatch-pct">12%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#8A6D4F"></div><div class="swatch-name">Tea Brown</div><div class="swatch-meta"><span class="swatch-hex">#8A6D4F</span><span class="swatch-pct">7%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#2A241F"></div><div class="swatch-name">Sumi Ink</div><div class="swatch-meta"><span class="swatch-hex">#2A241F</span><span class="swatch-pct">6%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/newborn-wrap.jpg" alt="A newborn wrapped in soft fabric." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Wabi-Sabi · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">The studio honors imperfection — the seam of light, the wrinkle of fabric, the breath caught between frames.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">First Light · Newborn · MMXXVI</span>
+        <a href="#" class="palette-test__cta"><span>Begin a consultation</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE I — COASTAL PASTEL
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="I" id="palette-I" aria-labelledby="palette-I-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">IX</span>
+      <div class="palette-header__right mono-caps-sm">Direction I · Coastal Pastel</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-I-name">
+          <span class="dropcap">C</span><span class="palette-name__roman">oastal</span>
+          <span class="palette-name__italic">Pastel</span>
+        </h2>
+        <p class="palette-descriptor">Salt air. Driftwood. October light.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#EEE7DA"></div><div class="swatch-name">Sea Salt</div><div class="swatch-meta"><span class="swatch-hex">#EEE7DA</span><span class="swatch-pct">58%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#B5AEA0"></div><div class="swatch-name">Driftwood Grey</div><div class="swatch-meta"><span class="swatch-hex">#B5AEA0</span><span class="swatch-pct">17%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#D8AFA0"></div><div class="swatch-name">Faded Coral</div><div class="swatch-meta"><span class="swatch-hex">#D8AFA0</span><span class="swatch-pct">13%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#7C8285"></div><div class="swatch-name">Aged Anchor</div><div class="swatch-meta"><span class="swatch-hex">#7C8285</span><span class="swatch-pct">8%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#34373A"></div><div class="swatch-name">Deep Tide</div><div class="swatch-meta"><span class="swatch-hex">#34373A</span><span class="swatch-pct">4%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/newborn-hands.jpg" alt="Newborn hands held in soft light." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Coastal Pastel · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">Anchorage in October — driftwood, salt grass, the cold hour before sunset. The family composed against the tide.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">The Hearth · Family · MMXXVI</span>
+        <a href="#" class="palette-test__cta"><span>Begin a consultation</span><span class="palette-test__cta-arrow">→</span></a>
+      </div>
+      <div class="palette-test__ornament">❦</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PALETTE J — SARGENT v2.1  (BRAND CHIEF RECOMMENDATION)
+     ════════════════════════════════════════════════ -->
+<section class="palette-section" data-palette="J" id="palette-J" aria-labelledby="palette-J-name">
+  <div class="palette-grid">
+    <header class="palette-header">
+      <span class="palette-header__numeral">X</span>
+      <div class="palette-header__right mono-caps-sm">Direction J · Sargent v2.1 · Recommended</div>
+    </header>
+
+    <div class="palette-left">
+      <div class="brand-chief-badge">
+        <span class="star">★</span>
+        <span>Brand Chief · Official Recommendation</span>
+      </div>
+
+      <div class="palette-name-block">
+        <h2 class="palette-name swashy" id="palette-J-name">
+          <span class="dropcap">S</span><span class="palette-name__roman">argent</span>
+          <span class="palette-name__italic palette-name__italic--small">v2.1</span>
+        </h2>
+        <p class="palette-descriptor">Light wins. Shadow serves the light.</p>
+      </div>
+
+      <blockquote class="pull-quote">Painted, not posed.</blockquote>
+
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-block" style="background:#F0E5D0"></div><div class="swatch-name">Alabaster Glow</div><div class="swatch-meta"><span class="swatch-hex">#F0E5D0</span><span class="swatch-pct">60%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#2D1F15"></div><div class="swatch-name">Walnut Ink</div><div class="swatch-meta"><span class="swatch-hex">#2D1F15</span><span class="swatch-pct">22%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#705440"></div><div class="swatch-name">Sargent Umber</div><div class="swatch-meta"><span class="swatch-hex">#705440</span><span class="swatch-pct">10%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#9D9C95"></div><div class="swatch-name">Pearl Mist</div><div class="swatch-meta"><span class="swatch-hex">#9D9C95</span><span class="swatch-pct">3%</span></div></div>
+        <div class="swatch"><div class="swatch-block" style="background:#7A5828"></div><div class="swatch-name">Aged Brass</div><div class="swatch-meta"><span class="swatch-hex">#7A5828</span><span class="swatch-pct">5%</span></div></div>
+      </div>
+    </div>
+
+    <figure class="palette-right">
+      <div class="palette-figure">
+        <picture><img src="../../assets/photos/maternity-veil.jpg" alt="A maternity portrait under a sculptural veil — Sargent v2.1 in context." loading="lazy" decoding="async" /></picture>
+      </div>
+      <figcaption class="palette-figure__caption mono-caps-sm"><span>Plate · Sargent v2.1 · in context</span><span>4:5</span></figcaption>
+    </figure>
+
+    <div class="palette-test">
+      <h3 class="palette-test__display swashy">Painted, <em>not posed.</em></h3>
+      <p class="palette-test__body">A Sargent atelier — warm cream walls, walnut beams, gilded frames, soft drapery. The pregnant woman is invited <em>into</em> the light, not staged against the dark.</p>
+      <div class="palette-test__meta-row">
+        <span class="mono-caps-sm">Lidi Studio · Anchorage · /LEE-dee/</span>
+        <a href="#" class="palette-test__cta"><span>Lock this palette</span><span class="palette-test__cta-arrow">★</span></a>
+      </div>
+      <div class="palette-test__ornament">❦ ⁂ ❦</div>
+    </div>
+
+    <p class="pigment-footnote">Pigments · Lead White · Walnut Hull Ink · Raw Umber · Lamp Black + Lead White · Yellow Ochre + Burnt Sienna</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     DECISION SUMMARY
+     ════════════════════════════════════════════════ -->
+<section class="summary" id="summary" aria-labelledby="summary-title">
+  <div class="summary__inner">
+    <header class="summary__head">
+      <h2 class="summary__title swashy" id="summary-title">
+        Ten directions. <em>One studio.</em>
+      </h2>
+      <div class="summary__subtitle mono-caps-sm">
+        Side-by-side<br>decision matrix<br>· MMXXVI ·
+      </div>
+    </header>
+
+    <div class="summary__list">
+
+      <div class="summary__row">
+        <span class="summary__letter">A</span>
+        <span class="summary__name"><em>Sargent</em> Luminous <span class="summary__name-sub">The luminous skin</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 60% 20% 12% 5% 3%;">
+          <span style="background:#F5EBDD"></span><span style="background:#D4B5B0"></span><span style="background:#C9C2B8"></span><span style="background:#B89968"></span><span style="background:#4A3F38"></span>
+        </div>
+        <div class="summary__test" style="background:#F5EBDD; border-color:rgba(74,63,56,0.18);">
+          <span class="summary__test-text" style="color:#4A3F38;">Painted, <em style="color:#B89968">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row">
+        <span class="summary__letter">B</span>
+        <span class="summary__name"><em>Vermeer</em> Soft Light <span class="summary__name-sub">Window-light, holding still</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 55% 18% 12% 8% 7%;">
+          <span style="background:#F4EDE2"></span><span style="background:#BCC8CD"></span><span style="background:#E0C5B4"></span><span style="background:#C9A777"></span><span style="background:#5C5A56"></span>
+        </div>
+        <div class="summary__test" style="background:#F4EDE2; border-color:rgba(92,90,86,0.18);">
+          <span class="summary__test-text" style="color:#5C5A56;">Painted, <em style="color:#C9A777">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row">
+        <span class="summary__letter">C</span>
+        <span class="summary__name"><em>Modern</em> Atelier <span class="summary__name-sub">Cashmere weight</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 55% 18% 12% 8% 7%;">
+          <span style="background:#EFE7DA"></span><span style="background:#D8B8AC"></span><span style="background:#B8B8A6"></span><span style="background:#A88553"></span><span style="background:#3D332A"></span>
+        </div>
+        <div class="summary__test" style="background:#EFE7DA; border-color:rgba(61,51,42,0.18);">
+          <span class="summary__test-text" style="color:#3D332A;">Painted, <em style="color:#A88553">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row">
+        <span class="summary__letter">D</span>
+        <span class="summary__name"><em>Aman</em> Spa <span class="summary__name-sub">Clay walls. Slow afternoon.</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 60% 18% 12% 6% 4%;">
+          <span style="background:#EBE2D2"></span><span style="background:#C8A192"></span><span style="background:#B5A88E"></span><span style="background:#9A6B47"></span><span style="background:#2E251F"></span>
+        </div>
+        <div class="summary__test" style="background:#EBE2D2; border-color:rgba(46,37,31,0.18);">
+          <span class="summary__test-text" style="color:#2E251F;">Painted, <em style="color:#9A6B47">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row">
+        <span class="summary__letter">E</span>
+        <span class="summary__name"><em>Champagne</em> &amp; Smoke <span class="summary__name-sub">A chamber. A pause.</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 58% 17% 13% 7% 5%;">
+          <span style="background:#F2E8DA"></span><span style="background:#B8A0A8"></span><span style="background:#A8A39C"></span><span style="background:#C68B7A"></span><span style="background:#3A2C2C"></span>
+        </div>
+        <div class="summary__test" style="background:#F2E8DA; border-color:rgba(58,44,44,0.18);">
+          <span class="summary__test-text" style="color:#3A2C2C;">Painted, <em style="color:#C68B7A">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row">
+        <span class="summary__letter">F</span>
+        <span class="summary__name"><em>Tuscan</em> Morning <span class="summary__name-sub">Stone and olive.</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 55% 18% 13% 8% 6%;">
+          <span style="background:#F0E4D0"></span><span style="background:#D8A285"></span><span style="background:#ADAE8E"></span><span style="background:#B36A45"></span><span style="background:#2F3328"></span>
+        </div>
+        <div class="summary__test" style="background:#F0E4D0; border-color:rgba(47,51,40,0.18);">
+          <span class="summary__test-text" style="color:#2F3328;">Painted, <em style="color:#B36A45">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row">
+        <span class="summary__letter">G</span>
+        <span class="summary__name"><em>Powder</em> Room <span class="summary__name-sub">A boudoir, in pearl.</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 55% 20% 12% 8% 5%;">
+          <span style="background:#F1E9DC"></span><span style="background:#E0BEB5"></span><span style="background:#B8B0BC"></span><span style="background:#B68660"></span><span style="background:#2D232A"></span>
+        </div>
+        <div class="summary__test" style="background:#F1E9DC; border-color:rgba(45,35,42,0.18);">
+          <span class="summary__test-text" style="color:#2D232A;">Painted, <em style="color:#B68660">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row">
+        <span class="summary__letter">H</span>
+        <span class="summary__name"><em>Wabi</em>-Sabi <span class="summary__name-sub">Rice paper. Gold seam.</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 60% 15% 12% 7% 6%;">
+          <span style="background:#F2EADC"></span><span style="background:#D4B5AE"></span><span style="background:#C5BFA8"></span><span style="background:#8A6D4F"></span><span style="background:#2A241F"></span>
+        </div>
+        <div class="summary__test" style="background:#F2EADC; border-color:rgba(42,36,31,0.18);">
+          <span class="summary__test-text" style="color:#2A241F;">Painted, <em style="color:#8A6D4F">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row">
+        <span class="summary__letter">I</span>
+        <span class="summary__name"><em>Coastal</em> Pastel <span class="summary__name-sub">Salt air. October light.</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 58% 17% 13% 8% 4%;">
+          <span style="background:#EEE7DA"></span><span style="background:#B5AEA0"></span><span style="background:#D8AFA0"></span><span style="background:#7C8285"></span><span style="background:#34373A"></span>
+        </div>
+        <div class="summary__test" style="background:#EEE7DA; border-color:rgba(52,55,58,0.20);">
+          <span class="summary__test-text" style="color:#34373A;">Painted, <em style="color:#7C8285">not posed.</em></span>
+        </div>
+      </div>
+
+      <div class="summary__row summary__row--star">
+        <span class="summary__letter"><span class="summary__star">★</span>J</span>
+        <span class="summary__name"><em>Sargent</em> v2.1 <span class="summary__name-sub">Brand Chief recommendation · Light wins</span></span>
+        <div class="summary__stripe" style="--stripe-cols: 60% 22% 10% 3% 5%;">
+          <span style="background:#F0E5D0"></span><span style="background:#2D1F15"></span><span style="background:#705440"></span><span style="background:#9D9C95"></span><span style="background:#7A5828"></span>
+        </div>
+        <div class="summary__test" style="background:#F0E5D0; border-color:rgba(45,31,21,0.22);">
+          <span class="summary__test-text" style="color:#2D1F15;">Painted, <em style="color:#7A5828">not posed.</em></span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="summary__close">
+      <span class="ornament" style="color:#7A5828; font-size: 24px;">❦ &nbsp; ⁂ &nbsp; ❦</span>
+      <p class="mono-caps-sm" style="margin-top: 24px;">Reply with “Lock palette [LETTER]” to commit</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════ -->
+<section class="foot" id="foot">
+  <div class="foot__top">
+    <span class="mono-caps-sm">PALETTE SHOWCASE · X CANDIDATES · DECISION REQUIRED</span>
+  </div>
+  <div class="foot__center">
+    <span class="foot__line swashy">Lidi Studio · <em>Palette Showcase</em></span>
+    <span class="foot__ornament">❦</span>
+    <span class="foot__line swashy" style="font-size: clamp(18px,2vw,28px); color: rgba(240,229,208,0.6);">Decision Required.</span>
+  </div>
+  <div class="foot__bottom">
+    <span class="foot__bottom-pron">Anchorage · MMXXVI · /LEE-dee/</span>
+  </div>
+</section>
+
+
+<script>
+  // ──────────────────────────────────────────
+  // 1. Reveal observer
+  // ──────────────────────────────────────────
+  (function () {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = document.querySelectorAll('.palette-section, .summary, .foot');
+    if (reduce || typeof IntersectionObserver === 'undefined') {
+      targets.forEach(t => t.classList.add('is-revealed'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(t => io.observe(t));
+  })();
+
+  // ──────────────────────────────────────────
+  // 2. Floating nav — active state
+  // ──────────────────────────────────────────
+  (function () {
+    const items = document.querySelectorAll('.palette-nav__item');
+    const sections = Array.from(document.querySelectorAll('.palette-section'));
+    if (typeof IntersectionObserver === 'undefined' || !sections.length) return;
+
+    const map = new Map();
+    sections.forEach(s => map.set(s.dataset.palette, s));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const code = entry.target.dataset.palette;
+          items.forEach(it => it.classList.toggle('is-active', it.dataset.jump === code));
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0.01 });
+
+    sections.forEach(s => io.observe(s));
+  })();
+</script>
+
+</body>
+</html>
