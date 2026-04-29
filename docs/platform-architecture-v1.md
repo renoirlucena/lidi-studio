@@ -9,22 +9,23 @@
 
 ## 1. Executive Summary
 
-> **Note (2026-04-29):** Initial planning specified Hetzner CX22 in Falkenstein at €4.51/mo. Actual provisioned server is **CPX21 in Hillsboro, Oregon at $13.99/mo**. The CPX21 has 50% more vCPU and 2× disk for ~$9/mo more — net positive for our workload. Hillsboro location reduces latency to Anchorage clientele significantly vs EU. RAM budget §2.17 unchanged. Decision recorded in [`/docs/decisions/server-decision.md`](decisions/server-decision.md) (ADR-002). Operational details in [`/infra/server-info.md`](../infra/server-info.md).
+> **Note (2026-04-29):** Initial planning specified Hetzner CX22 in Falkenstein at €4.51/mo. Actual provisioned server is **CPX21 in Hillsboro, Oregon at $9.99/mo + $0.60/mo IPv4 = $10.59/mo total**. The CPX21 has 50% more vCPU and 2× disk for ~$5.50/mo more — net positive for our workload. Hillsboro location reduces latency to Anchorage clientele significantly vs EU. RAM budget §2.17 unchanged. Decision recorded in [`/docs/decisions/server-decision.md`](decisions/server-decision.md) (ADR-002). Operational details in [`/infra/server-info.md`](../infra/server-info.md).
 
-Lidi Studio runs end-to-end on a single Hetzner CPX21 VPS ($13.99/mo). One machine serves every public and private function: an Astro-built static frontend at the edge, Ghost for the journal, Cal.com for booking, DocuSeal for contracts, Stripe for payments, NocoDB for the internal CRM, Umami for analytics, Uptime Kuma for monitoring — all reverse-proxied by Caddy 2 and fronted by Cloudflare's free tier. PostgreSQL 16 + Redis as data layer. Domain `lidi.studio` is acquired. **Total fixed monthly platform cost: $13.99.** Stack subscription footprint: zero. Time to production-ready launch from the provisioned server: 4–6 weeks.
+Lidi Studio runs end-to-end on a single Hetzner CPX21 VPS ($10.59/mo total). One machine serves every public and private function: an Astro-built static frontend at the edge, Ghost for the journal, Cal.com for booking, DocuSeal for contracts, Stripe for payments, NocoDB for the internal CRM, Umami for analytics, Uptime Kuma for monitoring — all reverse-proxied by Caddy 2 and fronted by Cloudflare's free tier. PostgreSQL 16 + Redis as data layer. Domain `lidi.studio` is acquired. **Total fixed monthly platform cost: $10.59.** Stack subscription footprint: zero. Time to production-ready launch from the provisioned server: 4–6 weeks.
 
 ### Cost breakdown
 
 | Item | Cost / month |
 |---|---:|
-| Hetzner CPX21 (3 vCPU AMD EPYC, 4 GB RAM, 80 GB NVMe SSD, 1 IPv4, Hillsboro OR) | $13.99 |
+| Hetzner CPX21 (3 vCPU AMD EPYC, 4 GB RAM, 80 GB NVMe SSD, Hillsboro OR) | $9.99 |
+| Primary IPv4 (separate billing) | $0.60 |
 | Cloudflare DNS / CDN / WAF (Free) | $0.00 |
 | Cloudflare R2 backup storage (10 GB free tier) | $0.00 |
 | Brevo SMTP (Free, 300 emails / day) | $0.00 |
 | GitHub Actions (Free, unlimited on public repo) | $0.00 |
 | Domain `lidi.studio` (annual renewal, separate budget) | ~$1.80 |
 | Stripe payment processing | transactional only (2.9% + $0.30/tx) |
-| **Total fixed platform cost** | **$13.99 / mo** |
+| **Total fixed platform cost** | **$10.59 / mo** |
 
 ---
 
@@ -360,4 +361,4 @@ Tables: `leads · commissions · clients · payments · webhook_events · email_
 | Version | Date | Status | Note |
 |---|---|---|---|
 | v1.0 | 2026-04-27 | superseded by v1.1 | Initial platform architecture · companion to brand-book-v2.2.md · planned Hetzner CX22 €4.51/mo Falkenstein · stack locked |
-| **v1.1** | **2026-04-29** | **active** | **Server provisioned: CPX21 in Hillsboro OR (`lidi-studio-prod`, IP `5.78.177.39`). Specs and cost adjusted: 3 vCPU · 4 GB RAM · 80 GB SSD · $13.99/mo. Stack and architecture otherwise unchanged from v1.0. See ADR-002 for decision rationale; see `/infra/server-info.md` for operational details.** |
+| **v1.1** | **2026-04-29** | **active** | **Server provisioned: CPX21 in Hillsboro OR (`lucena-prod`, IP `5.78.177.39`). Specs and cost adjusted: 3 vCPU · 4 GB RAM · 80 GB SSD · $10.59/mo total ($9.99 + $0.60 IPv4). Stack and architecture otherwise unchanged from v1.0. See ADR-002 for decision rationale; see `/infra/server-info.md` for operational details.** |

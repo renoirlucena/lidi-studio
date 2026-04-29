@@ -28,7 +28,7 @@ This repository is the source of truth for the Lidi Studio brand system, web pla
 
 ## Stack
 
-Single Hetzner **CPX21** VPS in Hillsboro, OR ($13.99/mo · 3 vCPU AMD EPYC · 4 GB RAM · 80 GB NVMe SSD). Zero SaaS subscriptions. *(Server choice rationale: [`docs/decisions/server-decision.md`](docs/decisions/server-decision.md) — ADR-002. Operational fact sheet: [`infra/server-info.md`](infra/server-info.md).)*
+Single Hetzner **CPX21** VPS in Hillsboro, OR ($10.59/mo total · 3 vCPU AMD EPYC · 4 GB RAM · 80 GB NVMe SSD). Zero SaaS subscriptions. *(Server choice rationale: [`docs/decisions/server-decision.md`](docs/decisions/server-decision.md) — ADR-002. Operational fact sheet: [`infra/server-info.md`](infra/server-info.md).)*
 
 | Layer | Tool |
 |---|---|

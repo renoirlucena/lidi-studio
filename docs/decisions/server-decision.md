@@ -21,7 +21,7 @@
 | RAM | 4 GB | 4 GB | — |
 | Disk | 40 GB SSD | **80 GB NVMe** | +100% |
 | Location | Falkenstein, DE / Helsinki, FI | **Hillsboro, OR (US-West)** | EU → US |
-| Cost | €4.51 / mo | **$13.99 / mo** | +~$9 / mo |
+| Cost | €4.51 / mo | **$9.99 + $0.60 IPv4 = $10.59 / mo** | +~$5.50 / mo |
 | Backups (Hetzner) | optional | disabled (we use Restic + R2) | — |
 | Server identifier | new | `lidi-studio-prod` *(rename pending in console; current name `openclaw-milbot`)* | — |
 | Hetzner Server ID | — | `124960297` | — |
@@ -49,7 +49,7 @@ The question became: **provision a new CX22 in EU per the original plan, or adop
 - Hillsboro location is significantly closer to Anchorage clientele than EU
 
 ### Option B — Provision a new CX22 in Falkenstein per the original plan
-- Stricter cost target (€4.51/mo vs $13.99/mo, ≈ -65%)
+- Stricter cost target (€4.51/mo vs $10.59/mo, ≈ -54%)
 - EU data residency by default
 - But: duplicates infrastructure with no operational gain
 - Leaves CPX21 idle on the bill anyway
@@ -64,13 +64,13 @@ The question became: **provision a new CX22 in EU per the original plan, or adop
 
 **Option A wins on four axes; Option B wins only on cost optimization in absolute terms.**
 
-1. **Hardware is technically superior to the plan.** The CPX21 has 50% more vCPU and 2× the disk for ~$9/mo more. The vCPU surplus matters: Cal.com (the heaviest service, Next.js-based) and Astro builds triggered synchronously by Ghost webhooks both benefit from concurrent throughput headroom. The disk surplus matters: photo uploads through Ghost will grow over time, and 80 GB pushes the "needs migration to scale" decision out by 2–3 years.
+1. **Hardware is technically superior to the plan.** The CPX21 has 50% more vCPU and 2× the disk for ~$5.50/mo more. The vCPU surplus matters: Cal.com (the heaviest service, Next.js-based) and Astro builds triggered synchronously by Ghost webhooks both benefit from concurrent throughput headroom. The disk surplus matters: photo uploads through Ghost will grow over time, and 80 GB pushes the "needs migration to scale" decision out by 2–3 years.
 
 2. **Hillsboro reduces latency to Lidi's actual customer base.** Lidi's commission audience is Anchorage and JBER — coastal Alaska. RTT from Anchorage to Hillsboro is ~20–35 ms; to Falkenstein it's ~150–180 ms. For a Cal.com booking flow with multiple synchronous database writes, that delta is the difference between "fast" and "perceptibly waiting." For the Astro static frontend the difference is mostly absorbed by Cloudflare's edge cache anyway, but the *uncached* admin paths (`/admin`, `/ghost`, `/book`, `/contracts/[token]`) are all latency-sensitive and all hit the origin.
 
 3. **No duplication of infrastructure.** Option B would leave the CPX21 idle on the Hetzner bill (it's already paid for, billing began the moment it was provisioned). Adopting it converts already-spent dollars into productive capacity. Option B effectively *adds* €4.51/mo to spend rather than saving anything.
 
-4. **The €/$ delta is operationally trivial.** ~$9/mo extra = ~$108/year. Against the full cost of building, hosting, and maintaining a fine art photography platform — and especially against the value of one additional commission booking per year — this is in the noise.
+4. **The €/$ delta is operationally trivial.** ~$5.50/mo extra = ~$66/year. Against the full cost of building, hosting, and maintaining a fine art photography platform — and especially against the value of one additional commission booking per year — this is in the noise.
 
 The two arguments **for** Option B were:
 - **Pure cost optimization.** Real, but trivial in absolute terms (see point 4 above).
@@ -82,7 +82,7 @@ The two arguments **for** Option B were:
 
 | Trade-off | Mitigation |
 |---|---|
-| **+~$9/mo cost** ($108/yr) | Accepted as operationally trivial. |
+| **+~$5.50/mo cost** ($66/yr) | Accepted as operationally trivial. |
 | **US data residency instead of EU GDPR-native** | Privacy policy at `/privacy` will disclose US hosting + Hetzner as processor. Umami is no-PII by default. Ghost member emails are minimal-PII. Stripe handles payment data (PCI-compliant, separate). Cal.com personal data lives in our Postgres. No special-category PII (health, race, etc.) is collected. |
 | **Hillsboro → EU latency penalty** | Acceptable for the few EU visitors expected. Cloudflare edge caches static frontend globally. |
 | **Hetzner native backups disabled on this server** | Intentional — we use Restic + Cloudflare R2 per architecture §2.15, which is encrypted client-side and superior to Hetzner snapshot backups for this use case. |

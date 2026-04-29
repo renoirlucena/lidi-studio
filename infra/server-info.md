@@ -73,11 +73,11 @@
 
 | Item | Amount |
 |---|---:|
-| Plan (CPX21 Hillsboro) | $13.99 / month |
-| IPv4 (included) | $0.00 |
+| Plan (CPX21 Hillsboro) | $9.99 / month |
+| Primary IPv4 (separate billing) | $0.60 / month |
 | Backups (disabled) | $0.00 |
 | Traffic overage | $0.00 expected (well under 1 TB) |
-| **Total** | **$13.99 / month** |
+| **Total** | **$10.59 / month** |
 
 Decision rationale for adopting CPX21 over the originally-planned CX22: see [`/docs/decisions/server-decision.md`](../docs/decisions/server-decision.md) (ADR-002).
 
