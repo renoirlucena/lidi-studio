@@ -73,6 +73,7 @@ services:
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - ./caddy/Caddyfile.status:/etc/caddy/Caddyfile.status:ro
+      - ./caddy/sites:/etc/caddy/sites:ro             # multi-tenant site blocks (ADR-003)
       - ./caddy/error-pages:/srv/error-pages:ro
       - caddy_data:/data
       - caddy_config:/config

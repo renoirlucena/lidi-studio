@@ -1,10 +1,11 @@
 # Lidi Studio — Infrastructure
 
-Self-hosted Docker Compose stack for `lidi.studio`. Runs on a single Hetzner CPX21 in Hillsboro, OR.
+Self-hosted Docker Compose stack for `lidi.studio`. Runs on a single Hetzner CPX21 (`lucena-prod`) in Hillsboro, OR. **Multi-tenant ready** (see [ADR-003](../docs/decisions/multi-tenant-decision.md)) — Lidi Studio is the only site in production today, but the Caddy configuration uses modular `sites/*.caddy` imports so FinanceLock, Booster Club, and OpenClaw can join without refactoring.
 
 > **Authoritative reference:** [`/docs/platform-architecture-v1.md`](../docs/platform-architecture-v1.md) (v1.1) is the source of truth for stack rationale, RAM budget (§2.17), routing map (§3), security posture (§9), and deployment workflow (§10). This README is a hands-on operator's guide; it does not duplicate architecture decisions.
 >
 > **Server fact sheet:** [`/infra/server-info.md`](server-info.md) — IPs, plan, setup checklist.
+> **Multi-tenant decision:** [`/docs/decisions/multi-tenant-decision.md`](../docs/decisions/multi-tenant-decision.md) — ADR-003.
 
 ---
 
@@ -230,9 +231,59 @@ docker compose exec caddy tail -f /var/log/caddy/access.log | jq '.request.uri, 
 
 ---
 
+---
+
+## Multi-tenant readiness
+
+Today: only **Lidi Studio** is in production. Tomorrow: **FinanceLock**, **Booster Club**, **OpenClaw** join the same server. The infra is shaped for that.
+
+### Caddy uses modular site imports
+- `caddy/Caddyfile` → global config + `import sites/*.caddy`
+- `caddy/sites/lidi-studio.caddy` → Lidi Studio's site block
+- `caddy/sites/README.md` → convention documentation
+- Adding a tenant means dropping one file and reloading Caddy — no edits to shared config.
+
+### Container prefix convention
+| Tenant | Prefix | Notes |
+|---|---|---|
+| Lidi Studio *(active)* | `lidi-` | `lidi-caddy`, `lidi-postgres` are shared infra for now |
+| FinanceLock *(future)* | `fl-` | |
+| Booster Club *(future)* | `bc-` | |
+| OpenClaw *(future)* | `oc-` | |
+
+### Onboarding a new tenant
+```bash
+# 1. Generate skeleton
+./scripts/add-site.sh financelock financelock.app fl
+
+# 2. Edit caddy/sites/financelock.caddy — uncomment reverse_proxy
+# 3. Add fl-* services to docker-compose.yml
+# 4. Add logical Postgres DB:
+docker exec lidi-postgres psql -U "$POSTGRES_USER" -c 'CREATE DATABASE financelock;'
+
+# 5. Configure Cloudflare DNS for financelock.app
+
+# 6. Bring up
+docker compose up -d fl-app
+
+# 7. Reload Caddy without downtime
+docker exec lidi-caddy caddy reload --config /etc/caddy/Caddyfile
+```
+
+### Postgres database isolation
+Today: 5 logical DBs in one Postgres instance for Lidi Studio (`ghost`, `calcom`, `docuseal`, `nocodb`, `umami`). New tenants add their own logical DBs to the same instance. When a tenant outgrows logical-DB isolation, split to a tenant-scoped Postgres instance — change `host: postgres` to `host: <prefix>-postgres` in their env.
+
+### Capacity planning
+- CPX21 RAM budget: 4 GB · current Lidi Studio commitment: 2.54 GB · headroom 38%
+- When a 2nd tenant pushes utilization past ~70%, plan the **CPX31 upgrade** (8 GB RAM, ~$23/mo). `hcloud server change-type` + reboot. ~30 s downtime.
+
+---
+
 ## See also
 
 - [`/docs/platform-architecture-v1.md`](../docs/platform-architecture-v1.md) — full architecture (v1.1)
 - [`/docs/decisions/server-decision.md`](../docs/decisions/server-decision.md) — ADR-002, why CPX21
-- [`/infra/server-info.md`](server-info.md) — operational fact sheet for `lidi-studio-prod`
+- [`/docs/decisions/multi-tenant-decision.md`](../docs/decisions/multi-tenant-decision.md) — ADR-003, multi-tenant architecture
+- [`/infra/server-info.md`](server-info.md) — operational fact sheet for `lucena-prod`
+- [`/infra/caddy/sites/README.md`](caddy/sites/README.md) — Caddy sites convention
 - [`/.env.example`](../.env.example) — environment variable template

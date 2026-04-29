@@ -19,6 +19,7 @@ fi
 
 SSH_PORT="${SSH_PORT:-2222}"
 LIDI_USER="${LIDI_USER:-lidi}"
+HOSTNAME_TARGET="${HOSTNAME_TARGET:-lucena-prod}"
 
 step() {
   echo ""
@@ -29,6 +30,15 @@ step() {
 step "1. Update system"
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
+# ──────────────── 1.5. Set hostname ────────────────
+step "1.5. Set hostname → $HOSTNAME_TARGET"
+hostnamectl set-hostname "$HOSTNAME_TARGET"
+# Ensure /etc/hosts maps the new hostname to localhost (avoids sudo warnings)
+if ! grep -qE "127\.0\.1\.1[[:space:]]+$HOSTNAME_TARGET" /etc/hosts; then
+  sed -i.bak '/^127\.0\.1\.1/d' /etc/hosts
+  echo "127.0.1.1 $HOSTNAME_TARGET" >> /etc/hosts
+fi
 
 # ──────────────── 2. Install required packages ────────────────
 step "2. Install required packages"

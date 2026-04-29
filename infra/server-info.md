@@ -8,14 +8,14 @@
 
 | Field | Value |
 |---|---|
-| **Hostname (target)** | `lidi-studio-prod` |
-| **Hostname (current, pending rename)** | `openclaw-milbot` |
+| **Hostname** | `lucena-prod` *(renamed in Hetzner console 2026-04-29 from `openclaw-milbot`)* |
+| **Naming rationale** | Generic, operator-scoped name allows multi-tenant hosting (Lidi Studio + future FinanceLock + Booster Club + OpenClaw) on the same server. See ADR-003. |
 | **Hetzner Server ID** | `124960297` |
 | **Provider** | Hetzner Cloud |
 | **Plan** | CPX21 |
 | **Status** | ON · provisioned, idle (no services deployed yet) |
 
-> ⚠ **Pending operator action:** rename in Hetzner Console → Servers → select server → Edit → Name = `lidi-studio-prod`. Manual; not done via API per project policy.
+> ✅ **Renamed 2026-04-29.** Hostname is `lucena-prod` (operator-scoped, multi-tenant ready). The OS hostname inside the VM is set by `setup-server.sh` via `hostnamectl set-hostname` to match.
 
 ---
 
@@ -119,7 +119,7 @@ Decision rationale for adopting CPX21 over the originally-planned CX22: see [`/d
 Atomic, ordered. Each item should be checked off as completed and dated.
 
 ### Hetzner console
-- [ ] Rename server: `openclaw-milbot` → `lidi-studio-prod`
+- [x] Rename server: `openclaw-milbot` → `lucena-prod` *(done 2026-04-29 in Hetzner console)*
 - [ ] Confirm IPv6 primary address (first usable in `2a01:4ff:1f0:b9be::/64`)
 - [ ] Confirm Ubuntu 24.04 LTS is the OS image *(rebuild if not)*
 - [ ] Hetzner backups: leave **DISABLED** *(decision recorded — Restic + R2 covers it)*
@@ -170,11 +170,11 @@ Atomic, ordered. Each item should be checked off as completed and dated.
 - [ ] Verify `docker compose version` works
 
 ### Hetzner Cloud Firewall *(layer 2 of defense, in addition to UFW)*
-- [ ] Create firewall in Hetzner console named `lidi-studio-prod`
+- [ ] Create firewall in Hetzner console named `lucena-prod`
 - [ ] Inbound rules:
   - [ ] Port 2222/tcp from `<your-home-IP>/32` (and any other authorized admin IPs)
   - [ ] Port 80/tcp + 443/tcp from Cloudflare IP ranges (auto-update via cron from `https://www.cloudflare.com/ips-v4`)
-- [ ] Attach firewall to server `lidi-studio-prod`
+- [ ] Attach firewall to server `lucena-prod`
 
 ### Smoke tests
 - [ ] `curl -I https://lidi.studio` — expect 200/308 once Astro is deployed

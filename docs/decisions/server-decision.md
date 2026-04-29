@@ -23,7 +23,7 @@
 | Location | Falkenstein, DE / Helsinki, FI | **Hillsboro, OR (US-West)** | EU → US |
 | Cost | €4.51 / mo | **$9.99 + $0.60 IPv4 = $10.59 / mo** | +~$5.50 / mo |
 | Backups (Hetzner) | optional | disabled (we use Restic + R2) | — |
-| Server identifier | new | `lidi-studio-prod` *(rename pending in console; current name `openclaw-milbot`)* | — |
+| Server identifier | new | `lucena-prod` *(renamed from `openclaw-milbot` 2026-04-29; operator-scoped name supports multi-tenant — see ADR-003)* | — |
 | Hetzner Server ID | — | `124960297` | — |
 | IPv4 | — | `5.78.177.39` | — |
 | IPv6 prefix | — | `2a01:4ff:1f0:b9be::/64` | — |
@@ -44,7 +44,7 @@ The question became: **provision a new CX22 in EU per the original plan, or adop
 
 ### Option A — Adopt the existing CPX21 in Hillsboro *(chosen)*
 - Use what's already paid for and provisioned
-- Rename in the Hetzner console: `openclaw-milbot` → `lidi-studio-prod` *(manual, pending)*
+- Rename in the Hetzner console: `openclaw-milbot` → `lucena-prod` *(done 2026-04-29)*
 - Hardware exceeds plan: +50% vCPU, +100% disk, same RAM
 - Hillsboro location is significantly closer to Anchorage clientele than EU
 
@@ -98,7 +98,7 @@ The two arguments **for** Option B were:
 - This ADR (ADR-002) recorded as historical decision
 
 ### Pending operator actions *(tracked in `/infra/server-info.md` checklist)*
-- Rename in Hetzner console: `openclaw-milbot` → `lidi-studio-prod`
+- Rename in Hetzner console: `openclaw-milbot` → `lucena-prod` *(done 2026-04-29)*
 - SSH hardening (custom port, key-only, fail2ban)
 - Docker + Docker Compose install
 - UFW firewall rules

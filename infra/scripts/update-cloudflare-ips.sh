@@ -28,7 +28,7 @@ echo "Wrote: $OUT_DIR/ips-v4.txt"
 echo "Wrote: $OUT_DIR/ips-v6.txt"
 
 # TODO: when hcloud CLI is installed and authenticated on the host, push
-# these ranges to the Hetzner Cloud Firewall named lidi-studio-prod via:
+# these ranges to the Hetzner Cloud Firewall named lucena-prod via:
 #
 #   hcloud firewall update <firewall-id> --rules-file <(jq -n \
 #     --arg v4 "$CF_V4" --arg v6 "$CF_V6" \
