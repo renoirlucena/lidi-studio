@@ -28,7 +28,7 @@ This repository is the source of truth for the Lidi Studio brand system, web pla
 
 ## Stack
 
-Single Hetzner CX22 VPS (€4.51/mo). Zero SaaS subscriptions.
+Single Hetzner **CPX21** VPS in Hillsboro, OR ($13.99/mo · 3 vCPU AMD EPYC · 4 GB RAM · 80 GB NVMe SSD). Zero SaaS subscriptions. *(Server choice rationale: [`docs/decisions/server-decision.md`](docs/decisions/server-decision.md) — ADR-002. Operational fact sheet: [`infra/server-info.md`](infra/server-info.md).)*
 
 | Layer | Tool |
 |---|---|
@@ -161,7 +161,8 @@ Architecture decisions live in `/docs/decisions/`. Each ADR is stamped with date
 
 | ADR | Decision | Status |
 |---|---|---|
-| 001 | Palette: Sargent Luminous | LOCKED |
+| [001](docs/decisions/palette-decision.md) | Palette: Sargent Luminous | LOCKED |
+| [002](docs/decisions/server-decision.md) | Server: adopt existing Hetzner CPX21 (Hillsboro, OR) over planned new CX22 (EU) | LOCKED |
 
 ---
 

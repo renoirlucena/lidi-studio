@@ -1,28 +1,30 @@
-# Lidi Studio — Platform Architecture v1.0
+# Lidi Studio — Platform Architecture v1.1
 
 > Companion to `brand-book-v2.2.md`.
 > Brand book defines WHO, WHAT, HOW IT FEELS.
 > This document defines WHERE, WITH WHAT, HOW IT WORKS.
-> Approved 2026-04-27. Active.
+> Approved 2026-04-27 (v1.0). Reconciled with provisioned server 2026-04-29 (v1.1). Active.
 
 ---
 
 ## 1. Executive Summary
 
-Lidi Studio runs end-to-end on a single Hetzner CX22 VPS (€4.51/mo). One machine serves every public and private function: an Astro-built static frontend at the edge, Ghost for the journal, Cal.com for booking, DocuSeal for contracts, Stripe for payments, NocoDB for the internal CRM, Umami for analytics, Uptime Kuma for monitoring — all reverse-proxied by Caddy 2 and fronted by Cloudflare's free tier. PostgreSQL 16 + Redis as data layer. Domain `lidi.studio` is acquired. **Total fixed monthly platform cost: €4.51.** Stack subscription footprint: zero. Time to production-ready launch from a clean Hetzner image: 6–8 weeks.
+> **Note (2026-04-29):** Initial planning specified Hetzner CX22 in Falkenstein at €4.51/mo. Actual provisioned server is **CPX21 in Hillsboro, Oregon at $13.99/mo**. The CPX21 has 50% more vCPU and 2× disk for ~$9/mo more — net positive for our workload. Hillsboro location reduces latency to Anchorage clientele significantly vs EU. RAM budget §2.17 unchanged. Decision recorded in [`/docs/decisions/server-decision.md`](decisions/server-decision.md) (ADR-002). Operational details in [`/infra/server-info.md`](../infra/server-info.md).
+
+Lidi Studio runs end-to-end on a single Hetzner CPX21 VPS ($13.99/mo). One machine serves every public and private function: an Astro-built static frontend at the edge, Ghost for the journal, Cal.com for booking, DocuSeal for contracts, Stripe for payments, NocoDB for the internal CRM, Umami for analytics, Uptime Kuma for monitoring — all reverse-proxied by Caddy 2 and fronted by Cloudflare's free tier. PostgreSQL 16 + Redis as data layer. Domain `lidi.studio` is acquired. **Total fixed monthly platform cost: $13.99.** Stack subscription footprint: zero. Time to production-ready launch from the provisioned server: 4–6 weeks.
 
 ### Cost breakdown
 
 | Item | Cost / month |
 |---|---:|
-| Hetzner CX22 (2 vCPU, 4 GB RAM, 40 GB SSD, 1 IPv4) | €4.51 |
-| Cloudflare DNS / CDN / WAF (Free) | €0.00 |
-| Cloudflare R2 backup storage (10 GB free tier) | €0.00 |
-| Brevo SMTP (Free, 300 emails / day) | €0.00 |
-| GitHub Actions (Free, 2,000 min / mo) | €0.00 |
-| Domain `lidi.studio` (annual renewal, separate budget) | ~€1.67 |
-| Stripe payment processing | transactional only (2.9% + €0.30/tx) |
-| **Total fixed platform cost** | **€4.51 / mo** |
+| Hetzner CPX21 (3 vCPU AMD EPYC, 4 GB RAM, 80 GB NVMe SSD, 1 IPv4, Hillsboro OR) | $13.99 |
+| Cloudflare DNS / CDN / WAF (Free) | $0.00 |
+| Cloudflare R2 backup storage (10 GB free tier) | $0.00 |
+| Brevo SMTP (Free, 300 emails / day) | $0.00 |
+| GitHub Actions (Free, unlimited on public repo) | $0.00 |
+| Domain `lidi.studio` (annual renewal, separate budget) | ~$1.80 |
+| Stripe payment processing | transactional only (2.9% + $0.30/tx) |
+| **Total fixed platform cost** | **$13.99 / mo** |
 
 ---
 
@@ -94,6 +96,8 @@ Free private repos, free Actions runtime (2,000 min/mo). SSH-deploy to Hetzner o
 | Restic (during backup) | 30 MB |
 | **Committed** | **2,680 MB** |
 | **Headroom** | **~1,400 MB (34%)** |
+
+> **vCPU note (CPX21):** the provisioned server has 3 vCPU (AMD EPYC) vs the 2 vCPU originally planned. RAM budget above is unchanged. The extra vCPU gives Cal.com (the heaviest service, Next.js-based) and PostgreSQL more concurrent throughput headroom — particularly during Astro builds triggered by Ghost-publish webhooks, which happen synchronously with normal request handling.
 
 ---
 
@@ -296,7 +300,7 @@ Tables: `leads · commissions · clients · payments · webhook_events · email_
 - Secrets: `/opt/lidi/.env` mode 600, never in git · `.env.example` committed with empty values
 - Admin routes: 2FA + Caddy basic_auth + IP allowlist · `X-Robots-Tag: noindex`
 - Backup encryption: Restic passphrase in 1Password + sealed offline envelope · annual restore drill
-- GDPR: Umami no-PII · Ghost member opt-in · privacy policy at `/privacy` · all data EU-hosted (Hetzner Falkenstein/Helsinki)
+- GDPR: Umami no-PII · Ghost member opt-in · privacy policy at `/privacy` · data hosted in Hetzner Hillsboro OR (US-West). EU customer data flows must be disclosed in privacy policy per GDPR Art. 13. Trade-off accepted in ADR-002 — see `/docs/decisions/server-decision.md` for reversal criteria if EU residency is later required.
 
 ---
 
@@ -355,4 +359,5 @@ Tables: `leads · commissions · clients · payments · webhook_events · email_
 
 | Version | Date | Status | Note |
 |---|---|---|---|
-| **v1.0** | **2026-04-27** | **active** | **Initial platform architecture · companion to brand-book-v2.2.md · Hetzner CX22 €4.51/mo · stack locked** |
+| v1.0 | 2026-04-27 | superseded by v1.1 | Initial platform architecture · companion to brand-book-v2.2.md · planned Hetzner CX22 €4.51/mo Falkenstein · stack locked |
+| **v1.1** | **2026-04-29** | **active** | **Server provisioned: CPX21 in Hillsboro OR (`lidi-studio-prod`, IP `5.78.177.39`). Specs and cost adjusted: 3 vCPU · 4 GB RAM · 80 GB SSD · $13.99/mo. Stack and architecture otherwise unchanged from v1.0. See ADR-002 for decision rationale; see `/infra/server-info.md` for operational details.** |
