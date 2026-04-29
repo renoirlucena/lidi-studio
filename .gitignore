@@ -81,7 +81,7 @@ restic-cache/
 *.sql.gz
 
 # ──────────────────────────────────────────
-# Editor / IDE
+# Editor / IDE / AI assistants
 # ──────────────────────────────────────────
 .vscode/
 .idea/
@@ -90,6 +90,8 @@ restic-cache/
 *.code-workspace
 .cursor/
 .aider*
+.claude/
+.continue/
 
 # ──────────────────────────────────────────
 # OS
