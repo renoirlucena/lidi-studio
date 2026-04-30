@@ -121,3 +121,4 @@ test-results/
 # ──────────────────────────────────────────
 # package-lock.json
 # yarn.lock
+lucena-prod.env.*
