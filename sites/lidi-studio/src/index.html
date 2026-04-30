@@ -1,0 +1,1172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lidi Studio — Painted, not posed.</title>
+
+<!-- REVIEW: meta description drawn from existing manifesto copy. Adjust if positioning changes. -->
+<meta name="description" content="Lidi Studio — fine art portraiture for the most extraordinary chapter of a woman's life. Composed in light, atmosphere, and time, by a photographer who paints in oil. Anchorage, Alaska." />
+<link rel="canonical" href="https://lidi.studio/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://lidi.studio/" />
+<meta property="og:title" content="Lidi Studio — Painted, not posed." />
+<meta property="og:description" content="Fine art portraiture by a photographer who paints in oil. Maternity, newborn, motherhood, family. Anchorage, Alaska." />
+<meta property="og:image" content="https://lidi.studio/photos/hero-angel-wings.jpg" />
+<meta property="og:image:width" content="1600" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Lidi Studio" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Lidi Studio — Painted, not posed." />
+<meta name="twitter:description" content="Fine art portraiture by a photographer who paints in oil. Anchorage, Alaska." />
+<meta name="twitter:image" content="https://lidi.studio/photos/hero-angel-wings.jpg" />
+
+<!-- Theme + favicon -->
+<meta name="theme-color" content="#F5EBDD" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Performance hints -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="/photos/hero-angel-wings.avif" type="image/avif" fetchpriority="high" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Italiana&family=JetBrains+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5EBDD;
+  --mauve:#D4B5B0;
+  --pearl:#C9C2B8;
+  --gold:#B89968;
+  --charcoal:#4A3F38;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{ scroll-behavior:smooth; }
+body{
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-feature-settings: "liga" 1, "dlig" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x:hidden;
+}
+img{ display:block; max-width:100%; }
+
+/* TYPE PRIMITIVES */
+.eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+}
+
+/* ═══ THE L · canonical monogram ═══ */
+.lmark{
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: 0;
+  display: inline-block;
+}
+
+/* ═══ SECTION TOKENS · color register exposed to descendants ═══ */
+:root{ --bg: var(--cream); --section-bg: var(--cream); }
+.section{
+  --bg: var(--cream);
+  --section-bg: var(--cream);
+  background: var(--section-bg);
+  padding: clamp(80px, 10vw, 140px) clamp(28px, 5vw, 80px);
+  position: relative;
+}
+.footer{ --bg: var(--charcoal); --section-bg: var(--charcoal); }
+
+/* ═══ SECTION DIVIDER · 80px atmospheric breath between cream sections ═══ */
+.section-divider{
+  height: 80px;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    #F5EBDD 0%,
+    rgba(201, 194, 184, 0.06) 50%,
+    #F5EBDD 100%
+  );
+  pointer-events: none;
+}
+
+/* Corner-only feathering: bleed the section's cream into just the four
+   corners of the photo. Faces, subjects, and full composition stay 100%
+   intact — only the rectangle's corners soften. */
+.vignette{ position: relative; overflow: hidden; --section-bg: var(--cream); }
+.vignette img{ display: block; width: 100%; height: auto; }
+.vignette > picture{ display: block; }
+.vignette::after{
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 60px at top left,
+      var(--section-bg) 0%,
+      var(--section-bg) 18%,
+      transparent 100%),
+    radial-gradient(circle 60px at top right,
+      var(--section-bg) 0%,
+      var(--section-bg) 18%,
+      transparent 100%),
+    radial-gradient(circle 60px at bottom left,
+      var(--section-bg) 0%,
+      var(--section-bg) 18%,
+      transparent 100%),
+    radial-gradient(circle 60px at bottom right,
+      var(--section-bg) 0%,
+      var(--section-bg) 18%,
+      transparent 100%);
+}
+.eyebrow.gold{ color: var(--gold); }
+.italiana{ font-family:'Italiana', serif; }
+.cormorant{ font-family:'Cormorant Garamond', serif; }
+.eb{ font-family:'EB Garamond', serif; }
+.mono{ font-family:'JetBrains Mono', monospace; }
+
+.ornament{
+  display: block;
+  width: 64px; height: 1px;
+  background: var(--gold);
+  border: 0;
+  margin: clamp(40px, 6vw, 80px) auto;
+  position: relative;
+}
+/* When ornament lives inside a section-divider breath zone, the divider
+   provides the vertical room — the ornament centers itself within it. */
+.section-divider{
+  display: flex; align-items: center; justify-content: center;
+}
+.section-divider > .ornament{ margin: 0 auto; }
+
+/* GOLD UNDERLINE LINK */
+.glink{
+  font-family:'JetBrains Mono', monospace;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 6px;
+  display: inline-block;
+}
+.glink::after{
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .6s var(--ease);
+}
+.glink:hover::after{ transform: scaleX(1); }
+.glink--always::after{ transform: scaleX(1); }
+.glink--prominent{ font-size: 12px; }
+
+/* ═══ NAV ═══ */
+.nav{
+  position: sticky; top: 0; z-index: 80;
+  background: color-mix(in oklab, var(--cream) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid color-mix(in oklab, var(--gold) 60%, transparent);
+}
+.nav__inner{
+  max-width: 1640px; margin: 0 auto;
+  padding: 22px clamp(20px,4vw,56px);
+  display:flex; align-items:center; justify-content:space-between; gap: 24px;
+}
+.nav__logo{
+  display:inline-flex; align-items:baseline; gap: 14px;
+  text-decoration:none; color: var(--charcoal);
+}
+.nav__logo .wm{ display:inline-flex; align-items:baseline; }
+.nav__logo .wm__l{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 500; font-style: normal;
+  font-size: 26px; line-height: 1;
+  letter-spacing: .32em;
+  color: var(--gold);
+}
+.nav__logo .wm__rest{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 500; font-style: normal;
+  font-size: 22px; line-height: 1;
+  letter-spacing: .32em;
+  color: var(--charcoal);
+}
+.nav__logo .dot{ width: 4px; height: 4px; border-radius: 50%; background: var(--gold); align-self: center; }
+.nav__logo .studio{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: .40em;
+}
+.nav__links{
+  display:flex; align-items:center; gap: clamp(20px,2.4vw,36px);
+}
+.nav__burger{ display:none; }
+@media (max-width: 880px){
+  .nav__links{ display:none; position: fixed; inset: 70px 0 auto 0; flex-direction:column; gap:18px; padding: 28px; background: var(--cream); border-bottom: 1px solid color-mix(in oklab, var(--gold) 50%, transparent); }
+  .nav__links.is-open{ display:flex; }
+  .nav__burger{ display:inline-flex; flex-direction:column; gap:5px; padding:10px; background:none; border:0; cursor:pointer; }
+  .nav__burger span{ width: 22px; height:1px; background: var(--charcoal); }
+}
+
+/* ═══ HERO ═══ */
+.hero{
+  position: relative;
+  min-height: calc(100vh - 70px);
+  height: 96vh;
+  background: var(--charcoal);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: clamp(28px, 4vh, 56px) clamp(28px, 5vw, 80px);
+  color: var(--cream);
+}
+.hero__photo{ position: absolute; inset:0; overflow:hidden; }
+.hero__photo img{
+  width:100%; height:100%; object-fit: cover;
+  clip-path: inset(0 0 100% 0);
+  transform: scale(1.04);
+  transition: clip-path 1.6s var(--ease), transform 6s var(--ease);
+}
+.hero.is-in .hero__photo img{
+  clip-path: inset(0 0 0 0);
+  transform: scale(1);
+}
+.hero__photo::after{
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at center, transparent 50%, color-mix(in oklab, var(--cream) 22%, transparent) 100%),
+    linear-gradient(180deg, rgba(74,63,56,.18) 0%, transparent 30%, transparent 60%, rgba(74,63,56,.45) 100%),
+    linear-gradient(180deg, transparent 70%, rgba(245,235,221,.55) 92%, rgba(245,235,221,.95) 100%);
+  pointer-events:none;
+}
+.hero__top{ position: relative; z-index: 2; display:flex; justify-content:space-between; gap:24px; }
+.hero__top .eyebrow{ color: var(--cream); }
+.hero__bottom{ position: relative; z-index: 2; max-width: 60ch; }
+.hero__h{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--cream);
+  letter-spacing: -.025em;
+  line-height: .92;
+  font-size: clamp(80px, 14vw, 200px);
+}
+.hero__h .l2{ display:block; margin-left: clamp(20px, 4vw, 80px); margin-top: -.18em; }
+.hero__lede{
+  margin-top: clamp(20px, 3vh, 36px);
+  font-family:'EB Garamond', serif;
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.5;
+  max-width: 50ch;
+  color: color-mix(in oklab, var(--cream) 92%, transparent);
+}
+.hero__scroll{
+  position: absolute; left: 50%; bottom: clamp(16px, 3vh, 36px);
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: var(--cream);
+}
+.hero__scroll .label{ font-family:'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .4em; opacity: .8; }
+.hero__scroll .line{
+  width: 1px; height: 60px; background: var(--gold); position: relative; overflow: hidden;
+}
+.hero__scroll .line::after{
+  content:''; position:absolute; left:0; right:0; top:-60px;
+  height:60px; background: linear-gradient(180deg, transparent 0%, var(--cream) 100%);
+  animation: scrollPulse 2.4s var(--ease) infinite;
+}
+@keyframes scrollPulse {
+  0%{ transform: translateY(0); }
+  100%{ transform: translateY(120px); }
+}
+
+/* ═══ SECTION SHELL ═══ */
+.section{
+  padding: clamp(80px, 10vw, 140px) clamp(28px, 5vw, 80px);
+  position: relative;
+  --bg: var(--cream);
+}
+.container{ max-width: 1640px; margin: 0 auto; }
+
+/* ═══ MANIFESTO ═══ */
+.manifesto{ text-align:center; }
+.manifesto .eyebrow{ display:inline-block; }
+.manifesto__rule{ width:48px; height:1px; background: var(--gold); margin: clamp(28px, 4vh, 48px) auto; }
+.manifesto__quote{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 1.22;
+  letter-spacing: -.01em;
+  color: var(--charcoal);
+  max-width: 28ch;
+  margin: 0 auto;
+}
+.manifesto__quote p + p{ margin-top: 1.1em; }
+.manifesto__quote .dropcap{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 400;
+  font-size: 6em; line-height: .82;
+  float: left; color: var(--gold);
+  margin: .04em -.02em -0.05em -0.08em;
+  shape-outside: margin-box;
+}
+.manifesto__quote em{ font-style: italic; color: var(--gold); }
+.manifesto__seal-wrap{
+  margin-top: clamp(32px, 4vw, 48px);
+  margin-bottom: clamp(8px, 1vw, 16px);
+  display:flex; justify-content:center;
+}
+.manifesto__seal{
+  width: 80px; height: 80px; border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #C8A678 0%,
+    #B89968 30%,
+    #8C7344 80%,
+    #6B5530 100%
+  );
+  display:grid; place-items:center;
+  box-shadow:
+    inset 0 -4px 12px rgba(60,40,20,.30),
+    inset 0 4px 8px rgba(255,220,160,.15),
+    0 4px 12px rgba(74,63,56,.15);
+  position: relative;
+}
+.manifesto__seal::before{
+  content:'';
+  position:absolute; inset:0; border-radius:50%;
+  background: radial-gradient(circle at 70% 70%, transparent 60%, rgba(60,40,20,.10) 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.manifesto__seal .l{
+  font-family:'Cormorant Garamond', serif;
+  font-weight:500; font-style: normal;
+  font-size: 32px; line-height:1; padding-bottom: 0; letter-spacing: 0;
+  color: var(--cream);
+  text-shadow:
+    0 1px 0 rgba(60,40,20,.30),
+    0 -1px 0 rgba(255,220,160,.10);
+  position: relative; z-index: 2;
+}
+
+/* ═══ COMMISSIONS ═══ */
+.commissions__head{
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 32px; align-items: end;
+  padding-bottom: clamp(32px, 4vw, 56px);
+  border-bottom: 1px solid color-mix(in oklab, var(--charcoal) 18%, transparent);
+  margin-bottom: clamp(56px, 8vw, 96px);
+}
+.commissions__h2{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 300;
+  font-size: clamp(36px, 5vw, 76px);
+  line-height: .96;
+  letter-spacing: -.02em;
+  color: var(--charcoal);
+  max-width: 18ch;
+  margin-top: 18px;
+}
+.commission{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(80px, 11vw, 140px);
+  align-items: start;
+}
+.commission__photo{
+  position: relative;
+  overflow: visible;
+  background: transparent;
+}
+.commission__photo img{
+  width:100%; height:100%; object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.commission__photo:hover img{ transform: scale(1.02); }
+.commission__photo--reveal img{
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.4s var(--ease), transform 6s var(--ease);
+}
+.commission.is-in .commission__photo--reveal img{ clip-path: inset(0 0 0 0); }
+.commission__text{ display:flex; flex-direction: column; gap: clamp(16px, 2.4vh, 24px); }
+.commission__no{
+  font-family:'JetBrains Mono', monospace;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.commission__name{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 4.5vw, 68px);
+  line-height: .96;
+  letter-spacing: -.02em;
+  color: var(--charcoal);
+}
+.commission__name strong{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 500; font-style: normal;
+}
+.commission__tag{
+  font-family:'Italiana', serif;
+  font-size: clamp(17px, 1.4vw, 22px);
+  letter-spacing: .02em;
+  line-height: 1.4;
+  color: var(--charcoal);
+  opacity: .9;
+  max-width: 32ch;
+}
+.commission__lede{
+  font-family:'EB Garamond', serif;
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.6;
+  color: var(--charcoal);
+  max-width: 44ch;
+  opacity: .88;
+}
+
+/* layout variants */
+.cmsn--01 .commission__photo{ grid-column: 1 / span 7; aspect-ratio: 3/4; }
+.cmsn--01 .commission__text { grid-column: 9 / span 4; padding-top: clamp(40px,8vh,80px); }
+
+.cmsn--02 .commission__text { grid-column: 1 / span 4; padding-top: clamp(80px,14vh,160px); }
+.cmsn--02 .commission__photo{ grid-column: 6 / span 7; aspect-ratio: 5/7; }
+
+.cmsn--03 .commission__photo{ grid-column: 2 / span 7; aspect-ratio: 4/5; }
+.cmsn--03 .commission__text { grid-column: 10 / span 3; padding-top: clamp(60px,10vh,120px); }
+
+.cmsn--04 .commission__text { grid-column: 1 / span 3; padding-top: clamp(60px,10vh,120px); }
+.cmsn--04 .commission__photo{ grid-column: 5 / span 8; aspect-ratio: 3/2; }
+
+.cmsn--05 { grid-template-columns: 1fr; gap: clamp(40px, 6vh, 72px); padding-top: clamp(40px, 6vh, 72px); border-top: 1px solid color-mix(in oklab, var(--gold) 50%, transparent); }
+.cmsn--05 .commission__photo{ aspect-ratio: 21/10; }
+.cmsn--05 .commission__bottom{
+  display:grid; grid-template-columns: repeat(12, 1fr); gap: clamp(24px, 4vw, 56px); align-items:start;
+}
+.cmsn--05 .commission__bottom .lede-block{ grid-column: 1 / span 6; }
+.cmsn--05 .commission__bottom .text-block{ grid-column: 8 / span 5; }
+.cmsn--05 .commission__name{ font-size: clamp(48px, 5.6vw, 88px); }
+.cmsn--05 .commission__tag{
+  font-size: clamp(22px, 2vw, 30px); max-width: 36ch;
+}
+
+@media (max-width: 980px){
+  .commission{ grid-template-columns: 1fr; gap: 28px; margin-bottom: 96px; }
+  .cmsn--01 .commission__photo, .cmsn--02 .commission__photo,
+  .cmsn--03 .commission__photo, .cmsn--04 .commission__photo,
+  .cmsn--05 .commission__photo{ grid-column: 1; aspect-ratio: 4/5; }
+  .cmsn--01 .commission__text, .cmsn--02 .commission__text,
+  .cmsn--03 .commission__text, .cmsn--04 .commission__text{ grid-column: 1; padding-top: 0; }
+  .cmsn--05 .commission__bottom{ grid-template-columns: 1fr; }
+  .cmsn--05 .commission__bottom .lede-block,
+  .cmsn--05 .commission__bottom .text-block{ grid-column: 1; }
+}
+
+/* ═══ ARCHIVE ═══ */
+.archive__inner{
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: center;
+}
+.archive__photo{ grid-column: 2 / span 6; aspect-ratio: 4/5; overflow:hidden; }
+.archive__photo img{ width:100%; height:100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.archive__photo:hover img{ transform: scale(1.02); }
+.archive__text{ grid-column: 9 / span 4; }
+.archive__eyebrow{ display:inline-block; margin-bottom: clamp(20px, 3vh, 32px); }
+.archive__rule{ width: 32px; height: 1px; background: var(--gold); margin-bottom: clamp(20px, 3vh, 32px); }
+.archive__quote{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(24px, 2.4vw, 36px);
+  line-height: 1.28;
+  letter-spacing: -.005em;
+  color: var(--charcoal);
+}
+.archive__quote .qm{ color: var(--gold); font-size: 1.4em; line-height: 0; vertical-align: -.32em; margin-right: .04em; }
+.archive__attr{ margin-top: clamp(20px, 3vh, 28px); margin-bottom: clamp(28px, 4vh, 40px); display:flex; align-items:center; gap: 12px; }
+.archive__attr .lmark{ font-size: 24px; }
+
+@media (max-width: 980px){
+  .archive__inner{ grid-template-columns: 1fr; }
+  .archive__photo, .archive__text{ grid-column: 1; }
+}
+
+/* ═══ ABOUT ═══ */
+.about__inner{
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+}
+.about__text{ grid-column: 1 / span 7; }
+.about__photo-col{ grid-column: 8 / span 5; }
+.about__h2{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(40px, 5vw, 80px);
+  line-height: 1;
+  letter-spacing: -.025em;
+  color: var(--charcoal);
+  margin: clamp(20px, 3vh, 28px) 0 clamp(36px, 5vh, 56px);
+}
+.about__h2 .it{ display: block; font-style: italic; font-weight: 300; }
+.about__body{
+  font-family:'EB Garamond', serif;
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.65;
+  color: var(--charcoal);
+  max-width: 56ch;
+}
+.about__body p + p{ margin-top: 1.1em; }
+.about__body .dropcap{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 400;
+  font-size: 6em; line-height: .82;
+  float: left; color: var(--gold);
+  margin: .04em .08em -0.05em -0.08em;
+  shape-outside: margin-box;
+}
+.pron{
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 4px 8px;
+  vertical-align: 2px;
+  margin: 0 4px;
+}
+.about__cta{ margin-top: clamp(28px, 4vh, 44px); }
+.about__photo{ aspect-ratio: 3/4; overflow: hidden; }
+.about__photo img{ width:100%; height:100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.about__photo:hover img{ transform: scale(1.02); }
+.about__caption{ margin-top: 14px; }
+
+@media (max-width: 980px){
+  .about__inner{ grid-template-columns: 1fr; }
+  .about__text, .about__photo-col{ grid-column: 1; }
+}
+
+/* ═══ JOURNAL ═══ */
+.journal{ border-top: 1px solid var(--gold); }
+.journal__head{
+  display:grid; grid-template-columns: 1fr auto;
+  gap: 32px; align-items: end;
+  padding-bottom: clamp(40px, 6vh, 72px);
+  border-bottom: 1px solid color-mix(in oklab, var(--charcoal) 18%, transparent);
+  margin-bottom: clamp(60px, 9vh, 100px);
+}
+.journal__h2{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 300;
+  font-size: clamp(36px, 5vw, 76px);
+  line-height: .96;
+  letter-spacing: -.02em;
+  margin-top: 18px;
+  max-width: 22ch;
+}
+.journal__grid{
+  display:grid; grid-template-columns: repeat(12, 1fr);
+  gap: clamp(28px, 5vw, 56px);
+}
+.journal__feat{ grid-column: 2 / span 6; }
+.journal__side{ grid-column: 9 / span 4; display:flex; flex-direction: column; gap: clamp(40px, 6vh, 64px); }
+.post__photo{ aspect-ratio: 5/7; overflow:hidden; margin-bottom: clamp(20px, 3vh, 32px); }
+.post__photo img{ width:100%; height:100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.post:hover .post__photo img{ transform: scale(1.02); }
+.post__photo--sm{ aspect-ratio: 4/3; }
+.post__eyebrow{ display:inline-block; margin-bottom: 12px; color: var(--gold); }
+.post__title{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 400;
+  font-size: clamp(26px, 2.4vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  color: var(--charcoal);
+  max-width: 28ch;
+  margin-bottom: 14px;
+}
+.post__title--sm{ font-size: clamp(20px, 1.6vw, 26px); }
+.post__meta{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+
+@media (max-width: 980px){
+  .journal__feat, .journal__side{ grid-column: 1 / -1; }
+}
+
+/* ═══ NEWSLETTER ═══ */
+.newsletter{ text-align:center; }
+.newsletter .eyebrow{ display:inline-block; }
+.newsletter__rule{ width: 40px; height: 1px; background: var(--gold); margin: clamp(28px, 4vh, 40px) auto; }
+.newsletter__h2{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 300;
+  font-size: clamp(36px, 4.6vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  max-width: 22ch;
+  margin: 0 auto;
+}
+.newsletter__lede{
+  font-family:'EB Garamond', serif;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.6;
+  max-width: 54ch;
+  margin: clamp(28px, 4vh, 40px) auto clamp(40px, 6vh, 56px);
+  color: var(--charcoal);
+  opacity: .88;
+}
+.newsletter__form{
+  max-width: 520px; margin: 0 auto;
+  display:grid; grid-template-columns: 1fr auto; gap: 24px; align-items:end;
+}
+.newsletter__input{
+  border: 0;
+  border-bottom: 1px solid var(--gold);
+  background: transparent;
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;
+  color: var(--charcoal);
+  padding: 12px 4px;
+  outline: none;
+  width: 100%;
+}
+.newsletter__input::placeholder{ color: color-mix(in oklab, var(--charcoal) 45%, transparent); font-style: italic; }
+.newsletter__btn{
+  background: transparent; border: 0; padding: 12px 4px; cursor: pointer;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid var(--gold);
+}
+.newsletter__btn::after{ content: ' →'; }
+.newsletter__fine{
+  margin-top: clamp(28px, 4vh, 40px);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: .32em; text-transform: uppercase;
+  opacity: .55;
+}
+
+/* ═══ FOOTER · 340px sunset bridge dissolving into charcoal ═══ */
+.footer{
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: clamp(360px, 38vh, 420px) clamp(28px, 5vw, 80px) clamp(40px, 6vh, 72px);
+  position: relative;
+  overflow: hidden;
+}
+.footer::before{
+  content:'';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 340px;
+  background: linear-gradient(
+    to bottom,
+    #F5EBDD 0%,
+    #E8D6C2 15%,
+    #BFA590 30%,
+    #8C7868 45%,
+    #5C4F44 60%,
+    #4A3F38 75%,
+    rgba(74, 63, 56, 0.7) 90%,
+    rgba(74, 63, 56, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.footer > *{ position: relative; z-index: 2; }
+.footer__inner{
+  max-width: 1640px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+}
+.footer__col-1{ grid-column: 2 / span 4; }
+.footer__col-2{ grid-column: 7 / span 2; }
+.footer__col-3{ grid-column: 9 / span 2; }
+.footer__col-4{ grid-column: 11 / span 2; }
+.footer__brand{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 52px;
+  letter-spacing: .32em;
+  color: var(--cream);
+  margin-bottom: 18px;
+  display: inline-flex; align-items: baseline; gap: clamp(18px, 2vw, 26px);
+}
+.footer__brand .wm__l{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 500; font-style: normal;
+  font-size: 52px; line-height: 1;
+  letter-spacing: .32em;
+  color: var(--gold);
+}
+.footer__brand .wm__rest{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 500; font-style: normal;
+  font-size: 52px; line-height: 1;
+  letter-spacing: .32em;
+  color: var(--cream);
+}
+.footer__brand .dot{ width:5px; height:5px; border-radius:50%; background: var(--gold); align-self:center; }
+.footer__brand .studio{
+  font-family:'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: .40em;
+  color: var(--cream);
+  align-self: center;
+}
+.footer__tag{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 300;
+  font-size: 22px;
+  color: var(--cream);
+  letter-spacing: -.005em;
+}
+.footer__col-head{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .32em; text-transform: uppercase;
+  color: var(--pearl);
+  margin-bottom: clamp(20px, 3vh, 28px);
+}
+.footer ul{ list-style:none; display:flex; flex-direction:column; gap: 14px; }
+.footer ul a{
+  font-family:'EB Garamond', serif;
+  font-size: 16px;
+  color: var(--cream);
+  text-decoration: none;
+  position: relative;
+  transition: color .3s ease;
+}
+.footer ul a:hover{ color: var(--gold); }
+.footer__bottom{
+  margin-top: clamp(72px, 10vh, 120px);
+  padding-top: clamp(28px, 4vh, 40px);
+  border-top: 1px solid color-mix(in oklab, var(--pearl) 30%, transparent);
+  display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: center;
+}
+.footer__bottom .left{ text-align:left; }
+.footer__bottom .center{ text-align:center; color: var(--gold); }
+.footer__bottom .right{ text-align:right; }
+.footer__bottom .eyebrow{ color: var(--pearl); font-size: 10px; }
+
+@media (max-width: 980px){
+  .footer__inner{ grid-template-columns: 1fr; }
+  .footer__col-1,.footer__col-2,.footer__col-3,.footer__col-4{ grid-column: 1; }
+  .footer__bottom{ grid-template-columns: 1fr; gap:14px; }
+  .footer__bottom .left,.footer__bottom .center,.footer__bottom .right{ text-align:left; }
+}
+
+/* ═══ MOTION ═══ */
+.reveal{ opacity: 0; transform: translateY(16px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal.is-in{ opacity: 1; transform: none; }
+.reveal-d2{ transition-delay: .2s; }
+.reveal-d3{ transition-delay: .4s; }
+.reveal-d4{ transition-delay: .6s; }
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero__photo img{ clip-path: none !important; transform: none !important; }
+  .commission__photo--reveal img{ clip-path: none !important; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ 1 · NAV ═══ -->
+<header class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="#">
+      <span class="wm"><span class="wm__l">L</span><span class="wm__rest">IDI</span></span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="studio">STUDIO</span>
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <nav class="nav__links" id="navlinks">
+      <a class="glink" href="#commissions">WORK</a>
+      <a class="glink" href="#commissions">COMMISSIONS</a>
+      <a class="glink" href="#journal">JOURNAL</a>
+      <a class="glink" href="#about">ABOUT</a>
+      <a class="glink glink--always" style="color:var(--gold)" href="#newsletter">BEGIN</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══ 2 · HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero__photo">
+    <picture><source srcset="/photos/hero-angel-wings.avif" type="image/avif"><source srcset="/photos/hero-angel-wings.webp" type="image/webp"><img src="/photos/hero-angel-wings.jpg" alt="" fetchpriority="high" decoding="async" /></picture>
+  </div>
+  <div class="hero__top">
+    <div class="eyebrow">LIDI STUDIO · ANCHORAGE · ALASKA</div>
+    <div class="eyebrow">MMXXVI</div>
+  </div>
+  <div class="hero__bottom">
+    <h1 class="hero__h">
+      <span class="l1"><em>Painted,</em></span>
+      <span class="l2"><em>not posed.</em></span>
+    </h1>
+    <p class="hero__lede">Fine art portraiture for the most extraordinary chapter of a woman's life. Composed in light, atmosphere, and time — by a photographer who paints in oil.</p>
+  </div>
+  <div class="hero__scroll">
+    <span class="label">SCROLL</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- ═══ 3 · MANIFESTO ═══ -->
+<section class="section manifesto">
+  <div class="container">
+    <div class="eyebrow gold reveal italiana" style="font-family:'Italiana',serif; font-size:14px; letter-spacing:.32em; font-weight:400">MANIFESTO &nbsp;·&nbsp; MMXXVI</div>
+    <div class="manifesto__rule reveal reveal-d2"></div>
+    <blockquote class="manifesto__quote reveal reveal-d2">
+      <p><span class="dropcap">M</span>otherhood is the most extraordinary chapter of a woman's life — and most of it disappears in phone rolls and pastel props.</p>
+      <!-- REVIEW: factual claims "Twenty years behind the camera" / "A lifetime behind the easel" — confirm with Lidi -->
+      <p>Lidi paints with light. <em>Twenty years behind the camera. A lifetime behind the easel.</em></p>
+      <p>Every session is composed: the wardrobe sculpted, the light layered, the body honored. These are not snapshots of a season — they are portraits of who you became.</p>
+      <p><em>Painted, not posed. Remembered, not just photographed.</em></p>
+    </blockquote>
+    <div class="manifesto__seal-wrap reveal reveal-d3">
+      <div class="manifesto__seal" aria-label="Lidi Studio seal"><span class="l">L</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr class="ornament" /></div>
+
+<!-- ═══ 4 · COMMISSIONS ═══ -->
+<section class="section" id="commissions">
+  <div class="container">
+    <header class="commissions__head">
+      <div>
+        <div class="eyebrow gold reveal">THE COMMISSIONS</div>
+        <h2 class="commissions__h2 reveal reveal-d2"><em>Five sittings,</em><br>composed across the chapter.</h2>
+      </div>
+      <div class="eyebrow reveal reveal-d3" style="opacity:.7">I&nbsp;&nbsp;—&nbsp;&nbsp;V</div>
+    </header>
+
+    <!-- 01 -->
+    <article class="commission cmsn--01">
+      <div class="commission__photo vignette commission__photo--reveal">
+        <picture><source srcset="/photos/newborn-family-beige.avif" type="image/avif"><source srcset="/photos/newborn-family-beige.webp" type="image/webp"><img src="/photos/newborn-family-beige.jpg" alt="The Hearth — composed family portrait" loading="lazy" /></picture>
+      </div>
+      <div class="commission__text">
+        <div class="commission__no">01 &nbsp;·&nbsp; Family</div>
+        <h3 class="commission__name"><strong>The</strong> <em>Hearth</em></h3>
+        <p class="commission__tag italiana">A composed family portrait, in the painter's tradition.</p>
+        <!-- REVIEW: deliverable count "fifteen rendered portraits" — confirm with Lidi -->
+        <p class="commission__lede">Ninety minutes in studio or on location. Direction of figurine, sculpted light, and a small archive of fifteen rendered portraits.</p>
+        <a class="glink" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Hearth%20%28Family%29">Read the commission</a>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="commission cmsn--02">
+      <div class="commission__text">
+        <div class="commission__no">02 &nbsp;·&nbsp; Maternity</div>
+        <h3 class="commission__name"><strong>The</strong> <em>Becoming</em></h3>
+        <p class="commission__tag italiana">A composed portrait of the woman becoming a mother.</p>
+        <!-- REVIEW: deliverable counts "Twenty-five portraits, five prints" — confirm with Lidi -->
+        <p class="commission__lede">Three hours. Conversation, direction of figurine, drapery built on the dressform, atmospheric light layered slowly. Twenty-five rendered portraits and five fine art prints.</p>
+        <a class="glink" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Becoming%20%28Maternity%29">Read the commission</a>
+      </div>
+      <div class="commission__photo vignette commission__photo--reveal">
+        <picture><source srcset="/photos/maternity-red.avif" type="image/avif"><source srcset="/photos/maternity-red.webp" type="image/webp"><img src="/photos/maternity-red.jpg" alt="The Becoming — maternity portrait" loading="lazy" /></picture>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="commission cmsn--03">
+      <div class="commission__photo vignette commission__photo--reveal">
+        <picture><source srcset="/photos/newborn-mother.avif" type="image/avif"><source srcset="/photos/newborn-mother.webp" type="image/webp"><img src="/photos/newborn-mother.jpg" alt="First Light — newborn with mother" loading="lazy" /></picture>
+      </div>
+      <div class="commission__text">
+        <div class="commission__no">03 &nbsp;·&nbsp; Newborn</div>
+        <h3 class="commission__name"><strong>First</strong> <em>Light</em></h3>
+        <p class="commission__tag italiana">The first portrait of a new life, painted in light.</p>
+        <!-- REVIEW: First Light commission has no explicit deliverable count — confirm with Lidi -->
+        <p class="commission__lede">Within the first fourteen days. Drapery, weight, hands, breath. The mother is the centre — the child, the gravity that pulls the composition toward her.</p>
+        <a class="glink" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20First%20Light%20%28Newborn%29">Read the commission</a>
+      </div>
+    </article>
+
+    <!-- 04 -->
+    <article class="commission cmsn--04">
+      <div class="commission__text">
+        <div class="commission__no">04 &nbsp;·&nbsp; Motherhood</div>
+        <h3 class="commission__name"><strong>The</strong> <em>Mothering</em></h3>
+        <p class="commission__tag italiana">A portrait of the woman, in the act of mothering.</p>
+        <!-- REVIEW: deliverable counts "Twenty portraits, three prints" — confirm with Lidi -->
+        <p class="commission__lede">Studio or location. Mother and her small ones, composed slowly. Twenty rendered portraits and three fine art prints — the chapter mid-stride.</p>
+        <a class="glink" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Mothering%20%28Motherhood%29">Read the commission</a>
+      </div>
+      <div class="commission__photo vignette commission__photo--reveal">
+        <picture><source srcset="/photos/newborn-wing.avif" type="image/avif"><source srcset="/photos/newborn-wing.webp" type="image/webp"><img src="/photos/newborn-wing.jpg" alt="The Mothering — mother in winter landscape" loading="lazy" /></picture>
+      </div>
+    </article>
+
+    <!-- 05 FLAGSHIP -->
+    <article class="commission cmsn--05">
+      <div class="commission__photo vignette commission__photo--reveal" style="aspect-ratio:21/10">
+        <picture><source srcset="/photos/maternity-black.avif" type="image/avif"><source srcset="/photos/maternity-black.webp" type="image/webp"><img src="/photos/maternity-black.jpg" alt="The Triptych — flagship commission" loading="lazy" style="object-position:center 28%"/></picture>
+      </div>
+      <div class="commission__bottom">
+        <div class="lede-block">
+          <div class="commission__no" style="margin-bottom:18px">FLAGSHIP &nbsp;·&nbsp; LIMITED FOUR PER YEAR</div>
+          <h3 class="commission__name"><strong>The</strong> <em>Triptych</em></h3>
+          <p class="commission__tag italiana" style="margin-top:18px">Three sittings across the most extraordinary year. One archive.</p>
+        </div>
+        <div class="text-block">
+          <p class="commission__lede" style="max-width:50ch">The Becoming, First Light, and The Mothering — composed in sequence over twelve months and bound, at close, in an archival portfolio book. A body of work, not a session.</p>
+          <a class="glink glink--prominent glink--always" style="color:var(--gold);margin-top:28px" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Triptych">Inquire about the Triptych</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="section-divider"><hr class="ornament" /></div>
+
+<!-- ═══ 5 · ARCHIVE ═══ -->
+<section class="section" id="archive">
+  <div class="container">
+    <div class="archive__inner">
+      <div class="archive__photo vignette reveal">
+        <picture><source srcset="/photos/maternity-bw.avif" type="image/avif"><source srcset="/photos/maternity-bw.webp" type="image/webp"><img src="/photos/maternity-bw.jpg" alt="Archival sitting — The Becoming, Spring MMXXVI" loading="lazy"/></picture>
+      </div>
+      <div class="archive__text">
+        <div class="archive__eyebrow eyebrow gold reveal">FROM THE ARCHIVE · A RECENT SITTING</div>
+        <div class="archive__rule reveal reveal-d2"></div>
+        <blockquote class="archive__quote reveal reveal-d2">
+          <span class="qm">“</span>Lidi did not photograph me. <em>She composed me.</em> The print on our wall feels like an heirloom my daughter will inherit.<span class="qm">”</span>
+        </blockquote>
+        <div class="archive__attr reveal reveal-d3">
+          <span class="lmark" aria-hidden="true">L</span>
+          <!-- REVIEW: testimonial source "S. · Spring MMXXVI" — placeholder or real client initial? -->
+          <span class="eyebrow" style="opacity:.75">— S. &nbsp;·&nbsp; The Becoming &nbsp;·&nbsp; Spring MMXXVI</span>
+        </div>
+        <!-- REVIEW: archive page does not exist yet; anchor scrolls to #archive section on this page -->
+        <a class="glink reveal reveal-d4" href="#archive">Enter the archive →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr class="ornament" /></div>
+
+<!-- ═══ 6 · ABOUT ═══ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about__inner">
+      <div class="about__text">
+        <div class="eyebrow gold reveal">ABOUT THE STUDIO</div>
+        <h2 class="about__h2 reveal reveal-d2">She paints with light.<span class="it">She paints with oil.</span></h2>
+        <div class="about__body reveal reveal-d3">
+          <p><span class="dropcap">L</span>idi <span class="pron">/lee-dee/</span> is a fine art photographer based in Anchorage, Alaska. Twenty years behind the camera. A lifetime behind the easel.</p>
+          <p>Her practice as an oil painter informs every frame: composition is built, not captured; light is layered, not found; drapery is sculpted on the dressform before it ever meets the model. The photograph is the last gesture, not the first.</p>
+          <p>The studio composes a small number of commissions each season. <em>Maternity, newborn, motherhood, family</em> — each rendered as a portrait, not a session.</p>
+        </div>
+        <div class="about__cta reveal reveal-d4">
+          <!-- REVIEW: "studio note" long-form page does not exist yet — link target TBD -->
+          <a class="glink" href="#">Read the studio note →</a>
+        </div>
+      </div>
+      <div class="about__photo-col reveal reveal-d3">
+        <div class="about__photo vignette">
+          <picture><source srcset="/photos/painting-landscape.avif" type="image/avif"><source srcset="/photos/painting-landscape.webp" type="image/webp"><img src="/photos/painting-landscape.jpg" alt="Untitled (Landscape, Oil on Linen) — Lidi, 2024" loading="lazy"/></picture>
+        </div>
+        <div class="about__caption eyebrow" style="opacity:.7">Untitled (Landscape, Oil on Linen) · Lidi · 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr class="ornament" /></div>
+
+<!-- ═══ 7 · JOURNAL ═══ -->
+<section class="section journal" id="journal">
+  <div class="container">
+    <header class="journal__head">
+      <div>
+        <div class="eyebrow gold reveal">THE JOURNAL</div>
+        <h2 class="journal__h2 reveal reveal-d2"><em>Recent dispatches</em><br>from the atelier.</h2>
+      </div>
+      <!-- REVIEW: journal index depends on Ghost integration (currently broken — pg driver missing) -->
+      <a class="glink reveal reveal-d3" href="#">All entries →</a>
+    </header>
+
+    <div class="journal__grid">
+      <!-- REVIEW: 3 journal posts below are placeholder cards. Real posts published in Ghost will populate this section once Ghost integration is restored. Titles/dates/durations are sample copy. -->
+      <article class="post journal__feat reveal">
+        <a href="#" style="text-decoration:none;color:inherit">
+          <div class="post__photo vignette">
+            <picture><source srcset="/photos/maternity-classic.avif" type="image/avif"><source srcset="/photos/maternity-classic.webp" type="image/webp"><img src="/photos/maternity-classic.jpg" alt="On Composing a Sitting in Three Acts" loading="lazy"/></picture>
+          </div>
+          <div class="eyebrow gold post__eyebrow">STUDIO NOTES &nbsp;·&nbsp; 04.MMXXVI</div>
+          <h3 class="post__title"><em>On Composing a Sitting</em> in Three Acts.</h3>
+          <div class="post__meta">LIDI &nbsp;·&nbsp; 12 MIN &nbsp;·&nbsp; READ</div>
+        </a>
+      </article>
+
+      <div class="journal__side">
+        <article class="post reveal reveal-d2">
+          <a href="#" style="text-decoration:none;color:inherit">
+            <div class="post__photo post__photo--sm vignette">
+              <picture><source srcset="/photos/bts-dress.avif" type="image/avif"><source srcset="/photos/bts-dress.webp" type="image/webp"><img src="/photos/bts-dress.jpg" alt="Notes on Drapery, in Cold Light" loading="lazy"/></picture>
+            </div>
+            <div class="eyebrow gold post__eyebrow">PROCESS &nbsp;·&nbsp; 03.MMXXVI</div>
+            <h3 class="post__title post__title--sm"><em>Notes on Drapery,</em> in Cold Light.</h3>
+            <div class="post__meta">LIDI &nbsp;·&nbsp; 7 MIN &nbsp;·&nbsp; READ</div>
+          </a>
+        </article>
+        <article class="post reveal reveal-d3">
+          <a href="#" style="text-decoration:none;color:inherit">
+            <div class="post__photo post__photo--sm vignette">
+              <picture><source srcset="/photos/bts-shooting.avif" type="image/avif"><source srcset="/photos/bts-shooting.webp" type="image/webp"><img src="/photos/bts-shooting.jpg" alt="What an Oil Painter Looks for in a Camera" loading="lazy"/></picture>
+            </div>
+            <div class="eyebrow gold post__eyebrow">STUDIO NOTES &nbsp;·&nbsp; 02.MMXXVI</div>
+            <h3 class="post__title post__title--sm">What an <em>Oil Painter</em> Looks for in a Camera.</h3>
+            <div class="post__meta">LIDI &nbsp;·&nbsp; 9 MIN &nbsp;·&nbsp; READ</div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr class="ornament" /></div>
+
+<!-- ═══ 8 · NEWSLETTER ═══ -->
+<section class="section newsletter" id="newsletter">
+  <div class="container">
+    <div class="eyebrow gold reveal">THE STUDIO LETTER &nbsp;·&nbsp; QUARTERLY</div>
+    <div class="newsletter__rule reveal reveal-d2"></div>
+    <h2 class="newsletter__h2 reveal reveal-d2"><em>Quarterly notes</em><br>from the atelier.</h2>
+    <p class="newsletter__lede reveal reveal-d3">Four times a year — a slow letter. Studio notes, recent sittings, occasional thoughts on light, drapery, and the painter's method. No promotions. No urgency.</p>
+    <!-- REVIEW: newsletter form is non-functional. The submit handler shows "Thank you" but does NOT capture the email anywhere. Wire to Brevo/Mailchimp/etc. once SMTP is configured. -->
+    <form class="newsletter__form reveal reveal-d4" onsubmit="event.preventDefault();this.querySelector('.newsletter__btn').textContent='Thank you'">
+      <input class="newsletter__input" type="email" placeholder="your email address" aria-label="Email address" required />
+      <button class="newsletter__btn" type="submit">Subscribe</button>
+    </form>
+    <div class="newsletter__fine reveal reveal-d4">No tracking pixels &nbsp;·&nbsp; Unsubscribe at any time</div>
+  </div>
+</section>
+
+<!-- ═══ 9 · FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__col-1">
+            <div class="footer__brand">
+        <span class="wm__l">L</span><span class="wm__rest">IDI</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="studio">STUDIO</span>
+      </div>
+      <div class="footer__tag"><em>Painted, not posed.</em></div>
+    </div>
+    <div class="footer__col-2">
+      <div class="footer__col-head">STUDIO</div>
+      <ul>
+        <!-- REVIEW: "Work" footer link target TBD — likely #commissions or a future portfolio page -->
+        <li><a href="#">Work</a></li>
+        <li><a href="#commissions">Commissions</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#archive">Archive</a></li>
+      </ul>
+    </div>
+    <div class="footer__col-3">
+      <div class="footer__col-head">JOURNAL</div>
+      <ul>
+        <li><a href="#journal">Journal</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+        <!-- REVIEW: "Press" page does not exist yet — link target TBD -->
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer__col-4">
+      <div class="footer__col-head">CONTACT</div>
+      <ul>
+        <li><a href="mailto:lidi@lidi.studio">lidi@lidi.studio</a></li>
+        <!-- REVIEW: social handle "@lidi.studio" — confirm Instagram/social URL -->
+        <li><a href="#">@lidi.studio</a></li>
+        <!-- REVIEW: "Anchorage AK · JBER" — link to Google Maps? confirm whether JBER reference is intentional -->
+        <li><a href="#">Anchorage AK · JBER</a></li>
+        <li><a href="https://status.lidi.studio">status.lidi.studio</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__inner footer__bottom">
+    <div class="left eyebrow" style="grid-column: 2 / span 4">Privacy &nbsp;·&nbsp; Terms &nbsp;·&nbsp; © MMXXVI Lidi Studio</div>
+    <div class="center eyebrow" style="grid-column: 7 / span 3">Pronounced /LEE-dee/</div>
+    <div class="right eyebrow" style="grid-column: 11 / span 2">Anchorage &nbsp;·&nbsp; 61°13′N · 149°54′W</div>
+  </div>
+</footer>
+
+<script>
+  // Hero entrance
+  requestAnimationFrame(()=>document.getElementById('hero').classList.add('is-in'));
+
+  // Reveal observer
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal, .commission').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal, .commission').forEach(el => el.classList.add('is-in'));
+  }
+
+  // Burger
+  const burger = document.getElementById('burger');
+  const links = document.getElementById('navlinks');
+  if(burger){ burger.addEventListener('click', () => links.classList.toggle('is-open')); }
+  document.querySelectorAll('#navlinks a').forEach(a => a.addEventListener('click', () => links.classList.remove('is-open')));
+</script>
+
+</body>
+</html>
