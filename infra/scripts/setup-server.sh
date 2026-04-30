@@ -1,6 +1,6 @@
 #!/bin/bash
 # Lidi Studio — server bootstrap
-# RUN AS ROOT ONCE on a fresh Ubuntu 24.04 LTS Hetzner CPX21.
+# RUN AS ROOT ONCE on a fresh Ubuntu 22.04 LTS or newer Hetzner CPX21.
 # Idempotent: safe to re-run.
 #
 # Configurable via env:
@@ -45,7 +45,8 @@ step "2. Install required packages"
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ufw fail2ban unattended-upgrades \
   curl jq git rsync restic \
-  ca-certificates gnupg lsb-release
+  ca-certificates gnupg lsb-release \
+  iproute2
 
 # ──────────────── 3. Create lidi user ────────────────
 step "3. Create lidi user"
@@ -66,19 +67,19 @@ if [ -f /root/.ssh/authorized_keys ]; then
   chmod 600 "/home/$LIDI_USER/.ssh/authorized_keys"
 fi
 
-# ──────────────── 4. Harden SSH ────────────────
-step "4. Harden SSH"
-cat > /etc/ssh/sshd_config.d/99-lidi.conf <<EOF
-Port $SSH_PORT
-PermitRootLogin no
-PasswordAuthentication no
-PubkeyAuthentication yes
-AllowUsers $LIDI_USER
-EOF
-systemctl restart ssh
+# (a) Validate authorized_keys is non-empty before any SSH hardening.
+# An empty file would silently lock us out after the sshd restart below.
+if [ ! -s "/home/$LIDI_USER/.ssh/authorized_keys" ]; then
+  echo "FATAL: /home/$LIDI_USER/.ssh/authorized_keys is missing or empty."
+  echo "Refusing to harden SSH — would lock out all access."
+  exit 1
+fi
+echo "✓ authorized_keys present and non-empty for $LIDI_USER"
 
-# ──────────────── 5. Configure UFW ────────────────
-step "5. Configure UFW"
+# ──────────────── 4. Configure UFW ────────────────
+# (b) UFW configured BEFORE sshd restart so port $SSH_PORT is allowed
+# the moment sshd starts listening on it.
+step "4. Configure UFW"
 ufw --force reset
 ufw default deny incoming
 ufw default allow outgoing
@@ -86,6 +87,37 @@ ufw allow "$SSH_PORT/tcp"
 ufw allow 80/tcp
 ufw allow 443/tcp
 ufw --force enable
+
+# ──────────────── 5. Harden SSH ────────────────
+step "5. Harden SSH"
+cat > /etc/ssh/sshd_config.d/99-lidi.conf <<EOF
+Port $SSH_PORT
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+AllowUsers $LIDI_USER
+EOF
+
+# (c) Validate sshd config syntax BEFORE restart.
+# A broken config + restart = no more SSH access.
+if ! sshd -t; then
+  echo "FATAL: sshd config invalid. Aborting before restart."
+  exit 1
+fi
+echo "✓ sshd config syntax OK"
+
+systemctl restart ssh
+
+# (e) Verify sshd is actually listening on the new port after restart.
+# If this check fails, the current root session (port 22) is still alive
+# so the operator has a chance to recover before disconnecting.
+sleep 2
+if ! ss -tlnp 2>/dev/null | grep -q ":$SSH_PORT "; then
+  echo "FATAL: sshd is NOT listening on port $SSH_PORT after restart."
+  echo "Investigate via: journalctl -u ssh -n 50"
+  exit 1
+fi
+echo "✓ sshd is listening on port $SSH_PORT"
 
 # ──────────────── 6. Configure fail2ban ────────────────
 step "6. Configure fail2ban"
@@ -126,9 +158,12 @@ fi
 usermod -aG docker "$LIDI_USER"
 
 # ──────────────── 10. Create app directories ────────────────
+# (d) Multi-tenant ready paths (matches ADR-003):
+#   /opt/shared — shared infra (compose, scripts, .env)
+#   /opt/sites  — per-tenant static/app artifacts (e.g. /opt/sites/lidi-studio/dist)
 step "10. Create app directories"
-mkdir -p /opt/lidi /var/log/lidi /var/lib/lidi
-chown -R "$LIDI_USER:$LIDI_USER" /opt/lidi /var/log/lidi /var/lib/lidi
+mkdir -p /opt/shared /opt/sites /var/log/lidi /var/lib/lidi
+chown -R "$LIDI_USER:$LIDI_USER" /opt/shared /opt/sites /var/log/lidi /var/lib/lidi
 
 # ──────────────── Done ────────────────
 echo ""
@@ -140,12 +175,12 @@ echo "Next steps:"
 echo "  1. Verify SSH on port $SSH_PORT works for user $LIDI_USER:"
 echo "     ssh -p $SSH_PORT $LIDI_USER@<server-ip>"
 echo "  2. Disable any open root SSH session"
-echo "  3. Clone repo to /opt/lidi:"
+echo "  3. Clone repo to /opt/shared:"
 echo "     su - $LIDI_USER"
-echo "     cd /opt/lidi && git clone https://github.com/renoirlucena/lidi-studio.git ."
-echo "  4. Create /opt/lidi/.env from .env.example, fill in real values"
+echo "     cd /opt/shared && git clone https://github.com/renoirlucena/lidi-studio.git ."
+echo "  4. Create /opt/shared/.env from .env.example, fill in real values"
 echo "  5. Bring stack up:"
-echo "     cd /opt/lidi/infra && docker compose up -d"
+echo "     cd /opt/shared/infra && docker compose up -d"
 echo "  6. Configure Hetzner Cloud Firewall (Cloudflare IPs only on 80/443)"
 echo "  7. Configure Cloudflare DNS records (see /infra/server-info.md)"
 echo ""
