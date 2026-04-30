@@ -15,68 +15,77 @@
 </script>
 
 <main>
-  <section class="page-hero">
-    <div class="container">
-      <div class="page-hero__eyebrow">PORTFOLIO</div>
-      <h1 class="page-hero__h1">A selection of recent work.</h1>
-      <p class="page-hero__lede">Composed in the painter's tradition — slow light, considered wardrobe, careful attention. Each commission below is a finished session.</p>
-    </div>
+  <section class="page-hero-luxe">
+    <span class="eyebrow-luxe reveal">Portfolio</span>
+    <h1 class="h1-luxe reveal reveal-d2">A selection of recent work.</h1>
+    <p class="lede-luxe reveal reveal-d3">Each commission below is a finished session — composed in the painter's tradition.</p>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="eyebrow gold">MATERNITY</div>
-      <p class="prose" style="margin: 12px 0 24px;">The woman becoming a mother, in her own light.</p>
-      <div class="gallery">
-        <picture><source srcset="/photos/maternity-red.avif" type="image/avif"><source srcset="/photos/maternity-red.webp" type="image/webp"><img src="/photos/maternity-red.jpg" alt="Fine art maternity portrait with painterly red gown, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/maternity-classic.avif" type="image/avif"><source srcset="/photos/maternity-classic.webp" type="image/webp"><img src="/photos/maternity-classic.jpg" alt="Editorial maternity portrait in cold light, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/maternity-bw.avif" type="image/avif"><source srcset="/photos/maternity-bw.webp" type="image/webp"><img src="/photos/maternity-bw.jpg" alt="Black and white fine art maternity portrait, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/maternity-veil.avif" type="image/avif"><source srcset="/photos/maternity-veil.webp" type="image/webp"><img src="/photos/maternity-veil.jpg" alt="Maternity portrait with sculpted drapery and veil, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/maternity-black.avif" type="image/avif"><source srcset="/photos/maternity-black.webp" type="image/webp"><img src="/photos/maternity-black.jpg" alt="Painterly maternity portrait in dark register, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
+  <nav class="filter-bar" aria-label="Portfolio category filter">
+    <div class="filter-bar__inner">
+      <button class="filter filter--active" data-filter="all" type="button">All</button>
+      <button class="filter" data-filter="maternity" type="button">Maternity</button>
+      <button class="filter" data-filter="newborn" type="button">Newborn</button>
+      <button class="filter" data-filter="family" type="button">Family</button>
+      <button class="filter" data-filter="motherhood" type="button">Motherhood</button>
+    </div>
+  </nav>
+
+  <section class="section-luxe section-luxe--full-bleed">
+    <div class="portfolio-gallery">
+      <a class="gallery__item gallery__item--full reveal" data-category="maternity" href="/{{LANG}}/sessions#becoming">
+        <div class="photo-luxe"><picture><source srcset="/photos/maternity-red.avif" type="image/avif"><source srcset="/photos/maternity-red.webp" type="image/webp"><img src="/photos/maternity-red.jpg" alt="Fine art maternity portrait with painterly red gown, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </a>
+      <div class="gallery__item gallery__item--default reveal" data-category="maternity">
+        <div class="photo-luxe"><picture><source srcset="/photos/maternity-classic.avif" type="image/avif"><source srcset="/photos/maternity-classic.webp" type="image/webp"><img src="/photos/maternity-classic.jpg" alt="Editorial maternity portrait in cold light, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d2" data-category="maternity">
+        <div class="photo-luxe"><picture><source srcset="/photos/maternity-bw.avif" type="image/avif"><source srcset="/photos/maternity-bw.webp" type="image/webp"><img src="/photos/maternity-bw.jpg" alt="Black and white fine art maternity portrait, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d3" data-category="maternity">
+        <div class="photo-luxe"><picture><source srcset="/photos/maternity-veil.avif" type="image/avif"><source srcset="/photos/maternity-veil.webp" type="image/webp"><img src="/photos/maternity-veil.jpg" alt="Maternity portrait with sculpted drapery and veil, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d4" data-category="maternity">
+        <div class="photo-luxe"><picture><source srcset="/photos/maternity-black.avif" type="image/avif"><source srcset="/photos/maternity-black.webp" type="image/webp"><img src="/photos/maternity-black.jpg" alt="Painterly maternity portrait in dark register, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+
+      <div class="gallery__item gallery__item--wide reveal" data-category="newborn">
+        <div class="photo-luxe"><picture><source srcset="/photos/newborn-mother.avif" type="image/avif"><source srcset="/photos/newborn-mother.webp" type="image/webp"><img src="/photos/newborn-mother.jpg" alt="Fine art newborn portrait with mother in soft light, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d2" data-category="newborn">
+        <div class="photo-luxe"><picture><source srcset="/photos/newborn-wing.avif" type="image/avif"><source srcset="/photos/newborn-wing.webp" type="image/webp"><img src="/photos/newborn-wing.jpg" alt="Editorial newborn portrait in winter landscape, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d3" data-category="newborn">
+        <div class="photo-luxe"><picture><source srcset="/photos/newborn-hands.avif" type="image/avif"><source srcset="/photos/newborn-hands.webp" type="image/webp"><img src="/photos/newborn-hands.jpg" alt="Heirloom newborn portrait detail of hands, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d4" data-category="newborn">
+        <div class="photo-luxe"><picture><source srcset="/photos/newborn-wrap.avif" type="image/avif"><source srcset="/photos/newborn-wrap.webp" type="image/webp"><img src="/photos/newborn-wrap.jpg" alt="Newborn portrait wrapped in cream linen, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d5" data-category="newborn">
+        <div class="photo-luxe"><picture><source srcset="/photos/newborn-dad.avif" type="image/avif"><source srcset="/photos/newborn-dad.webp" type="image/webp"><img src="/photos/newborn-dad.jpg" alt="Newborn portrait with father in painterly light, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+
+      <div class="gallery__item gallery__item--wide reveal" data-category="family">
+        <div class="photo-luxe"><picture><source srcset="/photos/newborn-family-beige.avif" type="image/avif"><source srcset="/photos/newborn-family-beige.webp" type="image/webp"><img src="/photos/newborn-family-beige.jpg" alt="Composed family portrait in painter's tradition, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+
+      <div class="gallery__item gallery__item--default reveal" data-category="motherhood">
+        <div class="photo-luxe"><picture><source srcset="/photos/bts-dress.avif" type="image/avif"><source srcset="/photos/bts-dress.webp" type="image/webp"><img src="/photos/bts-dress.jpg" alt="Behind the scenes — Lidi shaping drapery for a session, Anchorage studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d2" data-category="motherhood">
+        <div class="photo-luxe"><picture><source srcset="/photos/bts-shooting.avif" type="image/avif"><source srcset="/photos/bts-shooting.webp" type="image/webp"><img src="/photos/bts-shooting.jpg" alt="Fine art portrait session in progress, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+      </div>
+      <div class="gallery__item gallery__item--default reveal reveal-d3" data-category="motherhood">
+        <div class="photo-luxe"><picture><source srcset="/photos/bts-directing.avif" type="image/avif"><source srcset="/photos/bts-directing.webp" type="image/webp"><img src="/photos/bts-directing.jpg" alt="Lidi directing a fine art portrait session, Anchorage Alaska" loading="lazy" /></picture></div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="eyebrow gold">NEWBORN</div>
-      <p class="prose" style="margin: 12px 0 24px;">The first portrait of a new life.</p>
-      <div class="gallery">
-        <picture><source srcset="/photos/newborn-mother.avif" type="image/avif"><source srcset="/photos/newborn-mother.webp" type="image/webp"><img src="/photos/newborn-mother.jpg" alt="Fine art newborn portrait with mother in soft light, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/newborn-wing.avif" type="image/avif"><source srcset="/photos/newborn-wing.webp" type="image/webp"><img src="/photos/newborn-wing.jpg" alt="Editorial newborn portrait in winter landscape, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/newborn-hands.avif" type="image/avif"><source srcset="/photos/newborn-hands.webp" type="image/webp"><img src="/photos/newborn-hands.jpg" alt="Heirloom newborn portrait detail of hands, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/newborn-wrap.avif" type="image/avif"><source srcset="/photos/newborn-wrap.webp" type="image/webp"><img src="/photos/newborn-wrap.jpg" alt="Newborn portrait wrapped in cream linen, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/newborn-dad.avif" type="image/avif"><source srcset="/photos/newborn-dad.webp" type="image/webp"><img src="/photos/newborn-dad.jpg" alt="Newborn portrait with father in painterly light, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="eyebrow gold">FAMILY</div>
-      <p class="prose" style="margin: 12px 0 24px;">Composed family portraits, painted not snapped.</p>
-      <div class="gallery">
-        <picture><source srcset="/photos/newborn-family-beige.avif" type="image/avif"><source srcset="/photos/newborn-family-beige.webp" type="image/webp"><img src="/photos/newborn-family-beige.jpg" alt="Composed family portrait in painter's tradition, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="eyebrow gold">MOTHERHOOD</div>
-      <p class="prose" style="margin: 12px 0 24px;">The act of mothering, observed slowly.</p>
-      <div class="gallery">
-        <picture><source srcset="/photos/bts-dress.avif" type="image/avif"><source srcset="/photos/bts-dress.webp" type="image/webp"><img src="/photos/bts-dress.jpg" alt="Behind the scenes — Lidi shaping drapery for a session, Anchorage studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/bts-shooting.avif" type="image/avif"><source srcset="/photos/bts-shooting.webp" type="image/webp"><img src="/photos/bts-shooting.jpg" alt="Fine art portrait session in progress, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture>
-        <picture><source srcset="/photos/bts-directing.avif" type="image/avif"><source srcset="/photos/bts-directing.webp" type="image/webp"><img src="/photos/bts-directing.jpg" alt="Lidi directing a fine art portrait session, Anchorage Alaska" loading="lazy" /></picture>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container" style="text-align: center;">
-      <p class="prose" style="margin: 0 auto 24px;">If something here resonates, let's talk about your session.</p>
-      <a class="glink glink--prominent glink--always" style="color:var(--gold)" href="/{{LANG}}/inquire">Inquire about a session →</a>
+  <section class="cta-band">
+    <div class="container-narrow">
+      <h2 class="h2-luxe reveal">If something here resonates,</h2>
+      <p class="lede-luxe reveal reveal-d2" style="margin-top: var(--s-2); margin-bottom: var(--s-4);">let's talk about your session.</p>
+      <div class="reveal reveal-d3"><a class="cta-luxe" href="/{{LANG}}/inquire">Begin a conversation</a></div>
     </div>
   </section>
 </main>

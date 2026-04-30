@@ -7,109 +7,76 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Do you publish session prices?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Each session is custom. Once I understand what you're hoping for — maternity, newborn, family, or a sequence — I'll send current investment levels and availability." } },
-      { "@type": "Question", "name": "Where do you photograph?",
-        "acceptedAnswer": { "@type": "Answer", "text": "My studio is in Anchorage. I also work on location across South-Central Alaska — Eagle River, Palmer, Wasilla, Girdwood." } },
-      { "@type": "Question", "name": "When should I book a maternity session?",
-        "acceptedAnswer": { "@type": "Answer", "text": "For maternity, late second trimester is the sweet spot. For newborn, within the first two weeks. Family and motherhood: any time. Inquire early — calendars fill up." } },
-      { "@type": "Question", "name": "What should I wear?",
-        "acceptedAnswer": { "@type": "Answer", "text": "We choose your wardrobe together. I have a small studio collection of dresses and drapery, and I'll guide you on what to bring." } },
-      { "@type": "Question", "name": "How long does a session take?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It varies by session type. We talk first, work slowly, take the time the work needs. I'll share specifics when we connect." } },
-      { "@type": "Question", "name": "How long until I receive my photos?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Inquire for current delivery timeline. Each portrait is composed and finished individually, which takes time." } },
-      { "@type": "Question", "name": "Do you photograph weddings or commercial work?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Not currently. Lidi Studio is dedicated to portraiture — maternity, motherhood, newborn, family." } },
-      { "@type": "Question", "name": "Do you offer prints?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Fine art prints, archival albums, and framed work are available. We discuss this when you receive your gallery." } }
+      { "@type": "Question", "name": "Do you publish session prices?", "acceptedAnswer": { "@type": "Answer", "text": "Each session is custom. Once I understand what you're hoping for — maternity, newborn, family, or a sequence — I'll send current investment levels and availability." } },
+      { "@type": "Question", "name": "Where do you photograph?", "acceptedAnswer": { "@type": "Answer", "text": "My studio is in Anchorage. I also work on location across South-Central Alaska — Eagle River, Palmer, Wasilla, Girdwood." } },
+      { "@type": "Question", "name": "When should I book a maternity session?", "acceptedAnswer": { "@type": "Answer", "text": "For maternity, late second trimester is the sweet spot. For newborn, within the first two weeks. Family and motherhood: any time. Inquire early — calendars fill up." } },
+      { "@type": "Question", "name": "What should I wear?", "acceptedAnswer": { "@type": "Answer", "text": "We choose your wardrobe together. I have a small studio collection of dresses and drapery, and I'll guide you on what to bring." } },
+      { "@type": "Question", "name": "How long does a session take?", "acceptedAnswer": { "@type": "Answer", "text": "It varies by session type. We talk first, work slowly, take the time the work needs. I'll share specifics when we connect." } },
+      { "@type": "Question", "name": "How long until I receive my photos?", "acceptedAnswer": { "@type": "Answer", "text": "Inquire for current delivery timeline. Each portrait is composed and finished individually, which takes time." } },
+      { "@type": "Question", "name": "Do you photograph weddings or commercial work?", "acceptedAnswer": { "@type": "Answer", "text": "Not currently. Lidi Studio is dedicated to portraiture — maternity, motherhood, newborn, family." } },
+      { "@type": "Question", "name": "Do you offer prints?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Fine art prints, archival albums, and framed work are available. We discuss this when you receive your gallery." } }
     ]
   }
 }
 </script>
 
 <main>
-  <section class="page-hero">
-    <div class="container">
-      <div class="page-hero__eyebrow">INQUIRE</div>
-      <h1 class="page-hero__h1">Tell me what you have in mind.</h1>
-      <p class="page-hero__lede">Each session is custom. Send a note about you, the chapter you're in, and the kind of portrait you're imagining.</p>
-    </div>
+  <section class="page-hero-luxe">
+    <span class="eyebrow-luxe reveal">Inquire</span>
+    <h1 class="h1-luxe reveal reveal-d2">Tell me what you have in mind.</h1>
+    <p class="lede-luxe reveal reveal-d3">Each session is custom. Send a note about you, the chapter you're in, and the kind of portrait you're imagining.</p>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <form class="inquire-form" action="mailto:lidi@lidi.studio" method="post" enctype="text/plain">
-        <div>
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required />
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        <div>
-          <label for="session">Session type</label>
-          <select id="session" name="session">
-            <option>Maternity — The Becoming</option>
-            <option>Newborn — First Light</option>
-            <option>Family — The Hearth</option>
-            <option>Motherhood — The Mothering</option>
-            <option>The Triptych (sequence)</option>
-            <option>Other / not sure yet</option>
-          </select>
-        </div>
-        <div>
-          <label for="when">Estimated date</label>
-          <input type="text" id="when" name="when" placeholder="e.g. late August 2026, or your due date" />
-        </div>
-        <div>
-          <label for="story">Tell me about you</label>
-          <textarea id="story" name="story" placeholder="What chapter are you in? What kind of portrait are you imagining?" required></textarea>
-        </div>
-        <div><button type="submit">Send inquiry</button></div>
-        <!-- REVIEW: form is mailto: until Brevo SMTP is wired. Switch to server endpoint when SMTP is live. -->
-      </form>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="eyebrow gold" style="margin-bottom: 24px;">FREQUENTLY ASKED</div>
-      <div class="faq">
-        <details>
-          <summary>Do you publish session prices?</summary>
-          <p>Each session is custom. Once I understand what you're hoping for — maternity, newborn, family, or a sequence — I'll send current investment levels and availability.</p>
-        </details>
-        <details>
-          <summary>Where do you photograph?</summary>
-          <p>My studio is in Anchorage. I also work on location across South-Central Alaska — Eagle River, Palmer, Wasilla, Girdwood.</p>
-        </details>
-        <details>
-          <summary>When should I book a maternity session?</summary>
-          <p>For maternity, late second trimester is the sweet spot. For newborn, within the first two weeks. Family and motherhood: any time. Inquire early — calendars fill up.</p>
-        </details>
-        <details>
-          <summary>What should I wear?</summary>
-          <p>We choose your wardrobe together. I have a small studio collection of dresses and drapery, and I'll guide you on what to bring.</p>
-        </details>
-        <details>
-          <summary>How long does a session take?</summary>
-          <p>It varies by session type. We talk first, work slowly, take the time the work needs. I'll share specifics when we connect.</p>
-        </details>
-        <details>
-          <summary>How long until I receive my photos?</summary>
-          <p>Inquire for current delivery timeline. Each portrait is composed and finished individually, which takes time.</p>
-        </details>
-        <details>
-          <summary>Do you photograph weddings or commercial work?</summary>
-          <p>Not currently. Lidi Studio is dedicated to portraiture — maternity, motherhood, newborn, family.</p>
-        </details>
-        <details>
-          <summary>Do you offer prints?</summary>
-          <p>Yes. Fine art prints, archival albums, and framed work are available. We discuss this when you receive your gallery.</p>
-        </details>
+  <section class="section-luxe">
+    <form class="inquire-luxe reveal" action="mailto:lidi@lidi.studio" method="post" enctype="text/plain">
+      <div class="inquire-luxe__field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
       </div>
+      <div class="inquire-luxe__field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="inquire-luxe__field">
+        <label for="session">Session type</label>
+        <select id="session" name="session">
+          <option>Maternity — The Becoming</option>
+          <option>Newborn — First Light</option>
+          <option>Family — The Hearth</option>
+          <option>Motherhood — The Mothering</option>
+          <option>The Triptych (sequence)</option>
+          <option>Other / not sure yet</option>
+        </select>
+      </div>
+      <div class="inquire-luxe__field">
+        <label for="when">Estimated date</label>
+        <input type="text" id="when" name="when" placeholder="e.g. late August 2026, or your due date" />
+      </div>
+      <div class="inquire-luxe__field">
+        <label for="story">Tell me about you</label>
+        <textarea id="story" name="story" placeholder="What chapter are you in? What kind of portrait are you imagining?" required></textarea>
+      </div>
+      <div class="inquire-luxe__submit">
+        <button class="cta-luxe" type="submit">Send inquiry</button>
+      </div>
+      <!-- REVIEW: form is mailto: until Brevo SMTP is wired. Switch to server endpoint when SMTP is live. -->
+    </form>
+  </section>
+
+  <section class="section-luxe">
+    <div class="container-narrow text-center">
+      <span class="eyebrow-luxe reveal">Frequently asked</span>
+      <h2 class="h2-luxe reveal reveal-d2" style="margin-top: var(--s-2); margin-bottom: var(--s-4);">A few common questions.</h2>
+    </div>
+    <div class="faq-luxe reveal reveal-d3">
+      <details><summary>Do you publish session prices?</summary><p>Each session is custom. Once I understand what you're hoping for — maternity, newborn, family, or a sequence — I'll send current investment levels and availability.</p></details>
+      <details><summary>Where do you photograph?</summary><p>My studio is in Anchorage. I also work on location across South-Central Alaska — Eagle River, Palmer, Wasilla, Girdwood.</p></details>
+      <details><summary>When should I book a maternity session?</summary><p>For maternity, late second trimester is the sweet spot. For newborn, within the first two weeks. Family and motherhood: any time. Inquire early — calendars fill up.</p></details>
+      <details><summary>What should I wear?</summary><p>We choose your wardrobe together. I have a small studio collection of dresses and drapery, and I'll guide you on what to bring.</p></details>
+      <details><summary>How long does a session take?</summary><p>It varies by session type. We talk first, work slowly, take the time the work needs. I'll share specifics when we connect.</p></details>
+      <details><summary>How long until I receive my photos?</summary><p>Inquire for current delivery timeline. Each portrait is composed and finished individually, which takes time.</p></details>
+      <details><summary>Do you photograph weddings or commercial work?</summary><p>Not currently. Lidi Studio is dedicated to portraiture — maternity, motherhood, newborn, family.</p></details>
+      <details><summary>Do you offer prints?</summary><p>Yes. Fine art prints, archival albums, and framed work are available. We discuss this when you receive your gallery.</p></details>
     </div>
   </section>
 </main>

@@ -6,92 +6,104 @@
   "schema": {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Service",
-        "@id": "https://lidi.studio/en/sessions#hearth",
-        "name": "The Hearth — Family Portrait",
-        "provider": { "@id": "https://lidi.studio/#business" },
-        "areaServed": { "@type": "AdministrativeArea", "name": "Anchorage, Alaska" },
-        "category": "Fine Art Family Photography",
-        "description": "A composed family portrait, made the way a painter would arrange a sitting."
-      },
-      {
-        "@type": "Service",
-        "@id": "https://lidi.studio/en/sessions#becoming",
-        "name": "The Becoming — Maternity Portrait",
-        "provider": { "@id": "https://lidi.studio/#business" },
-        "areaServed": { "@type": "AdministrativeArea", "name": "Anchorage, Alaska" },
-        "category": "Fine Art Maternity Photography",
-        "description": "A studio session for the woman becoming a mother."
-      },
-      {
-        "@type": "Service",
-        "@id": "https://lidi.studio/en/sessions#first-light",
-        "name": "First Light — Newborn Portrait",
-        "provider": { "@id": "https://lidi.studio/#business" },
-        "areaServed": { "@type": "AdministrativeArea", "name": "Anchorage, Alaska" },
-        "category": "Fine Art Newborn Photography",
-        "description": "The first portrait of a new life, photographed within the first weeks."
-      },
-      {
-        "@type": "Service",
-        "@id": "https://lidi.studio/en/sessions#mothering",
-        "name": "The Mothering — Motherhood Portrait",
-        "provider": { "@id": "https://lidi.studio/#business" },
-        "areaServed": { "@type": "AdministrativeArea", "name": "Anchorage, Alaska" },
-        "category": "Fine Art Motherhood Photography",
-        "description": "A portrait of the woman with her small ones — the chapter mid-stride."
-      }
+      { "@type": "Service", "@id": "https://lidi.studio/en/sessions#hearth", "name": "The Hearth — Family Portrait", "provider": { "@id": "https://lidi.studio/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Anchorage, Alaska" }, "category": "Fine Art Family Photography", "description": "A composed family portrait, made the way a painter would arrange a sitting." },
+      { "@type": "Service", "@id": "https://lidi.studio/en/sessions#becoming", "name": "The Becoming — Maternity Portrait", "provider": { "@id": "https://lidi.studio/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Anchorage, Alaska" }, "category": "Fine Art Maternity Photography", "description": "A studio session for the woman becoming a mother." },
+      { "@type": "Service", "@id": "https://lidi.studio/en/sessions#first-light", "name": "First Light — Newborn Portrait", "provider": { "@id": "https://lidi.studio/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Anchorage, Alaska" }, "category": "Fine Art Newborn Photography", "description": "The first portrait of a new life, photographed within the first weeks." },
+      { "@type": "Service", "@id": "https://lidi.studio/en/sessions#mothering", "name": "The Mothering — Motherhood Portrait", "provider": { "@id": "https://lidi.studio/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Anchorage, Alaska" }, "category": "Fine Art Motherhood Photography", "description": "A portrait of the woman with her small ones — the chapter mid-stride." }
     ]
   }
 }
 </script>
 
 <main>
-  <section class="page-hero">
-    <div class="container">
-      <div class="page-hero__eyebrow">SESSIONS</div>
-      <h1 class="page-hero__h1">Four ways of working.</h1>
-      <p class="page-hero__lede">Each composed for a chapter of becoming. Inquire for current investment levels and availability — every session is custom.</p>
-    </div>
+  <section class="page-hero-luxe">
+    <span class="eyebrow-luxe reveal">Sessions</span>
+    <h1 class="h1-luxe reveal reveal-d2">Four ways of working.</h1>
+    <p class="lede-luxe reveal reveal-d3">Each composed for a chapter of becoming. Inquire for current investment levels and availability — every session is custom.</p>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <article class="prose" id="hearth">
-        <div class="eyebrow gold">01 · FAMILY</div>
-        <h2><em>The Hearth</em></h2>
+  <article class="commission-luxe" id="hearth">
+    <span class="eyebrow-luxe commission-luxe__num reveal">01 — Family</span>
+    <div class="commission-luxe__photo reveal reveal-d2">
+      <div class="photo-luxe"><picture><source srcset="/photos/newborn-family-beige.avif" type="image/avif"><source srcset="/photos/newborn-family-beige.webp" type="image/webp"><img src="/photos/newborn-family-beige.jpg" alt="Composed family portrait in painter's tradition, Anchorage Alaska — Lidi Studio" loading="lazy" /></picture></div>
+    </div>
+    <h2 class="h1-luxe commission-luxe__title reveal reveal-d3"><em>The Hearth</em></h2>
+    <p class="commission-luxe__tag reveal reveal-d4">A composed family portrait, in the painter's tradition.</p>
+    <div class="commission-luxe__body reveal reveal-d5">
+      <div class="prose-luxe">
         <p>A composed family portrait, made the way a painter would arrange a sitting. We choose your wardrobe together, then I shape the light around you. The result: a portrait you'll want to live with.</p>
-        <p><a href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Hearth%20%28Family%29">Inquire about The Hearth →</a></p>
-      </article>
-
-      <article class="prose" id="becoming" style="margin-top: clamp(56px, 8vh, 96px);">
-        <div class="eyebrow gold">02 · MATERNITY</div>
-        <h2><em>The Becoming</em></h2>
-        <p>A studio session for the woman becoming a mother. We talk first. I shape the light, the drapery, your stillness. Each portrait composed with the patience of an oil painter.</p>
-        <p><a href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Becoming%20%28Maternity%29">Inquire about The Becoming →</a></p>
-      </article>
-
-      <article class="prose" id="first-light" style="margin-top: clamp(56px, 8vh, 96px);">
-        <div class="eyebrow gold">03 · NEWBORN</div>
-        <h2><em>First Light</em></h2>
-        <p>The first portrait of a new life, photographed within the first weeks. Quiet light, careful hands, no props. Just the weight of someone new in your arms.</p>
-        <p><a href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20First%20Light%20%28Newborn%29">Inquire about First Light →</a></p>
-      </article>
-
-      <article class="prose" id="mothering" style="margin-top: clamp(56px, 8vh, 96px);">
-        <div class="eyebrow gold">04 · MOTHERHOOD</div>
-        <h2><em>The Mothering</em></h2>
-        <p>A portrait of you with your small ones — the chapter mid-stride. Studio or location. We compose slowly, the way you'd want to be remembered.</p>
-        <p><a href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Mothering%20%28Motherhood%29">Inquire about The Mothering →</a></p>
-      </article>
-
-      <article class="prose" id="triptych" style="margin-top: clamp(56px, 8vh, 96px); border-top: 1px solid color-mix(in oklab, var(--gold) 50%, transparent); padding-top: clamp(40px, 6vh, 64px);">
-        <div class="eyebrow gold">FLAGSHIP · LIMITED</div>
-        <h2><em>The Triptych</em></h2>
-        <p>The Becoming, First Light, and The Mothering — three sessions composed across a year. Bound together in a single archival portfolio. A body of work, not a session.</p>
-        <p><a href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Triptych">Inquire about The Triptych →</a></p>
-      </article>
+      </div>
     </div>
-  </section>
+    <div class="reveal reveal-d6">
+      <a class="cta-luxe cta-luxe--ghost" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Hearth%20%28Family%29">Inquire about The Hearth</a>
+    </div>
+  </article>
+
+  <article class="commission-luxe" id="becoming">
+    <span class="eyebrow-luxe commission-luxe__num reveal">02 — Maternity</span>
+    <div class="commission-luxe__photo reveal reveal-d2">
+      <div class="photo-luxe"><picture><source srcset="/photos/maternity-red.avif" type="image/avif"><source srcset="/photos/maternity-red.webp" type="image/webp"><img src="/photos/maternity-red.jpg" alt="Fine art maternity portrait, The Becoming — Anchorage Alaska Lidi Studio" loading="lazy" /></picture></div>
+    </div>
+    <h2 class="h1-luxe commission-luxe__title reveal reveal-d3"><em>The Becoming</em></h2>
+    <p class="commission-luxe__tag reveal reveal-d4">A composed portrait of the woman becoming a mother.</p>
+    <div class="commission-luxe__body reveal reveal-d5">
+      <div class="prose-luxe">
+        <p>A studio session for the woman becoming a mother. We talk first. I shape the light, the drapery, your stillness. Each portrait composed with the patience of an oil painter.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-d6">
+      <a class="cta-luxe cta-luxe--ghost" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Becoming%20%28Maternity%29">Inquire about The Becoming</a>
+    </div>
+  </article>
+
+  <article class="commission-luxe" id="first-light">
+    <span class="eyebrow-luxe commission-luxe__num reveal">03 — Newborn</span>
+    <div class="commission-luxe__photo reveal reveal-d2">
+      <div class="photo-luxe"><picture><source srcset="/photos/newborn-mother.avif" type="image/avif"><source srcset="/photos/newborn-mother.webp" type="image/webp"><img src="/photos/newborn-mother.jpg" alt="Fine art newborn portrait, First Light — Anchorage Alaska Lidi Studio" loading="lazy" /></picture></div>
+    </div>
+    <h2 class="h1-luxe commission-luxe__title reveal reveal-d3"><em>First Light</em></h2>
+    <p class="commission-luxe__tag reveal reveal-d4">The first portrait of a new life, painted in light.</p>
+    <div class="commission-luxe__body reveal reveal-d5">
+      <div class="prose-luxe">
+        <p>The first portrait of a new life, photographed within the first weeks. Quiet light, careful hands, no props. Just the weight of someone new in your arms.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-d6">
+      <a class="cta-luxe cta-luxe--ghost" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20First%20Light%20%28Newborn%29">Inquire about First Light</a>
+    </div>
+  </article>
+
+  <article class="commission-luxe" id="mothering">
+    <span class="eyebrow-luxe commission-luxe__num reveal">04 — Motherhood</span>
+    <div class="commission-luxe__photo reveal reveal-d2">
+      <div class="photo-luxe"><picture><source srcset="/photos/newborn-wing.avif" type="image/avif"><source srcset="/photos/newborn-wing.webp" type="image/webp"><img src="/photos/newborn-wing.jpg" alt="Fine art motherhood portrait, The Mothering — Anchorage Alaska Lidi Studio" loading="lazy" /></picture></div>
+    </div>
+    <h2 class="h1-luxe commission-luxe__title reveal reveal-d3"><em>The Mothering</em></h2>
+    <p class="commission-luxe__tag reveal reveal-d4">A portrait of the woman, in the act of mothering.</p>
+    <div class="commission-luxe__body reveal reveal-d5">
+      <div class="prose-luxe">
+        <p>A portrait of you with your small ones — the chapter mid-stride. Studio or location. We compose slowly, the way you'd want to be remembered.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-d6">
+      <a class="cta-luxe cta-luxe--ghost" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Mothering%20%28Motherhood%29">Inquire about The Mothering</a>
+    </div>
+  </article>
+
+  <article class="commission-luxe commission-luxe--triptych" id="triptych">
+    <span class="eyebrow-luxe commission-luxe__num reveal">Flagship · Limited</span>
+    <div class="commission-luxe__photo reveal reveal-d2">
+      <div class="photo-luxe"><picture><source srcset="/photos/maternity-black.avif" type="image/avif"><source srcset="/photos/maternity-black.webp" type="image/webp"><img src="/photos/maternity-black.jpg" alt="The Triptych flagship commission — Anchorage Alaska Lidi Studio" loading="lazy" /></picture></div>
+    </div>
+    <h2 class="h-display commission-luxe__title reveal reveal-d3" style="font-size: var(--fs-h1-luxe);"><em>The Triptych</em></h2>
+    <p class="commission-luxe__tag reveal reveal-d4">Three sittings across the most extraordinary year. One archive.</p>
+    <div class="commission-luxe__body reveal reveal-d5">
+      <div class="prose-luxe">
+        <p>The Becoming, First Light, and The Mothering — three sessions composed in sequence over twelve months. Bound together, at close, in a single archival portfolio. A body of work, not a session.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-d6">
+      <a class="cta-luxe" href="mailto:lidi@lidi.studio?subject=Inquiry%20%E2%80%94%20The%20Triptych">Inquire about The Triptych</a>
+    </div>
+  </article>
 </main>

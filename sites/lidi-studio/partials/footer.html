@@ -1,42 +1,44 @@
-<footer class="footer">
-  <div class="footer__inner">
-    <div class="footer__col-1">
-      <div class="footer__brand">
-        <span class="wm__l">L</span><span class="wm__rest">IDI</span>
-        <span class="dot" aria-hidden="true"></span>
-        <span class="studio">STUDIO</span>
-      </div>
-      <div class="footer__tag"><em>{{FOOTER_TAGLINE}}</em></div>
+<footer class="footer footer--v4">
+  <div class="footer__top">
+    <div class="footer__brand" aria-label="Lidi Studio">
+      <span class="footer__monogram-l">L</span>
+      <span class="footer__brand-dot" aria-hidden="true">·</span>
+      <span class="footer__studio">STUDIO</span>
     </div>
-    <div class="footer__col-2">
+    <div class="footer__tag"><em>{{FOOTER_TAGLINE}}</em></div>
+  </div>
+
+  <div class="footer__cols">
+    <div class="footer__col">
       <div class="footer__col-head">{{FOOTER_COL_STUDIO}}</div>
       <ul>
-        <li><a href="/{{LANG}}/portfolio">{{NAV_PORTFOLIO}}</a></li>
-        <li><a href="/{{LANG}}/sessions">{{NAV_SESSIONS}}</a></li>
-        <li><a href="/{{LANG}}/about">{{NAV_ABOUT}}</a></li>
+        <li><a class="footer__link" href="/{{LANG}}/portfolio">{{NAV_PORTFOLIO}}</a></li>
+        <li><a class="footer__link" href="/{{LANG}}/sessions">{{NAV_SESSIONS}}</a></li>
+        <li><a class="footer__link" href="/{{LANG}}/about">{{NAV_ABOUT}}</a></li>
       </ul>
     </div>
-    <div class="footer__col-3">
+    <div class="footer__col">
       <div class="footer__col-head">{{FOOTER_COL_STORIES}}</div>
       <ul>
-        <li><a href="/{{LANG}}/stories">{{NAV_STORIES}}</a></li>
-        <li><a href="/{{LANG}}/stories/why-painted-not-posed">{{FOOTER_LINK_METHOD}}</a></li>
-        <li><a href="/{{LANG}}/stories/notes-on-drapery-cold-light">{{FOOTER_LINK_DRAPERY}}</a></li>
+        <li><a class="footer__link" href="/{{LANG}}/stories">{{NAV_STORIES}}</a></li>
+        <li><a class="footer__link" href="/{{LANG}}/stories/why-painted-not-posed">{{FOOTER_LINK_METHOD}}</a></li>
+        <li><a class="footer__link" href="/{{LANG}}/stories/notes-on-drapery-cold-light">{{FOOTER_LINK_DRAPERY}}</a></li>
       </ul>
     </div>
-    <div class="footer__col-4">
+    <div class="footer__col">
       <div class="footer__col-head">{{FOOTER_COL_CONTACT}}</div>
       <ul>
-        <li><a href="mailto:lidi@lidi.studio">lidi@lidi.studio</a></li>
-        <li><a href="/{{LANG}}/inquire">{{FOOTER_LINK_INQUIRE}} →</a></li>
+        <li><a class="footer__link" href="mailto:lidi@lidi.studio">lidi@lidi.studio</a></li>
+        <li><a class="footer__link" href="/{{LANG}}/inquire">{{FOOTER_LINK_INQUIRE}} →</a></li>
         <!-- REVIEW: social handle "@lidi.studio" — confirm Instagram/social URL -->
-        <li><a href="#">@lidi.studio</a></li>
+        <li><a class="footer__link" href="#">@lidi.studio</a></li>
       </ul>
     </div>
   </div>
-  <div class="footer__inner footer__bottom">
-    <div class="left eyebrow" style="grid-column: 2 / span 4">{{FOOTER_LEGAL}}</div>
-    <div class="center eyebrow" style="grid-column: 7 / span 3">Pronounced /LEE-dee/</div>
-    <div class="right eyebrow" style="grid-column: 11 / span 2">Anchorage &nbsp;·&nbsp; Alaska</div>
+
+  <div class="footer__bottom">
+    <div class="footer__bottom-item eyebrow">{{FOOTER_LEGAL}}</div>
+    <div class="footer__bottom-item eyebrow">Pronounced /LEE-dee/</div>
+    <div class="footer__bottom-item eyebrow">Anchorage &nbsp;·&nbsp; Alaska</div>
   </div>
 </footer>

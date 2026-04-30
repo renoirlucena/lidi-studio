@@ -1,25 +1,153 @@
 <script>
-  // Hero entrance (only fires if hero element exists on this page)
-  requestAnimationFrame(()=>document.getElementById('hero')?.classList.add('is-in'));
+(() => {
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Reveal observer
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduce){
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal, .commission').forEach(el => io.observe(el));
-  } else {
-    document.querySelectorAll('.reveal, .commission').forEach(el => el.classList.add('is-in'));
+  // ════════════════════════════════════════
+  // 1. Custom cursor (desktop hover-capable only)
+  // ════════════════════════════════════════
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor';
+    document.body.appendChild(cursor);
+    document.body.classList.add('has-custom-cursor');
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+
+    const animate = () => {
+      cursorX += (mouseX - cursorX) * 0.18;
+      cursorY += (mouseY - cursorY) * 0.18;
+      cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+
+    const hoverSel = 'a, button, [role="button"], input[type="submit"], summary, .photo-luxe, .gallery__item';
+    document.querySelectorAll(hoverSel).forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('cursor--hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('cursor--hover'));
+    });
   }
 
-  // Burger menu
+  // ════════════════════════════════════════
+  // 2. Scroll reveal (sequenced)
+  // ════════════════════════════════════════
+  if (reduceMotion) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  // ════════════════════════════════════════
+  // 3. Hero parallax (homepage only)
+  // ════════════════════════════════════════
+  const heroPhoto = document.querySelector('.hero-v4__photo');
+  if (heroPhoto && !reduceMotion) {
+    let ticking = false;
+    const update = () => {
+      const offset = window.scrollY * 0.3;
+      heroPhoto.style.transform = `translate3d(0, ${offset}px, 0)`;
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+  }
+
+  // ════════════════════════════════════════
+  // 4. Hero text entrance (homepage only)
+  // ════════════════════════════════════════
+  const hero = document.querySelector('.hero-v4');
+  if (hero) {
+    requestAnimationFrame(() => hero.classList.add('is-loaded'));
+  }
+
+  // ════════════════════════════════════════
+  // 5. Portfolio filter
+  // ════════════════════════════════════════
+  const filters = document.querySelectorAll('.filter');
+  if (filters.length > 0) {
+    const items = document.querySelectorAll('.gallery__item');
+
+    const applyFilter = (cat) => {
+      items.forEach((item, i) => {
+        const matches = cat === 'all' || item.dataset.category === cat;
+        if (matches) {
+          item.style.display = '';
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'scale(1)';
+            }, i * 25);
+          });
+        } else {
+          item.style.opacity = '0';
+          item.style.transform = 'scale(.96)';
+          setTimeout(() => { item.style.display = 'none'; }, 280);
+        }
+      });
+    };
+
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.filter;
+        filters.forEach(f => f.classList.remove('filter--active'));
+        btn.classList.add('filter--active');
+        if (cat !== 'all') {
+          history.replaceState(null, '', `#${cat}`);
+        } else {
+          history.replaceState(null, '', window.location.pathname);
+        }
+        applyFilter(cat);
+      });
+    });
+
+    // Activate from URL hash
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const target = document.querySelector(`[data-filter="${hash}"]`);
+      if (target) target.click();
+    }
+  }
+
+  // ════════════════════════════════════════
+  // 6. Burger menu (mobile)
+  // ════════════════════════════════════════
   const burger = document.getElementById('burger');
-  const links = document.getElementById('navlinks');
-  if(burger){ burger.addEventListener('click', () => links.classList.toggle('is-open')); }
-  document.querySelectorAll('#navlinks a').forEach(a => a.addEventListener('click', () => links?.classList.remove('is-open')));
+  const navLinks = document.getElementById('navlinks');
+  if (burger && navLinks) {
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('is-active');
+      navLinks.classList.toggle('is-open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('is-open');
+        burger.classList.remove('is-active');
+      });
+    });
+  }
+
+  // ════════════════════════════════════════
+  // 7. Newsletter form placeholder (no Brevo wired yet)
+  // ════════════════════════════════════════
+  document.querySelectorAll('.newsletter__form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.newsletter__btn');
+      if (btn) { btn.textContent = 'Thank you'; btn.disabled = true; }
+    });
+  });
+})();
 </script>
 </body>
 </html>
