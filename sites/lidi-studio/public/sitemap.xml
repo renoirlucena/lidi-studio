@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://lidi.studio/</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://lidi.studio/en/</loc><lastmod>2026-04-30</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://lidi.studio/en/portfolio</loc><lastmod>2026-04-30</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lidi.studio/en/sessions</loc><lastmod>2026-04-30</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lidi.studio/en/stories</loc><lastmod>2026-04-30</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lidi.studio/en/stories/why-painted-not-posed</loc><lastmod>2026-04-30</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lidi.studio/en/stories/notes-on-drapery-cold-light</loc><lastmod>2026-04-30</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lidi.studio/en/stories/alaska-light-portrait-art</loc><lastmod>2026-04-30</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lidi.studio/en/about</loc><lastmod>2026-04-30</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lidi.studio/en/inquire</loc><lastmod>2026-04-30</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>
