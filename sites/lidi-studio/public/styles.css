@@ -663,38 +663,9 @@ img{ display:block; max-width:100%; }
 .footer__col-2{ grid-column: 7 / span 2; }
 .footer__col-3{ grid-column: 9 / span 2; }
 .footer__col-4{ grid-column: 11 / span 2; }
-.footer__brand{
-  font-family:'Cormorant Garamond', serif;
-  font-weight: 500;
-  font-size: 52px;
-  letter-spacing: .32em;
-  color: var(--cream);
-  margin-bottom: 18px;
-  display: inline-flex; align-items: baseline; gap: clamp(18px, 2vw, 26px);
-}
-.footer__brand .wm__l{
-  font-family:'Cormorant Garamond', serif;
-  font-weight: 500; font-style: normal;
-  font-size: 52px; line-height: 1;
-  letter-spacing: .32em;
-  color: var(--gold);
-}
-.footer__brand .wm__rest{
-  font-family:'Cormorant Garamond', serif;
-  font-weight: 500; font-style: normal;
-  font-size: 52px; line-height: 1;
-  letter-spacing: .32em;
-  color: var(--cream);
-}
-.footer__brand .dot{ width:5px; height:5px; border-radius:50%; background: var(--gold); align-self:center; }
-.footer__brand .studio{
-  font-family:'Cormorant Garamond', serif;
-  font-weight: 400;
-  font-size: 26px;
-  letter-spacing: .40em;
-  color: var(--cream);
-  align-self: center;
-}
+/* Footer monogram styles live in the .footer--v4 block below
+   (lines ~1733+). The v4 markup uses .footer__monogram-l / .footer__brand-dot
+   / .footer__studio — not the legacy .wm__l/.wm__rest/.dot/.studio. */
 .footer__tag{
   font-family:'Cormorant Garamond', serif;
   font-style: italic; font-weight: 300;
@@ -958,6 +929,11 @@ img{ display:block; max-width:100%; }
 :root{
   /* v4 colour additions */
   --gold-soft: #D4B888;
+  /* WCAG AA fix: --gold (#B89968) on --cream is 2.28:1.
+     --gold-deep is the version that passes 4.5:1 on cream backgrounds.
+     Use it for small text (eyebrow, form labels). Keep --gold for buttons,
+     hover states, and large display text where 3:1 is sufficient. */
+  --gold-deep: #7B6432;
   --gold-shadow: rgba(184, 153, 104, 0.18);
   --cream-deep: #EFE3D2;
 
@@ -1036,8 +1012,10 @@ img{ display:block; max-width:100%; }
   font-size: var(--fs-caption-luxe);
   letter-spacing: .42em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-deep);
 }
+/* On dark/charcoal backgrounds (e.g. footer), the eyebrow uses --gold-soft
+   instead of --gold-deep — see .footer--v4 .footer__bottom-item override. */
 .h-display{
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -1102,6 +1080,16 @@ img{ display:block; max-width:100%; }
   height: auto;
   transition: transform 800ms var(--ease-out);
   will-change: transform;
+}
+/* CLS fix (Sprint 2 audit B2/B3): when .photo-luxe declares an aspect-ratio
+   (inline style or via .story-card etc.), force the image to fill the
+   reserved box so the layout doesn't shift between empty placeholder and
+   loaded image. */
+.photo-luxe[style*="aspect-ratio"] img,
+.photo-luxe[style*="aspect-ratio"] picture img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .photo-luxe::after{
   content: '';
@@ -1170,6 +1158,46 @@ img{ display:block; max-width:100%; }
   border: 1px solid var(--gold);
 }
 .cta-luxe--ghost:hover{ background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
+
+/* ── Inline CTAs (Sprint 2: 12 strategic mid-page CTAs) ────── */
+.cta-inline{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 14px 28px;
+  background: var(--gold);
+  color: #2A2520;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  transition: background 400ms var(--ease-out), color 400ms var(--ease-out), border-color 400ms var(--ease-out);
+}
+.cta-inline:hover{
+  background: transparent;
+  color: var(--gold-deep);
+}
+.cta-inline:focus-visible{
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+}
+
+.cta-section{
+  text-align: center;
+  padding: var(--s-6) var(--s-3);
+  border-top: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+}
+.cta-section > p{
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: var(--fs-body-luxe);
+  color: var(--charcoal);
+  max-width: 48ch;
+  margin: 0 auto var(--s-3);
+}
 
 /* ── Reveal on scroll (replaces v2) ────────────────────────── */
 .reveal{
@@ -1273,6 +1301,18 @@ img{ display:block; max-width:100%; }
   z-index: 2;
   max-width: 1080px;
   width: 100%;
+}
+/* Sprint 2 audit A1: hero is now a real <h1> for SEO/a11y. The visual
+   styling lives on the inner .hero-v4__line spans, so the h1 itself
+   needs default browser styles stripped. */
+.hero-v4__title{
+  margin: 0;
+  padding: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
 }
 .hero-v4__line{
   display: block;
@@ -1611,7 +1651,7 @@ img{ display:block; max-width:100%; }
   font-size: 10px;
   letter-spacing: .42em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-deep);
   margin-bottom: var(--s-1);
 }
 .inquire-luxe__field input,

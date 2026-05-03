@@ -1,0 +1,81 @@
+name: Deploy lidi-studio site
+
+# Triggers on changes to the static site or this workflow itself.
+# Image optimization runs as part of the build so the dist/ artifact
+# is reproducible from sources alone.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sites/lidi-studio/**'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-lidi-studio
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install build deps
+        working-directory: sites/lidi-studio
+        run: npm install --no-save sharp
+
+      - name: Build static site
+        working-directory: sites/lidi-studio
+        run: |
+          # Re-run image optimization in CI so AVIF/WebP sources are
+          # always derived from public/photos/*.jpg in this commit.
+          # Skipped if photos/*.avif already present (idempotent).
+          if ls public/photos/*.avif >/dev/null 2>&1; then
+            echo "Optimized variants already present in repo, skipping re-optimization."
+          else
+            node scripts/optimize-images.mjs
+          fi
+          rm -rf dist
+          mkdir -p dist
+          cp -r public/* dist/
+          cp src/index.html dist/index.html
+          du -sh dist/
+          find dist -type f | wc -l
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 2222 -H 5.78.177.39 >> ~/.ssh/known_hosts
+
+      - name: Stage to /tmp via rsync
+        run: |
+          rsync -avz --delete -e "ssh -p 2222" \
+            sites/lidi-studio/dist/ \
+            lidi@5.78.177.39:/tmp/lidi-site/
+
+      - name: Replace astro_dist Docker volume
+        run: |
+          ssh -p 2222 lidi@5.78.177.39 "
+            docker run --rm \
+              -v infra_astro_dist:/dist \
+              -v /tmp/lidi-site:/source:ro \
+              alpine sh -c 'rm -rf /dist/* && cp -r /source/. /dist/'
+          "
+
+      - name: Verify HTTPS
+        run: |
+          STATUS=$(curl -sS -o /dev/null -w '%{http_code}' --connect-timeout 15 https://lidi.studio/)
+          echo "HTTPS status: $STATUS"
+          [ "$STATUS" = "200" ] || exit 1

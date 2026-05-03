@@ -125,12 +125,14 @@ function buildHreflang(slug, availableLangs) {
 }
 
 function buildLangToggle(currentLang, slug, availableLangs) {
-  // Hide toggle entirely if only one language exists for this page
+  // Hide the entire <span class="nav__lang"> wrapper when there's nothing to switch to.
+  // Otherwise empty markup ships to every page (Sprint 2 audit B6).
   if (availableLangs.length < 2) return '';
-  return availableLangs.map(l => {
+  const links = availableLangs.map(l => {
     const cls = l === currentLang ? 'nav__lang-link nav__lang-link--current' : 'nav__lang-link';
     return `<a class="${cls}" href="/${l}/${slug}">${l.toUpperCase()}</a>`;
   }).join(' · ');
+  return `<span class="nav__lang" aria-label="Language">${links}</span>`;
 }
 
 async function build() {
@@ -199,7 +201,7 @@ async function build() {
       HREFLANG_BLOCK: buildHreflang(slug, availableLangs),
       EXTRA_HEAD: meta.extra_head || '',
       SCHEMA_JSON_LD: schemaJsonLd,
-      LANG_TOGGLE: buildLangToggle(lang, slug, availableLangs),
+      LANG_TOGGLE_BLOCK: buildLangToggle(lang, slug, availableLangs),
       NAV_PORTFOLIO: t.nav_portfolio,
       NAV_SESSIONS: t.nav_sessions,
       NAV_STORIES: t.nav_stories,
