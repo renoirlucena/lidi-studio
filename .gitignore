@@ -123,3 +123,7 @@ test-results/
 # yarn.lock
 lucena-prod.env.*
 dist-v2/
+
+# Local-only photo source folder. Optimized output is committed under
+# sites/lidi-studio/public/photos/. Originals stay on operator's machine.
+newphotos/
