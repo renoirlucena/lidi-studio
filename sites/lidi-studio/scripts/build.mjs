@@ -37,6 +37,7 @@ const i18n = {
   en: {
     nav_portfolio: 'PORTFOLIO',
     nav_sessions: 'SESSIONS',
+    nav_investment: 'INVESTMENT',
     nav_stories: 'STORIES',
     nav_about: 'ABOUT',
     nav_inquire: 'INQUIRE',
@@ -52,6 +53,7 @@ const i18n = {
   pt: {
     nav_portfolio: 'PORTFÓLIO',
     nav_sessions: 'ENSAIOS',
+    nav_investment: 'VALORES',
     nav_stories: 'HISTÓRIAS',
     nav_about: 'SOBRE',
     nav_inquire: 'CONTATO',
@@ -67,6 +69,7 @@ const i18n = {
   es: {
     nav_portfolio: 'PORTAFOLIO',
     nav_sessions: 'SESIONES',
+    nav_investment: 'INVERSIÓN',
     nav_stories: 'HISTORIAS',
     nav_about: 'SOBRE',
     nav_inquire: 'CONSULTA',
@@ -204,6 +207,7 @@ async function build() {
       LANG_TOGGLE_BLOCK: buildLangToggle(lang, slug, availableLangs),
       NAV_PORTFOLIO: t.nav_portfolio,
       NAV_SESSIONS: t.nav_sessions,
+      NAV_INVESTMENT: t.nav_investment,
       NAV_STORIES: t.nav_stories,
       NAV_ABOUT: t.nav_about,
       NAV_INQUIRE: t.nav_inquire,

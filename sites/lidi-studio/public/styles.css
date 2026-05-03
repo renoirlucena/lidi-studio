@@ -1856,3 +1856,437 @@ img{ display:block; max-width:100%; }
   }
 }
 .footer--v4 .footer__bottom-item{ color: var(--cream); opacity: .6; }
+
+/* ═══════════════════════════════════════════════════════════
+   Investment page (Sprint 3 — replaces /en/sessions)
+   Reuses --cream, --gold, --gold-deep, --charcoal, --s-N tokens.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Founding Client strip */
+.investment-strip {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--gold) 8%, var(--cream)) 0%, var(--cream-deep) 100%);
+  border-top: 1px solid color-mix(in oklab, var(--gold) 25%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--gold) 25%, transparent);
+  padding: var(--s-4) var(--s-3);
+  text-align: center;
+}
+.investment-strip__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+}
+@media (min-width: 720px) {
+  .investment-strip__inner {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--s-5);
+  }
+}
+.investment-strip__badge .eyebrow-luxe {
+  color: var(--gold-deep);
+  letter-spacing: .5em;
+}
+.investment-strip__line {
+  font-family: 'EB Garamond', serif;
+  font-size: var(--fs-body-luxe);
+  color: var(--charcoal);
+  margin: 0;
+  max-width: 60ch;
+}
+.investment-strip__line strong {
+  color: var(--gold-deep);
+  font-weight: 500;
+}
+.investment-strip__remaining {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin: 0;
+}
+.investment-strip__count {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 500;
+  margin-right: 6px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Tabs */
+.investment-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent);
+}
+.investment-tab {
+  background: transparent;
+  border: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  padding: 14px 28px;
+  cursor: pointer;
+  transition: background 300ms var(--ease-out), color 300ms var(--ease-out);
+  border-right: 1px solid color-mix(in oklab, var(--gold) 30%, transparent);
+}
+.investment-tab:last-child { border-right: 0; }
+.investment-tab:hover { background: color-mix(in oklab, var(--gold) 10%, transparent); }
+.investment-tab.is-active {
+  background: var(--gold);
+  color: #2A2520;
+}
+.investment-tab:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 2px;
+}
+
+/* Panels */
+.investment-panel {
+  padding: 0 var(--s-3) var(--s-7);
+}
+.investment-panel[hidden] { display: none; }
+
+.investment-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
+}
+@media (min-width: 880px) {
+  .investment-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-5);
+    align-items: stretch;
+  }
+}
+
+/* Package cards */
+.investment-pkg {
+  position: relative;
+  background: color-mix(in oklab, var(--cream-deep) 50%, var(--cream));
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  padding: var(--s-5) var(--s-4);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.investment-pkg--featured {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--gold) 6%, var(--cream)) 0%, var(--cream-deep) 100%);
+  border-color: var(--gold);
+  border-width: 2px;
+}
+.investment-pkg__ribbon {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: #2A2520;
+  padding: 6px 18px;
+}
+.investment-pkg__ribbon .eyebrow-luxe {
+  color: #2A2520;
+  font-size: 9px;
+  letter-spacing: .35em;
+}
+
+.investment-pkg__head {
+  margin-bottom: var(--s-3);
+}
+.investment-pkg__head .eyebrow-luxe {
+  display: block;
+  margin-bottom: var(--s-1);
+}
+.investment-pkg__title {
+  margin: 0;
+  color: var(--charcoal);
+}
+
+.investment-pkg__price {
+  margin-bottom: var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+.investment-pkg__founding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.investment-pkg__price-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 4px;
+}
+.investment-pkg__price-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1;
+  color: var(--gold-deep);
+  letter-spacing: -.01em;
+}
+.investment-pkg__regular {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.investment-pkg__price-strike {
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;
+  color: var(--charcoal);
+  opacity: .55;
+  text-decoration: line-through;
+}
+
+.investment-pkg__tag {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: var(--fs-body-luxe);
+  color: var(--charcoal);
+  margin: 0 0 var(--s-3);
+  max-width: 36ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.investment-pkg__highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--s-4);
+  text-align: left;
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--charcoal);
+  max-width: 36ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.investment-pkg__highlights li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 4px;
+}
+.investment-pkg__highlights li::before {
+  content: '·';
+  position: absolute;
+  left: 6px;
+  top: 0;
+  color: var(--gold);
+  font-size: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 1;
+}
+
+.investment-pkg__cta {
+  margin-top: auto;
+  align-self: center;
+}
+
+/* Calculator */
+.investment-calc {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 var(--s-3);
+}
+.investment-calc__inner {
+  background: color-mix(in oklab, var(--cream-deep) 60%, var(--cream));
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  padding: var(--s-4);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
+}
+@media (min-width: 720px) {
+  .investment-calc__inner { grid-template-columns: 1fr 1fr 1fr; }
+}
+.investment-calc__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+.investment-calc__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: var(--s-1);
+}
+.investment-calc__select {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  background: var(--cream);
+  border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent);
+  color: var(--charcoal);
+}
+.investment-calc__addon {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'EB Garamond', serif;
+  font-size: 15px;
+  color: var(--charcoal);
+  cursor: pointer;
+  line-height: 1.4;
+}
+.investment-calc__addon input { margin-top: 4px; accent-color: var(--gold); }
+
+.investment-calc__total {
+  margin-top: var(--s-4);
+  padding: var(--s-4);
+  background: var(--charcoal);
+  color: var(--cream);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+}
+.investment-calc__total-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+.investment-calc__total-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(52px, 7vw, 80px);
+  line-height: 1;
+  color: var(--gold);
+  letter-spacing: -.01em;
+}
+.investment-calc__note {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--cream);
+  opacity: .75;
+  margin: 0;
+  max-width: 50ch;
+}
+
+/* Modal */
+.investment-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-3);
+}
+.investment-modal[hidden] { display: none; }
+.investment-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 37, 32, 0.65);
+  backdrop-filter: blur(4px);
+}
+.investment-modal__panel {
+  position: relative;
+  background: var(--cream);
+  width: min(560px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--s-5) var(--s-4);
+  border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent);
+}
+.investment-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: 0;
+  font-size: 28px;
+  color: var(--charcoal);
+  cursor: pointer;
+  line-height: 1;
+  padding: 6px 10px;
+}
+.investment-modal__close:hover { color: var(--gold-deep); }
+.investment-modal__title {
+  margin: var(--s-1) 0 var(--s-2);
+  color: var(--charcoal);
+}
+.investment-modal__lede {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--charcoal);
+  opacity: .8;
+  margin: 0 0 var(--s-3);
+}
+.investment-modal__pkg-label {
+  display: block;
+  padding: 10px 0;
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  color: var(--charcoal);
+  border-bottom: 1px solid color-mix(in oklab, var(--charcoal) 20%, transparent);
+}
+.investment-modal__form {
+  display: grid;
+  gap: var(--s-3);
+  text-align: left;
+}
+.investment-modal__form .inquire-luxe__field input,
+.investment-modal__form .inquire-luxe__field textarea {
+  width: 100%;
+  padding: 10px 0;
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--charcoal) 30%, transparent);
+  color: var(--charcoal);
+}
+.investment-modal__form .inquire-luxe__field input:focus,
+.investment-modal__form .inquire-luxe__field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--gold-deep);
+}
+.investment-modal__form .inquire-luxe__field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.investment-modal__submit {
+  text-align: center;
+  margin-top: var(--s-2);
+}
+.investment-modal__status {
+  font-family: 'EB Garamond', serif;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  margin-top: var(--s-2);
+}
+.investment-modal__status:empty { display: none; }
+.investment-modal__status--ok {
+  color: var(--charcoal);
+  background: color-mix(in oklab, var(--gold) 12%, transparent);
+}
+.investment-modal__status--warn {
+  color: var(--charcoal);
+  background: color-mix(in oklab, #C04A2B 12%, transparent);
+}
