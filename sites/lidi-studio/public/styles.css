@@ -1084,12 +1084,15 @@ img{ display:block; max-width:100%; }
 /* CLS fix (Sprint 2 audit B2/B3): when .photo-luxe declares an aspect-ratio
    (inline style or via .story-card etc.), force the image to fill the
    reserved box so the layout doesn't shift between empty placeholder and
-   loaded image. */
+   loaded image. Sprint 6: also anchor object-position to upper third for
+   portrait subjects, matching the gallery rule. Story post hero images
+   inherit this. About hero overrides via inline style. */
 .photo-luxe[style*="aspect-ratio"] img,
 .photo-luxe[style*="aspect-ratio"] picture img{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 28%;
 }
 .photo-luxe::after{
   content: '';
@@ -1537,11 +1540,11 @@ img{ display:block; max-width:100%; }
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: var(--s-2);
-  /* Sprint 5 audit: pack wide/tall items into the gaps left by default-sized
-     items so the grid doesn't trail off-axis when an item like --wide
-     can't fit at end-of-row. Without dense, you get visible holes that
-     read as "shifted right". */
-  grid-auto-flow: row dense;
+  /* Sprint 6 audit: every gallery item is now --default (uniform 4:5)
+     except the one --full hero. With uniform rows, dense isn't needed
+     and was actually causing the perceived "right-shift" by reordering
+     items. */
+  grid-auto-rows: auto;
 }
 @media (max-width: 720px){
   .portfolio-gallery{ grid-template-columns: 1fr 1fr; }
@@ -1551,7 +1554,11 @@ img{ display:block; max-width:100%; }
 }
 .gallery__item--wide{ grid-column: span 2; aspect-ratio: 4 / 3; }
 .gallery__item--tall{ grid-row: span 2; aspect-ratio: 3 / 4; }
-.gallery__item--full{ grid-column: 1 / -1; aspect-ratio: 21 / 9; }
+/* Sprint 6 audit: --full was 21/9 — too aggressive for the available portrait
+   sources (cropped them to a thin horizontal band, often landing on the dark
+   background area of the gown). 3/2 matches maternity-red.jpg (1536x1024) and
+   shows the full image without cropping the subject. */
+.gallery__item--full{ grid-column: 1 / -1; aspect-ratio: 3 / 2; }
 .gallery__item--default{ aspect-ratio: 4 / 5; }
 .gallery__item .photo-luxe{ height: 100%; }
 .gallery__item .photo-luxe img,
