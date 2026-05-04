@@ -1284,6 +1284,10 @@ img{ display:block; max-width:100%; }
 .hero-v4__photo picture,
 .hero-v4__photo img{
   width: 100%; height: 100%; object-fit: cover;
+  /* Sprint 5 audit: hero image is portrait (1024x1536). On wide desktops the
+     default object-position: 50% 50% crops the face (above the visible band).
+     Anchor to the upper third so the subject's face stays visible. */
+  object-position: center 28%;
   transform: scale(1.05);
   transition: transform 1800ms var(--ease-out);
 }
@@ -1533,6 +1537,11 @@ img{ display:block; max-width:100%; }
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: var(--s-2);
+  /* Sprint 5 audit: pack wide/tall items into the gaps left by default-sized
+     items so the grid doesn't trail off-axis when an item like --wide
+     can't fit at end-of-row. Without dense, you get visible holes that
+     read as "shifted right". */
+  grid-auto-flow: row dense;
 }
 @media (max-width: 720px){
   .portfolio-gallery{ grid-template-columns: 1fr 1fr; }
@@ -1546,7 +1555,14 @@ img{ display:block; max-width:100%; }
 .gallery__item--default{ aspect-ratio: 4 / 5; }
 .gallery__item .photo-luxe{ height: 100%; }
 .gallery__item .photo-luxe img,
-.gallery__item .photo-luxe picture img{ height: 100%; object-fit: cover; }
+.gallery__item .photo-luxe picture img{
+  height: 100%;
+  object-fit: cover;
+  /* Sprint 5 audit: portrait-oriented photos cropped to 4:5 (default) or 4:3
+     (--wide) lose the top of the frame with object-position: 50% 50%, which
+     is where faces typically sit. Anchor toward the upper third. */
+  object-position: center 25%;
+}
 .gallery__caption{
   font-family: 'EB Garamond', serif;
   font-style: italic;
